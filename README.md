@@ -5,17 +5,21 @@ easily.
 
 It isn't much yet, but I'm certain it will evolve.
 
+## Formulas
+
+The `/formulas` directory is where the logic for deploying Brubeck, Node.js, Tornado or Siege. The idea here is that we think in terms of servers and say, "I need a Brubeck server" or "I need something to run Siege quickly and then go away". 
+
 ## Service Configs
 
-The `/etc` directory is basically the basis for system configs. For now these files still need editing in a deploy. That'll change soon enough.
+The `/etc` directory is basically the basis for system configs.
+
+For now these files still need editing in a deploy. They come with basic configs for typical use cases but the network addresses still need to be filled in.
 
 ## Tweaks
 
 The `/tweaks` directory is commands you run to flip switches in your system, like disabling NUMA or setting some number of open file descriptors.
 
-## Formulas
-
-The `/formulas` directory is where the logic for deploying Brubeck, Node.js, Tornado or Siege. The idea here is that we think in terms of servers and say, "I need a Brubeck server" or "I need something to run Siege quickly and then go away". 
+The tweaks will have comments documenting their purpose, but they should only be executed by formulas. Each formula is responsible for which system tweaks it wants to take advantage of. 
 
 ## Final Note
 
