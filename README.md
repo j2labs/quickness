@@ -15,7 +15,7 @@ The `/tweaks` directory is commands you run to flip switches in your system, lik
 
 ## Formulas
 
-the /formulas directory is where the logic for deploying brubeck, node.js, tornado or siege. the idea here is that we think in terms of servers and say, "i need a brubeck server" or "i need something to run siege quickly and then go away". 
+The `/formulas` directory is where the logic for deploying Brubeck, Node.js, Tornado or Siege. The idea here is that we think in terms of servers and say, "I need a Brubeck server" or "I need something to run Siege quickly and then go away". 
 
 ## Final Note
 
