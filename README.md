@@ -7,7 +7,11 @@ It isn't much yet, but I'm certain it will evolve.
 
 ## Formulas
 
-The `/formulas` directory is where the logic for deploying Brubeck, Node.js, Tornado or Siege. The idea here is that we think in terms of servers and say, "I need a Brubeck server" or "I need something to run Siege quickly and then go away". 
+The `/formulas` directory is where the logic for deploying Brubeck, Node.js, etc is. 
+
+The idea here is to think in terms of servers and say, "I need a Brubeck server" or "I need something to run Siege quickly and then go away".
+
+Eventually, the formulas, and any other relevant scripts, will be sent to one or more servers for executon.
 
 ## Service Configs
 
@@ -24,3 +28,6 @@ The tweaks will have comments documenting their purpose, but they should only be
 ## Final Note
 
 These ideas (and naming) are all rough, but I already find the scripts useful.
+
+If you write your own formulas, I recommend trying them on a single instance before deploying across many.
+
