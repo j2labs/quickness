@@ -8,6 +8,7 @@
 ### Settings
 ###
 
+MONGREL2_VERSION="mongrel2-1.7.5"
 PREV_DIR=$PWD
 QUICKNESS_DIR=$HOME/.quickness
 SRC_DIR=$QUICKNESS_DIR/src
@@ -27,37 +28,21 @@ fi
 ###
 
 apt-get -y install \
-    python-dev \
-    python-pip \
+    libsqlite3-dev \
+    sqlite3 \
     libevent-dev \
     libev4
 
 
 ###
-### Formula Dependencies
-###
-
-./zeromq.sh
-./mongrel2.sh
-
-
-###
-### Brubeck
+### Mongrel2
 ###
 
 cd $SRC_DIR
-
-if [ ! -d "brubeck" ]; then
-    git clone https://github.com/j2labs/brubeck.git
-    cd brubeck
-
-    ### Install Brubeck's dependencies
-    pip install -I -r envs/brubeck.reqs
-
-    ### Concurrency already handled with gevent + zeromq
-    pip install -I -r envs/gevent.reqs
-
-    ### Install Brubeck itself
-    python ./setup.py install
-    cd ../..
+if [ ! -d $MONGREL2_VERSION ]; then
+    wget http://mongrel2.org/static/downloads/$MONGREL2_VERSION.tar.bz2
+    tar jxf $MONGREL2_VERSION.tar.bz2
+    cd $MONGREL2_VERSION
+    make && make install
 fi
+
