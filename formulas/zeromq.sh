@@ -4,7 +4,7 @@
 ### Settings
 ###
 
-ZMQ_VERSION="zeromq-2.1.9"
+ZMQ_VERSION="zeromq-2.1.11"
 PREV_DIR=$PWD
 QUICKNESS_DIR=$HOME/.quickness
 SRC_DIR=$QUICKNESS_DIR/src
@@ -37,7 +37,7 @@ apt-get -y install \
 cd $SRC_DIR
 
 if [ ! -d $ZMQ_VERSION ]; then
-    wget http://download.zeromq.org/historic/$ZMQ_VERSION.tar.gz 
+    wget http://download.zeromq.org/$ZMQ_VERSION.tar.gz 
     tar zxf $ZMQ_VERSION.tar.gz
     cd $ZMQ_VERSION
     ./autogen.sh
