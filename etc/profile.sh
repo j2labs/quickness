@@ -41,8 +41,8 @@ alias sudoo="sudo /bin/bash -l"
 ###
 
 export QUICKNESS_REPO=$(cd $(dirname $(dirname $THIS_SCRIPT)); pwd)
-export QUICKNESSK_FORMULAS=$QUICKNESS_REPO/formulas
-export QUICKNESSK_TWEAKS=$QUICKNESS_REPO/tweaks
+export QUICKNESS_FORMULAS=$QUICKNESS_REPO/formulas
+export QUICKNESS_TWEAKS=$QUICKNESS_REPO/tweaks
 
 export QUICKNESS_HOME=$HOME/.quickness
 export QUICKNESS_SRC=$HOME/.quickness/src
