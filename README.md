@@ -16,6 +16,18 @@ After launching a fresh box, SSH to it and run the following steps to install Qu
 
 Your prompt will change to something colorful and informative.
 
+## Building A System
+
+I usually build a system with a few commands. That looks like:
+
+    ubuntu@host : 02:53:23 : ~
+    $ quick_new
+    ...
+    $ quick_apply max_files
+    $ quick_install brubeck
+
+Done.
+
 ## Commands
 
 After source'ing `quickness/etc/profile.sh` you will have a few commands available to you. Each of them begin with `quick_` as a prefix, so you can tab them out.
