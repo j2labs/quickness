@@ -11,6 +11,14 @@
 PREV_DIR=$PWD
 
 ###
+### Formula Dependencies
+###
+
+quick_install zeromq
+quick_install mongrel2
+
+
+###
 ### System Depenencies
 ###
 
@@ -19,14 +27,6 @@ apt-get -y install \
     python-pip \
     libevent-dev \
     libev4
-
-
-###
-### Formula Dependencies
-###
-
-./zeromq.sh
-./mongrel2.sh
 
 
 ###
@@ -41,6 +41,8 @@ fi
 
 git clone https://github.com/j2labs/brubeck.git
 cd brubeck
+
+### The next few steps leave a `build/` in the brubeck directory
 
 ### Install Brubeck's dependencies
 pip install -I -r envs/brubeck.reqs
