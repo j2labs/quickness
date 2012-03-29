@@ -50,6 +50,10 @@ export QUICKNESS_HOME=$HOME/.quickness
 ### Functions
 ###
 
+quick_new() {
+    sudo $QK_TWEAKS/bootstrap.sh
+}
+
 quick_apply() {
     typeset tweak_name="$1"
 
