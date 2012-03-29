@@ -10,17 +10,6 @@
 
 MONGREL2_VERSION="mongrel2-1.7.5"
 PREV_DIR=$PWD
-QUICKNESS_DIR=$HOME/.quickness
-SRC_DIR=$QUICKNESS_DIR/src
-
-
-###
-### Directory Structures
-###
-
-if [ ! -d $SRC_DIR ]; then
-    mkdir $SRC_DIR 
-fi
 
 
 ###
@@ -38,7 +27,7 @@ apt-get -y install \
 ### Mongrel2
 ###
 
-cd $SRC_DIR
+cd $QUICKNESS_SRC
 
 if [ -d $MONGREL2VERSION ]; then
     rm -rf ./$MONGREL2VERSION
@@ -49,3 +38,4 @@ tar jxf $MONGREL2_VERSION.tar.bz2
 cd $MONGREL2_VERSION
 make && make install
 
+cd $PREV_DIR

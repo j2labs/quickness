@@ -16,4 +16,4 @@ apt-get -y install \
 
 ldconfig
 
-mkdir $HOME/src
+mkdir $QUICKNESS_HOME

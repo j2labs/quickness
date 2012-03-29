@@ -6,17 +6,6 @@
 
 ZMQ_VERSION="zeromq-2.1.11"
 PREV_DIR=$PWD
-QUICKNESS_DIR=$HOME/.quickness
-SRC_DIR=$QUICKNESS_DIR/src
-
-
-###
-### Directory Structures
-###
-
-if [ ! -d $SRC_DIR ]; then
-    mkdir -p $SRC_DIR 
-fi
 
 
 ###
@@ -34,7 +23,7 @@ apt-get -y install \
 ### ZeroMQ
 ###
 
-cd $SRC_DIR
+cd $QUICKNESS_SRC
 
 if [ -d $ZMQ_VERSION ]; then
     rm -rf ./$ZMQ_VERSION
@@ -47,3 +36,5 @@ cd $ZMQ_VERSION
 ./configure && make && make install
 
 ldconfig # update library cache
+
+cd $PREV_DIR

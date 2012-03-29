@@ -9,18 +9,6 @@
 ###
 
 PREV_DIR=$PWD
-QUICKNESS_DIR=$HOME/.quickness
-SRC_DIR=$QUICKNESS_DIR/src
-
-
-###
-### Directory Structures
-###
-
-if [ ! -d $SRC_DIR ]; then
-    mkdir $SRC_DIR 
-fi
-
 
 ###
 ### System Depenencies
@@ -45,7 +33,7 @@ apt-get -y install \
 ### Brubeck
 ###
 
-cd $SRC_DIR
+cd $QUICKNESS_SRC
 
 if [ -d "brubeck" ]; then
     rm -rf brubeck

@@ -41,9 +41,18 @@ alias sudoo="sudo /bin/bash -l"
 ###
 
 export QUICKNESS_REPO=$(cd $(dirname $(dirname $THIS_SCRIPT)); pwd)
-export QK_FORMULAS=$QUICKNESS_REPO/formulas
-export QK_TWEAKS=$QUICKNESS_REPO/tweaks
+export QUICKNESSK_FORMULAS=$QUICKNESS_REPO/formulas
+export QUICKNESSK_TWEAKS=$QUICKNESS_REPO/tweaks
+
 export QUICKNESS_HOME=$HOME/.quickness
+export QUICKNESS_SRC=$HOME/.quickness/src
+
+if [ ! -d $QUICKNESS_HOME ]; then
+    mkdir $QUICKNESS_HOME
+fi
+if [ ! -d $QUICKNESS_SRC ]; then
+    mkdir $QUICKNESS_SRC
+fi
 
 
 ###
@@ -51,7 +60,7 @@ export QUICKNESS_HOME=$HOME/.quickness
 ###
 
 quick_new() {
-    sudo $QK_TWEAKS/bootstrap.sh
+    sudo $QUICKNESS_TWEAKS/bootstrap.sh
 }
 
 quick_apply() {
@@ -62,7 +71,7 @@ quick_apply() {
         echo "Pass <tweak> argument to quick_apply"
     else
         echo "Quick Tweaking \`$tweak_name\`\n\n"
-        sudo $QK_TWEAKS/$tweak_name.sh
+        sudo $QUICKNESS_TWEAKS/$tweak_name.sh
     fi
 }
 
@@ -74,14 +83,14 @@ quick_install() {
         echo "Pass <formula> argument to quick_install"
     else
         echo "Quick Installing \`$formula_name\`\n\n"
-        sudo $QK_FORMULAS/$formula_name.sh
+        sudo $QUICKNESS_FORMULAS/$formula_name.sh
     fi
 }
 
 quick_tweaks() {
-    ls $QK_TWEAKS
+    ls $QUICKNESS_TWEAKS
 }
 
 quick_formulas() {
-    ls $QK_FORMULAS
+    ls $QUICKNESS_FORMULAS
 }
