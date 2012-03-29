@@ -36,12 +36,14 @@ apt-get -y install \
 
 cd $SRC_DIR
 
-if [ ! -d $ZMQ_VERSION ]; then
-    wget http://download.zeromq.org/$ZMQ_VERSION.tar.gz 
-    tar zxf $ZMQ_VERSION.tar.gz
-    cd $ZMQ_VERSION
-    ./autogen.sh
-    ./configure && make && make install
+if [ -d $ZMQ_VERSION ]; then
+    rm -rf ./$ZMQ_VERSION
 fi
+
+wget http://download.zeromq.org/$ZMQ_VERSION.tar.gz 
+tar zxf $ZMQ_VERSION.tar.gz
+cd $ZMQ_VERSION
+./autogen.sh
+./configure && make && make install
 
 ldconfig # update library cache

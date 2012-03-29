@@ -39,10 +39,13 @@ apt-get -y install \
 ###
 
 cd $SRC_DIR
-if [ ! -d $MONGREL2_VERSION ]; then
-    wget http://mongrel2.org/static/downloads/$MONGREL2_VERSION.tar.bz2
-    tar jxf $MONGREL2_VERSION.tar.bz2
-    cd $MONGREL2_VERSION
-    make && make install
+
+if [ -d $MONGREL2VERSION ]; then
+    rm -rf ./$MONGREL2VERSION
 fi
+
+wget http://mongrel2.org/static/downloads/$MONGREL2_VERSION.tar.bz2
+tar jxf $MONGREL2_VERSION.tar.bz2
+cd $MONGREL2_VERSION
+make && make install
 

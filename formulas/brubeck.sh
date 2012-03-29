@@ -47,17 +47,20 @@ apt-get -y install \
 
 cd $SRC_DIR
 
-if [ ! -d "brubeck" ]; then
-    git clone https://github.com/j2labs/brubeck.git
-    cd brubeck
-
-    ### Install Brubeck's dependencies
-    pip install -I -r envs/brubeck.reqs
-
-    ### Concurrency already handled with gevent + zeromq
-    pip install -I -r envs/gevent.reqs
-
-    ### Install Brubeck itself
-    python ./setup.py install
-    cd ../..
+if [ -d "brubeck" ]; then
+    rm -rf brubeck
 fi
+
+git clone https://github.com/j2labs/brubeck.git
+cd brubeck
+
+### Install Brubeck's dependencies
+pip install -I -r envs/brubeck.reqs
+
+### Concurrency already handled with gevent + zeromq
+pip install -I -r envs/gevent.reqs
+
+### Install Brubeck itself
+python ./setup.py install
+
+cd ../..
