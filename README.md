@@ -5,11 +5,28 @@ easily.
 
 It's just a few shell scripts for now, but I'm certain it will evolve as I figure out great ways to deploy and configure servers.
 
-My current thoughts are that I will use parallel ssh pools with Jeff Forcier's [SSH](https://github.com/bitprophet/ssh). I also like the idea of using Kenneth Reitz's [envoy](https://github.com/kennethreitz/envoy) project. People can write simple shell scripts for formulas or something more sophisticated with fabric, but the scripts are run as local scripts on the remote systems. 
+After launching a fresh box, SSH to it and run the following steps to install Quickness.
 
-I think this keeps it flexible in terms of how you want to write system building code, since it can be any language you want.
+    ubuntu@host:~$ sudo apt-get install git-core
+    ubuntu@host:~$ git clone https://github.com/j2labs/quickness.git
+    ubuntu@host:~$ source quickness/etc/profile.sh 
 
-An implicit assumption is that all machines are expendible. This has been my experience on AWS and I want to carry that through into the tools I use. If you need a new box, just deploy it. If you need to run a few updates, try them on some temporary server and make sure they work. Then deploy across many and check the output for errors.
+    ubuntu@host : 02:52:16 : ~
+    $ 
+
+Your prompt will change to something colorful and informative.
+
+## Commands
+
+After source'ing `quickness/etc/profile.sh` you will have a few commands available to you. Each of them begin with `quick_` as a prefix, so you can tab them out.
+
+| **Command**      | **Function**                                                                                          |
+|-----------------:|:------------------------------------------------------------------------------------------------------|
+| `quick_new`      | This is the first command you should run. It bootstraps the system with things every developer needs. |
+| `quick_apply`    | This applies a system tweak. The word 'apply' is used to signal that these change a system's config.  |
+| `quick_tweaks`   | Lists all the available tweaks.                                                                                               |
+| `quick_install`  | Installs a formula, which is to say it runs a series of steps from a script.                          |
+| `quick_formulas` | Lists all the concepts that have been captured in a shell script.                                     |
 
 ## Formulas
 
