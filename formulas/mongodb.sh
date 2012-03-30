@@ -1,5 +1,3 @@
-#!/bin/sh
-
 ### This script follows the instructions found on MongoDB's website.
 ### www.mongodb.org/display/DOCS/Ubuntu+and+Debian+packages
 

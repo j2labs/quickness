@@ -1,5 +1,3 @@
-#!/bin/sh
-
 ### Brubeck installs consist of installing ZeroMQ, Mongrel2 and some Python
 ### packages. This script currently covers all of this, though it'd be ideal
 ### to break it apart into more modular components.
@@ -8,8 +6,13 @@
 ### Settings
 ###
 
+source ../../etc/profile.sh
+
 PREV_DIR=$PWD
 
+echo "JAMES"
+echo $QUICKNESS_TWEAKS
+echo "SEMAJ"
 ###
 ### Formula Dependencies
 ###
@@ -47,8 +50,15 @@ cd brubeck
 ### Install Brubeck's dependencies
 pip install -I -r envs/brubeck.reqs
 
-### Concurrency already handled with gevent + zeromq
-pip install -I -r envs/gevent.reqs
+### Concurrency handled with gevent
+pip install gevent
+
+cd build/
+git clone https://github.com/traviscline/gevent-zeromq
+cd gevent-zeromq
+sudo python ./setup.py install
+cd ../..
+
 
 ### Install Brubeck itself
 python ./setup.py install

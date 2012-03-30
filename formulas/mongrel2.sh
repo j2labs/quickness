@@ -1,5 +1,3 @@
-#!/bin/sh
-
 ### Brubeck installs consist of installing ZeroMQ, Mongrel2 and some Python
 ### packages. This script currently covers all of this, though it'd be ideal
 ### to break it apart into more modular components.
