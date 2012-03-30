@@ -15,5 +15,3 @@ apt-get -y install \
     mercurial
 
 ldconfig
-
-mkdir $QUICKNESS_HOME
