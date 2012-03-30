@@ -16,7 +16,7 @@ After launching a fresh box, open a terminal on it and run the following steps.
     ubuntu@host:~$ source quickness/etc/profile.sh 
 
     ubuntu@host : 02:52:16 : ~
-    $ 
+    Q: 
 
 Your prompt will change to something colorful with a newline before the command entry point. `ls` is colorful too, along with other aliases. 
 
@@ -28,10 +28,10 @@ Quickness is also ready to go.
 I usually build a system with a few commands. That looks like:
 
     ubuntu@host : 02:53:23 : ~
-    $ quick_new
+    Q: quick_new
     ...
-    $ quick_apply max_files
-    $ quick_install brubeck
+    Q: quick_apply max_files
+    Q: quick_install brubeck
 
 Done.
 
@@ -48,17 +48,19 @@ After source'ing `quickness/etc/profile.sh` you will have a few commands availab
 | `quick_install`  | Installs a formula, which is to say it runs a script which installs 1 or more packages.               |                          
 | `quick_formulas` | Lists all the concepts that have been captured as formulas.                                           |
 
+These commands can be any kind of script, they just have to be in `quickness/bin`.
+
 
 ## Environment Configs
 
-The `/etc` directory is basically the basis for system configs.
+The `quickness/etc` directory is basically the basis for system configs.
 
 For now these files still need editing in a deploy. They come with basic configs for typical use cases but the network addresses still need to be filled in.
 
 
 ## Formulas
 
-The `/formulas` directory is where the logic for deploying Brubeck, Node.js, etc is. 
+The `quickness/formulas` directory is where the logic for deploying Brubeck, Node.js, etc is. 
 
 The idea here is to think in terms of servers and say, "I need a Brubeck server" or "I need my usual Node deployment."
 
@@ -67,7 +69,7 @@ Eventually, the formulas, and any other relevant scripts, will be sent to one or
 
 ## Tweaks
 
-The `/tweaks` directory is commands you run to flip switches in your operating system, like disabling NUMA or configuring some huge number of open file descriptors.
+The `quickness/tweaks` directory is commands you run to flip switches in your operating system, like disabling NUMA or configuring some huge number of open file descriptors.
 
 The tweaks each have comments documenting their purpose. It is my hopes that the tweaks can serve as teaching tools for interesting ways of configuring operating systems.
 
