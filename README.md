@@ -1,6 +1,7 @@
 # Quickness 11.10
 
-This is a tool for deploying system configurations to Ubuntu systems easily.
+This is a tool for deploying system configurations to Ubuntu systems easily. 
+The "11.10" above maps the code here to Ubuntu 11.10. Things will be upgraded when new Ubuntu's come out.
 
 It's just a few shell scripts for now, but I'm certain it will evolve as I
 figure out great ways to deploy and configure servers.
@@ -10,7 +11,7 @@ figure out great ways to deploy and configure servers.
 
 After launching a fresh box, open a terminal on it and run the following steps.
 
-    ubuntu@host:~$ sudo apt-get install git-core
+    ubuntu@host:~$ sudo apt-get -y install git-core
     ubuntu@host:~$ git clone https://github.com/j2labs/quickness.git
     ubuntu@host:~$ source quickness/etc/profile.sh 
 
