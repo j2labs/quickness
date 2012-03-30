@@ -12,7 +12,7 @@ else
         fi
 	export TMPDIR="$HOME/.tmp"
 fi
-export PS1="\n[01;$PS_COLOR\u@\h[0m : \t : [01;34m\w[0m\n\$ "
+export PS1="\n[01;$PS_COLOR\u@\h[0m : \t : [01;34m\w[0m\nQ: "
 
 ### default arguments to commands
 alias ls="ls -F --color"
