@@ -55,4 +55,4 @@ if [ ! -d $QUICKNESS_SRC ]; then
     mkdir $QUICKNESS_SRC
 fi
 
-export PATH=QUICKNESS_BIN:$PATH
+export PATH=$QUICKNESS_BIN:$PATH
