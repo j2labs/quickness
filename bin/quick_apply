@@ -7,6 +7,6 @@ else
     echo "Quick Tweaking \`$tweak_name\`"
     echo
     echo
-    sudo -E $QUICKNESS_TWEAKS/$tweak_name.sh
+    sudo -E $QUICKNESS_TWEAKS/$tweak_name
 fi
 

@@ -1,1 +1,1 @@
-sudo -E $QUICKNESS_TWEAKS/bootstrap.sh
+sudo -E $QUICKNESS_TWEAKS/bootstrap

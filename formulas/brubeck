@@ -12,8 +12,8 @@ PREV_DIR=$PWD
 ### Formula Dependencies
 ###
 
-quick_install.sh zeromq
-quick_install.sh mongrel2
+quick_install zeromq
+quick_install mongrel2
 
 
 ###
