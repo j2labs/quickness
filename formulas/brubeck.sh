@@ -6,13 +6,8 @@
 ### Settings
 ###
 
-source ../../etc/profile.sh
-
 PREV_DIR=$PWD
 
-echo "JAMES"
-echo $QUICKNESS_TWEAKS
-echo "SEMAJ"
 ###
 ### Formula Dependencies
 ###
