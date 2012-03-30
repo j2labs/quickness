@@ -2,7 +2,7 @@
 ### Environment
 ###
 
-THIS_SCRIPT=${BASH_SOURCE[@]}
+THIS_SCRIPT=${BASH_SOURCE[0]}
 
 ### Colorful prompt with special colors for root
 if [ $USER = "root" ]; then
@@ -60,7 +60,7 @@ fi
 ###
 
 quick_new() {
-    sudo $QUICKNESS_TWEAKS/bootstrap.sh
+    sudo $QUICKNESS_REPO/etc/profile && $QUICKNESS_TWEAKS/bootstrap.sh
 }
 
 quick_apply() {
@@ -71,7 +71,7 @@ quick_apply() {
         echo "Pass <tweak> argument to quick_apply"
     else
         echo "Quick Tweaking \`$tweak_name\`\n\n"
-        sudo $QUICKNESS_TWEAKS/$tweak_name.sh
+        sudo $QUICKNESS_REPO/etc/profile && $QUICKNESS_TWEAKS/$tweak_name.sh
     fi
 }
 
@@ -83,7 +83,7 @@ quick_install() {
         echo "Pass <formula> argument to quick_install"
     else
         echo "Quick Installing \`$formula_name\`\n\n"
-        sudo $QUICKNESS_FORMULAS/$formula_name.sh
+        sudo $QUICKNESS_REPO/etc/profile && $QUICKNESS_FORMULAS/$formula_name.sh
     fi
 }
 
