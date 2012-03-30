@@ -8,6 +8,7 @@
 
 MONGREL2_VERSION="mongrel2-1.7.5"
 PREV_DIR=$PWD
+cd $QUICKNESS_SRC
 
 
 ###
@@ -24,8 +25,6 @@ apt-get -y install \
 ###
 ### Mongrel2
 ###
-
-cd $QUICKNESS_SRC
 
 if [ -d $MONGREL2VERSION ]; then
     rm -rf ./$MONGREL2VERSION

@@ -4,6 +4,7 @@
 
 ZMQ_VERSION="zeromq-2.1.11"
 PREV_DIR=$PWD
+cd $QUICKNESS_SRC
 
 
 ###
@@ -20,8 +21,6 @@ apt-get -y install \
 ###
 ### ZeroMQ
 ###
-
-cd $QUICKNESS_SRC
 
 if [ -d $ZMQ_VERSION ]; then
     rm -rf ./$ZMQ_VERSION
