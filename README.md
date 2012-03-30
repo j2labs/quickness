@@ -4,19 +4,6 @@ This is a tool for deploying system configurations to Ubuntu systems easily.
 The "11.10" above maps the code here to Ubuntu 11.10. Things will be upgraded when new Ubuntu's come out.
 
 
-## Background
-
-I have built many systems in my life. AWS has exacerbated this problem considerably, too.
-
-It can be time consuming, but all hackers eventually automate their daily life, as redundant as their code might be to whatever is already out there. It starts as a few shell scripts. It grows into some shell functions and environment variables. And then you have a simple environment that installs things for you.
-
-And then maybe you call it Quickness. And then you post it on your GitHub page. And it's really just a bunch of scripts that slap a system together.
-
-*Why’d you write it in shell anyway? That’s weird.*
-
-Well. It *does* capture the way I like systems to behave if they're fresh. Maybe you'll like the way my systems usually behave too?
-
-
 ## Just Launched A Box
 
 After launching a fresh box, open a terminal on it and run the following steps.
@@ -82,6 +69,19 @@ Eventually, the formulas, and any other relevant scripts, will be sent to one or
 The `quickness/tweaks` directory is commands you run to flip switches in your operating system, like disabling NUMA or configuring some huge number of open file descriptors.
 
 The tweaks each have comments documenting their purpose. It is my hopes that the tweaks can serve as teaching tools for interesting ways of configuring operating systems.
+
+
+## Background
+
+I have built many systems in my life. AWS has exacerbated this problem considerably, too.
+
+It can be time consuming, but all hackers eventually automate their daily life, as redundant as their code might be to whatever is already out there. It starts as a few shell scripts. It grows into some shell functions and environment variables. And then you have a simple environment that installs things for you.
+
+And then maybe you call it Quickness. And then you post it on your GitHub page. And it's really just a bunch of scripts that slap a system together.
+
+*Why’d you write it in shell anyway? That’s weird.*
+
+Well. It *does* capture the way I like systems to behave if they're fresh. Maybe you'll like the way my systems usually behave too?
 
 
 ## License
