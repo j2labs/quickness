@@ -24,7 +24,6 @@ Quickness is also ready to go.
 
 I usually build a system with a few commands. That looks like:
 
-    ubuntu@host : 02:53:23 : ~
     Q: quick_new
     Q: quick_apply max_files
     Q: quick_install brubeck
