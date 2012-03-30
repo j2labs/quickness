@@ -7,13 +7,14 @@
 ###
 
 PREV_DIR=$PWD
+cd $QUICKNESS_SRC
 
 ###
 ### Formula Dependencies
 ###
 
-$QUICKNESS_BIN/quick_install zeromq
-$QUICKNESS_BIN/quick_install mongrel2
+sudo $QUICKNESS_BIN/quick_install zeromq
+sudo $QUICKNESS_BIN/quick_install mongrel2
 
 
 ###
@@ -28,10 +29,22 @@ apt-get -y install \
 
 
 ###
+### Concurrency with Gevent
+###
+
+pip install gevent
+
+### Gevent + ZeroMQ requires a little special handling right now
+git clone https://github.com/traviscline/gevent-zeromq
+cd gevent-zeromq
+sudo python ./setup.py install
+cd ..
+
+
+###
 ### Brubeck
 ###
 
-cd $QUICKNESS_SRC
 
 if [ -d "brubeck" ]; then
     rm -rf brubeck
@@ -44,15 +57,6 @@ cd brubeck
 
 ### Install Brubeck's dependencies
 pip install -I -r envs/brubeck.reqs
-
-### Concurrency handled with gevent
-pip install gevent
-
-cd build/
-git clone https://github.com/traviscline/gevent-zeromq
-cd gevent-zeromq
-sudo python ./setup.py install
-cd ../..
 
 
 ### Install Brubeck itself
