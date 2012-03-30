@@ -1,4 +1,4 @@
-typeset tweak_name="$1"
+tweak_name="$1"
 
 if [ "$tweak_name" = "" ]
 then

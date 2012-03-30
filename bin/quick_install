@@ -1,4 +1,4 @@
-typeset formula_name="$1"
+formula_name="$1"
 
 if [ "$formula_name" = "" ]
 then
