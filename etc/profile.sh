@@ -2,8 +2,6 @@
 ### Environment
 ###
 
-THIS_SCRIPT=${BASH_SOURCE[0]}
-
 ### Colorful prompt with special colors for root
 if [ $USER = "root" ]; then
 	PS_COLOR="31m"
@@ -40,9 +38,12 @@ alias sudoo="sudo /bin/bash -l"
 ### Quickness Settings
 ###
 
+THIS_SCRIPT=${BASH_SOURCE[0]}
+
 export QUICKNESS_REPO=$(cd $(dirname $(dirname $THIS_SCRIPT)); pwd)
 export QUICKNESS_FORMULAS=$QUICKNESS_REPO/formulas
 export QUICKNESS_TWEAKS=$QUICKNESS_REPO/tweaks
+export QUICKNESS_BIN=$QUICKNESS_REPO/bin
 
 export QUICKNESS_HOME=$HOME/.quickness
 export QUICKNESS_SRC=$HOME/.quickness/src
@@ -54,43 +55,4 @@ if [ ! -d $QUICKNESS_SRC ]; then
     mkdir $QUICKNESS_SRC
 fi
 
-
-###
-### Functions
-###
-
-quick_new() {
-    sudo -E $QUICKNESS_TWEAKS/bootstrap.sh
-}
-
-quick_apply() {
-    typeset tweak_name="$1"
-
-    if [ "$tweak_name" = "" ]
-    then
-        echo "Pass <tweak> argument to quick_apply"
-    else
-        echo "Quick Tweaking \`$tweak_name\`\n\n"
-        sudo -E $QUICKNESS_TWEAKS/$tweak_name.sh
-    fi
-}
-
-quick_install() {
-    typeset formula_name="$1"
-
-    if [ "$formula_name" = "" ]
-    then
-        echo "Pass <formula> argument to quick_install"
-    else
-        echo "Quick Installing \`$formula_name\`\n\n"
-        sudo -E $QUICKNESS_FORMULAS/$formula_name.sh
-    fi
-}
-
-quick_tweaks() {
-    ls $QUICKNESS_TWEAKS
-}
-
-quick_formulas() {
-    ls $QUICKNESS_FORMULAS
-}
+export PATH=QUICKNESS_BIN:$PATH
