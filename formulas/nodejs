@@ -24,7 +24,6 @@ sudo apt-get update
 
 ### Install Node
 apt-get -y install \
-    curl \
     nodejs
 
 

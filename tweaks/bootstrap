@@ -14,7 +14,8 @@ apt-get -y install \
     libtool \
     uuid-dev \
     git-core \
-    mercurial
+    mercurial \
+    curl
 
 
 ### Update library cache
