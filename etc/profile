@@ -1,0 +1,48 @@
+###
+### Environment
+###
+
+
+### Import quickness/etc/quickness
+###
+### If you change this, change `quickness/bin/quick` too
+if [[ $BASH_SOURCE ]]; then
+    export QUICKNESS=$(dirname $(dirname ${BASH_SOURCE[0]}))
+else
+    export QUICKNESS=$(cd $(dirname $(dirname $0)); pwd)
+fi
+. $QUICKNESS/etc/quickness
+
+
+### Colorful prompt with special colors for root
+if [ $USER = "root" ]; then
+	PS_COLOR="31m"
+else
+	PS_COLOR="32m"
+        if [ ! -d "$HOME/.tmp" ]; then
+            mkdir $HOME/.tmp
+        fi
+	export TMPDIR="$HOME/.tmp"
+fi
+export PS1="\n[01;$PS_COLOR\u@\h[0m : \t : [01;34m\w[0m\nQ: "
+
+
+### Default Arguments
+alias ls="ls -F --color"
+alias rm="rm -i"
+alias cp="cp -i"
+alias mv="mv -i"
+
+
+### Short Cuts
+alias l="ls"
+alias sl="ls"
+alias lss="ls --hide=*~"
+alias la="ls -a"
+alias ll="ls -l"
+alias lal="ls -al"
+alias lsd="ls -l | grep ^d"
+alias psg="ps ax | grep"
+alias clpy="rm -f *~ *pyc"
+alias pwdd="pwd -P"
+alias sudoo="sudo /bin/bash -l"

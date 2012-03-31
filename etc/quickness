@@ -1,0 +1,28 @@
+###
+### Quickness Settings
+###
+
+#export QUICKNESS_REPO=$(cd $(dirname $(dirname $0)); pwd)
+export QUICKNESS_REPO=$QUICKNESS
+export QUICKNESS_FORMULAS=$QUICKNESS_REPO/formulas
+export QUICKNESS_TWEAKS=$QUICKNESS_REPO/tweaks
+export QUICKNESS_BIN=$QUICKNESS_REPO/bin
+
+export QUICKNESS_HOME=$HOME/.quickness
+export QUICKNESS_SRC=$HOME/.quickness/src
+
+
+###
+### Quickness Workspaces
+###
+
+if [ ! -d $QUICKNESS_HOME ]; then
+    mkdir $QUICKNESS_HOME
+fi
+if [ ! -d $QUICKNESS_SRC ]; then
+    mkdir $QUICKNESS_SRC
+fi
+
+
+### Path
+export PATH=$QUICKNESS_BIN:$PATH

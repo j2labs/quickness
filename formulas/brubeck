@@ -9,23 +9,15 @@
 PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
+
 ###
 ### Formula Dependencies
 ###
 
-sudo $QUICKNESS_BIN/quick_install zeromq
-sudo $QUICKNESS_BIN/quick_install mongrel2
-
-
-###
-### System Depenencies
-###
-
-apt-get -y install \
-    python-dev \
-    python-pip \
-    libevent-dev \
-    libev4
+sudo $QUICKNESS_BIN/quick quick_install evented_libs
+sudo $QUICKNESS_BIN/quick quick_install python_dev
+sudo $QUICKNESS_BIN/quick quick_install zeromq
+sudo $QUICKNESS_BIN/quick quick_install mongrel2
 
 
 ###
@@ -62,4 +54,4 @@ pip install -I -r envs/brubeck.reqs
 ### Install Brubeck itself
 python ./setup.py install
 
-cd ../..
+cd $PREV_DIR

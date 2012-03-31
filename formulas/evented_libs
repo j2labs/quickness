@@ -1,0 +1,16 @@
+### Determine which libev
+if [ "$(apt-cache search libev3 | grep libev3)" ]; then
+   export LIBEV="libev3"
+else
+   export LIBEV="libev4"
+fi
+
+
+### Install libevent and libev
+apt-get -y install \
+    libevent-dev \
+    $LIBEV
+
+
+### Update library cache
+ldconfig

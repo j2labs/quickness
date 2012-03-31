@@ -1,8 +1,10 @@
 ### Update package manager
 apt-get update
 
+
 ### Update packages
 apt-get -y upgrade
+
 
 ### Install universal needs
 apt-get -y install \
@@ -14,4 +16,6 @@ apt-get -y install \
     git-core \
     mercurial
 
+
+### Update library cache
 ldconfig

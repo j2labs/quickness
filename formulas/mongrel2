@@ -12,14 +12,19 @@ cd $QUICKNESS_SRC
 
 
 ###
+### Formula Dependencies
+###
+
+sudo $QUICK_BIN/quick quick_install evented_libs
+
+
+###
 ### System Depenencies
 ###
 
 apt-get -y install \
     libsqlite3-dev \
-    sqlite3 \
-    libevent-dev \
-    libev4
+    sqlite3
 
 
 ###

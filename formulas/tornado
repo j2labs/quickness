@@ -1,1 +1,19 @@
+###
+### Settings
+###
+
+PREV_DIR=$PWD
+cd $QUICKNESS_SRC
+
+
+###
+### Formula Dependencies
+###
+
+sudo $QUICKNESS_BIN/quick quick_install python_dev
+sudo $QUICKNESS_BIN/quick quick_install evented_libs
+
+
 pip install tornado
+
+cd $PREV_DIR

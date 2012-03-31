@@ -1,7 +1,31 @@
 ### This script follows the instructions found on MongoDB's website.
 ### www.mongodb.org/display/DOCS/Ubuntu+and+Debian+packages
 
+
+###
+### OS Version Based Repo
+###
+
+### Get major and minor number for OS
+OS_VER=$(lsb_release -r | cut -d ":" -f 2 | sed 's/^[\t ]*//g')
+OS_MAJOR=$(echo $OS_VER | cut -d "." -f 1)
+OS_MINOR=$(echo $OS_VER | cut -d "." -f 2)
+
+### Less than 11.10 use a different repo URL
+if [ $OS_MAJOR -lt 11 ] && [ $OS_MINOR -lt 10 ]; then
+    echo "HI"
+    export APT_SOURCE="deb http://downloads-distro.mongodb.org/repo/debian-sysvinit dist 10gen"
+else
+    echo "NOOO"
+    export APT_SOURCE="http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen" 
+fi
+
+
+### Update apt with Mongo info
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
-sudo echo "deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen" >> /etc/apt/source.list
+sudo echo "$APT_SOURCE" >> /etc/apt/sources.list
 sudo apt-get update
+
+
+### Install Mongo
 sudo apt-get install mongodb-10gen

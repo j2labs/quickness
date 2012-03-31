@@ -1,9 +1,15 @@
+### Import quickness/etc/quickness
+export QUICKNESS=$(cd $(dirname $(dirname $0)); pwd)
+. $QUICKNESS/etc/quickness
+
+
+### Install
 formula_name="$1"
 
 if [ "$formula_name" = "" ]
 then
     echo "Pass <formula> argument to quick_install"
 else
-    echo "Quick Installing \`$formula_name\`\n\n"
-    sudo -E $QUICKNESS_FORMULAS/$formula_name
+    echo "Quick Installing: $formula_name"
+    sudo $QUICKNESS_BIN/quick $QUICKNESS_FORMULAS/$formula_name
 fi

@@ -1,0 +1,14 @@
+###
+### Settings
+###
+
+PREV_DIR=$PWD
+cd $QUICKNESS_SRC
+
+
+apt-get -y install \
+    python-dev \
+    python-pip
+
+
+cd $PREV_DIR

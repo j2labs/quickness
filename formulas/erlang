@@ -21,7 +21,7 @@ apt-get -y install \
 ### Erlang
 ###
 
-wget http://erlang.org/download/$APP_VERSION.tar.gz"
+wget "http://erlang.org/download/$APP_VERSION.tar.gz"
 tar zxvf $APP_VERSION.tar.gz
 cd $APP_VERSION
 ./configure && make && sudo make install

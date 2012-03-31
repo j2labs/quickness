@@ -6,6 +6,12 @@ ZMQ_VERSION="zeromq-2.1.11"
 PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
+###
+### Formula Dependencies
+###
+
+sudo $QUICKNESS_BIN/quick quick_install evented_libs
+
 
 ###
 ### System Depenencies
@@ -13,9 +19,7 @@ cd $QUICKNESS_SRC
 
 apt-get -y install \
     libsqlite3-dev \
-    sqlite3 \
-    libevent-dev \
-    libev4
+    sqlite3 
 
 
 ###

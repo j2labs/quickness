@@ -1,6 +1,35 @@
+###
+### Settings
+###
+
+PREV_DIR=$PWD
+cd $QUICKNESS_SRC
+
+
+###
+### Formula Dependencies
+###
+
+sudo $QUICKNESS_BIN/quick quick_install evented_libs
+
+
+###
+### System Depenencies
+###
+
+sudo apt-get -y install python-software-properties
+sudo add-apt-repository ppa:chris-lea/node.js
+sudo apt-get update
+
+
+### Install Node
 apt-get -y install \
-    libev4 \
-    nginx \
+    curl \
     nodejs
 
-ldconfig
+
+###
+### Node Package Manager
+###
+
+sudo curl "http://npmjs.org/install.sh" | sudo sh  # this is su ridiculous
