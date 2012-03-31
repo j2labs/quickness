@@ -1,0 +1,35 @@
+###
+### Settings
+###
+
+APP_VERSION="otp_src_R15B"
+PREV_DIR=$PWD
+cd $QUICKNESS_SRC
+
+
+###
+### System Depenencies
+###
+
+apt-get -y install \
+    libncurses5-dev \
+    openssl \
+    libssl-dev
+
+
+###
+### Erlang
+###
+
+wget http://erlang.org/download/$APP_VERSION.tar.gz"
+tar zxvf $APP_VERSION.tar.gz
+cd $APP_VERSION
+./configure && make && sudo make install
+
+cd $PREV_DIR
+
+
+###
+### Rebar
+###
+
