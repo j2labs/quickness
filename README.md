@@ -1,4 +1,4 @@
-![Quickness](https://github.com/j2labs/quickness/raw/vagrant_support/etc/logo.png)
+![Quickness](https://github.com/j2labs/quickness/raw/master/etc/logo.png)
 
 This is a tool for deploying system configurations to Ubuntu systems easily. I use it on fresh Ubuntu boxes on AWS regularly. It also has a `Vagrantfile`, so you can build VirtualBox VM's and work from your laptop instead.
 
