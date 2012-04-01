@@ -9,7 +9,7 @@ Quickness makes installing the big concepts, like entire environments, easier. I
 
 Installing Quickness is basically just cloning a repo and turning on the environment. 
 
-You can use a fresh AWS box from anywhere, including local VM's.
+You can use a fresh Ubuntu box from anywhere, including local VM's.
 
 ## New Remote Box
 
