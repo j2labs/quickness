@@ -1,15 +1,23 @@
 ![Quickness](https://github.com/j2labs/quickness/raw/vagrant_support/etc/logo.png)
 
-This is a tool for deploying system configurations to Ubuntu systems easily. It also has a `Vagrantfile` so you can build VirtualBox VM's with it too.
+This is a tool for deploying system configurations to Ubuntu systems easily. I use it on fresh Ubuntu boxes on AWS regularly. It also has a `Vagrantfile`, so you can build VirtualBox VM's and work from your laptop instead.
+
+Quickness makes installing the big concepts, like entire environments, easier. It attempts to have good taste in what should be present and what shouldn't. An Erlang install, for example, will be similar to what everyone normally has.
 
 
-## Just Launched A Remote Box
+## Installing
 
-After launching a fresh box, open a terminal on it and run the following steps.
+Installing Quickness is basically just cloning a repo and turning on the environment. 
+
+You can use a fresh AWS box from anywhere, including local VM's.
+
+## New Remote Box
+
+After launching a fresh box, SSH to it and run the following steps.
 
     ubuntu@host:~$ sudo apt-get -y install git-core
     ubuntu@host:~$ git clone https://github.com/j2labs/quickness.git
-    ubuntu@host:~$ source quickness/etc/profile.sh 
+    ubuntu@host:~$ source quickness/etc/profile
 
     ubuntu@host : 02:52:16 : ~
     Q: 
@@ -38,6 +46,8 @@ Then SSH to the machine and you will have a quickness prompt ready to go.
     ubuntu@host : 02:52:16 : ~
     Q: 
 
+There's the quickness prompt again.
+
 
 ## Building A System
 
@@ -52,7 +62,7 @@ Done.
 
 ## Commands
 
-After source'ing `quickness/etc/profile.sh` you will have a few commands available to you. Each of them begin with `quick_` and live in `quickness/bin/`, so you can tab them out.
+After source'ing `quickness/etc/profile` you will have a few commands available to you. Each of them begin with `quick_` and live in `quickness/bin/`, so you can tab them out.
 
 | **Command**      | **Function**                                                                                                         |
 |-----------------:|:---------------------------------------------------------------------------------------------------------------------|
