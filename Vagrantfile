@@ -5,8 +5,13 @@ Vagrant::Config.run do |config|
     ### URL to get image if not cached
     config.vm.box_url = "http://files.vagrantup.com/lucid64.box"
 
-    ### Network config
-    config.vm.network :bridged, "33.33.33.11"
+    ### Network config, based on Vagrant version
+    (maj, min, dot) = Vagrant::VERSION.split('.')
+    if Integer(maj) > 0
+        config.vm.network :bridged, "33.33.33.11"
+    else
+        config.vm.network "33.33.33.11"
+    end
     #config.vm.forward_port "http", 80, 6767
 
     ### Install and bootstrap Quickness
