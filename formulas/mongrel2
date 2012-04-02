@@ -34,6 +34,9 @@ apt-get -y install \
 if [ -d $MONGREL2VERSION ]; then
     rm -rf ./$MONGREL2VERSION
 fi
+if [ -f $MONGREL2_VERSION.tar.bz2 ]; then
+    rm -f $MONGREL2_VERSION.tar.bz2
+fi
 
 wget http://mongrel2.org/static/downloads/$MONGREL2_VERSION.tar.bz2
 tar jxf $MONGREL2_VERSION.tar.bz2

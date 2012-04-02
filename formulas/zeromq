@@ -29,6 +29,9 @@ apt-get -y install \
 if [ -d $ZMQ_VERSION ]; then
     rm -rf ./$ZMQ_VERSION
 fi
+if [ -f $ZMQ_VERSION.tar.gz ]; then
+    rm -f $ZMQ_VERSION.tar.gz
+fi
 
 wget http://download.zeromq.org/$ZMQ_VERSION.tar.gz 
 tar zxf $ZMQ_VERSION.tar.gz

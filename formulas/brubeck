@@ -27,6 +27,9 @@ sudo $QUICKNESS_BIN/quick quick_install mongrel2
 pip install gevent
 
 ### Gevent + ZeroMQ requires a little special handling right now
+if [ -d "gevent-zeromq" ]; then
+    rm -rf gevent-zeromq
+fi
 git clone https://github.com/traviscline/gevent-zeromq
 cd gevent-zeromq
 sudo python ./setup.py install
