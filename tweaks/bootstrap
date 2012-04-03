@@ -1,12 +1,23 @@
+echo "[quickness] Quickness Bootstrap"
+
 ### Update package manager
+echo "[quickness] Updating package list]"
 apt-get update
 
+### The updates include a grub update, which needs manual config under vagrant
+IS_VAGRANT=$(grep vagrant /etc/passwd);
+if [ $IS_VAGRANT ]; then
+    grub-install /dev/sda
+    echo "[quickness] Configured grub upgrade]"
+fi
 
 ### Update packages
+echo "[quickness] upgrading all packages]"
 apt-get -y upgrade
 
 
 ### Install universal needs
+echo "[quickness] Installing essential tools]"
 apt-get -y install \
     build-essential \
     autoconf \
