@@ -15,7 +15,6 @@ Vagrant::Config.run do |config|
     #config.vm.forward_port "http", 80, 6767
 
     ### Install and bootstrap Quickness
-    Vagrant::Config.run do |config|
-        config.vm.provision :shell, :inline => "echo \". /vagrant/etc/profile\" >> /home/vagrant/.profile"
-    end
+    config.vm.provision :shell, :inline => "echo \". /vagrant/etc/profile\" >> /home/vagrant/.profile"
+    config.vm.provision :shell, :inline => "/vagrant/bin/quick_new"
 end
