@@ -1,0 +1,34 @@
+###
+### Settings
+###
+
+PREV_DIR=$PWD
+cd $QUICKNESS_SRC
+
+
+###
+### Formula Dependencies
+###
+
+sudo $QUICKNESS_BIN/quick quick_install evented_libs
+
+
+###
+### Formula Details
+###
+
+if [ -d redis ]; then
+    rm -rf ./redis
+fi
+
+git clone https://github.com/antirez/redis.git
+cd redis
+make && make install
+
+echo "Server: redis-server"
+echo "Client: redis-cli"
+echo
+echo "Worth reading:"
+echo "- http://redis.io/commands/auth"
+
+cd $PREV_DIR
