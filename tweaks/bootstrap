@@ -1,23 +1,22 @@
-echo "[quickness] Quickness Bootstrap"
+echo "Quickness Bootstrap"
 
-### Update package manager
-echo "[quickness] Updating package list]"
+
+### Headless install
+export DEBIAN_FRONTEND=noninteractive
+
+
+### Update package manager and packages
+echo "Updating package list"
 apt-get update
 
-### The updates include a grub update, which needs manual config under vagrant
-IS_VAGRANT=$(grep vagrant /etc/passwd);
-if [ $IS_VAGRANT ]; then
-    grub-install /dev/sda
-    echo "[quickness] Configured grub upgrade]"
-fi
 
 ### Update packages
-echo "[quickness] upgrading all packages]"
-apt-get -y upgrade
+echo "Upgrading all packages"
+apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy upgrade
 
 
 ### Install universal needs
-echo "[quickness] Installing essential tools]"
+echo "Installing essential system tools"
 apt-get -y install \
     build-essential \
     autoconf \
