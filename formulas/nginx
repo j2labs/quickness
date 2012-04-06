@@ -1,12 +1,31 @@
 ###
+### Settings
+###
+
+PREV_DIR=$PWD
+cd $QUICKNESS_SRC
+
+
+###
 ### Formula Dependencies
 ###
 
 sudo $QUICKNESS_BIN/quick quick_install evented_libs
-
+apt-get install -y libpcre3 libpcre3-dev
 
 ###
 ### Formula Details
 ###
 
-apt-get -y install nginx
+# apt-get -y install nginx
+
+if [ -d nginx ]; then
+    rm -rf ./nginx
+fi
+
+git clone https://github.com/git-mirror/nginx.git
+cd nginx
+./auto/configure --with-http_ssl_module --prefix=/usr/local
+make && make install
+
+cd $PREV_DIR
