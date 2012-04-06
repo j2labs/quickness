@@ -46,3 +46,8 @@ alias psg="ps ax | grep"
 alias clpy="rm -f *~ *pyc"
 alias pwdd="pwd -P"
 alias sudoo="sudo /bin/bash -l"
+
+
+### Starters
+alias mongodb='sudo mongod --config /etc/mongodb.conf --fork && sleep 1 && tail -20 /var/log/mongodb/mongodb.log'
+alias rediss='redis-server /etc/redis.conf'
