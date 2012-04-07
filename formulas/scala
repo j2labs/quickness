@@ -12,9 +12,7 @@ cd $QUICKNESS_SRC
 ### System Depenencies
 ###
 
-apt-get -y install \
-    default-jdk \
-    ant
+sudo $QUICKNESS_BIN/quick quick_install java
 
 
 ###
