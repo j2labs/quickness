@@ -1,7 +1,15 @@
+### The usual
 .DS_Store
-*.pyc
-*.bak
-*.swp
 *~
+
+### Ignore vagrant side-effects
 .vagrant
+
+### Ignore anything added to bin, but track changes on quickness commands
+bin/*
+!bin/quick
+!bin/quick_install
+!bin/quick_formulas
+!bin/quick_apply
+!bin/quick_tweaks
 
