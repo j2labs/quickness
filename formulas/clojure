@@ -1,0 +1,31 @@
+###
+### Settings
+###
+
+PREV_DIR=$PWD
+cd $QUICKNESS_SRC
+
+
+###
+### SRCunla Depenencies
+###
+
+sudo $QUICKNESS_BIN/quick quick_install java
+
+
+###
+### Clojure
+###
+
+if [ -d clojure ]; then
+    rm -rf clojure
+fi
+
+git clone https://github.com/clojure/clojure.git
+cd clojure
+mvn package
+
+cd $PREV_DIR
+
+echo "java -cp $QUICKNESS_SRC/clojure/target/clojure-1.4.0-master-SNAPSHOT.jar clojure.main" > $QUICKNESS_BIN/clj
+chmod 755 $QUICKNESS_BIN/clj
