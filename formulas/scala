@@ -4,9 +4,11 @@
 
 APP_VERSION="scala-2.9.1-1"
 SBT_VERSION="0.11.2"
+AKKA_VERSION="akka-2.0"
 PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
+PROFILE_UPDATED="no"
 
 ###
 ### System Depenencies
@@ -29,20 +31,59 @@ fi
 wget http://www.scala-lang.org/downloads/distrib/files/$APP_VERSION.tgz
 tar zxvf $APP_VERSION.tgz
 cd $APP_VERSION
-./configure && make && sudo make install
+
+### Update Profile
+if [ "$(grep Scala $HOME/.profile)" = "" ]; then  # 1 equal sign. wtf bash.
+    echo "" >> $HOME/.profile
+    echo "### Scala" >> $HOME/.profile
+    echo "export HAS_SCALA=\"yes\"" >> ~/.profile
+    echo "export PATH=$QUICKNESS_SRC/$APP_VERSION/bin:\$PATH" >> ~/.profile
+    PROFILE_UPDATE="yes"
+fi
 
 
 ###
 ### SBT
 ###
 
-cd $QUICKNESS_BIN
+cd $QUICKNESS_SRC/$APP_VERSION/bin
 wget "http://typesafe.artifactoryonline.com/typesafe/ivy-releases/org.scala-tools.sbt/sbt-launch/$SBT_VERSION/sbt-launch.jar"
 
 echo 'java -Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=384M -jar `dirname $0`/sbt-launch.jar "$@"' > sbt
 chmod 755 sbt
+cd $QUICKNESS_SRC
+
+
+###
+### Akka actor library
+###
 
 cd $QUICKNESS_SRC
+wget http://download.akka.io/downloads/$AKKA_VERSION.tgz
+tar zxf $AKKA_VERSION.tgz
+cd $AKKA_VERSION
+
+### Update Profile
+if [ "$(grep Akka $HOME/.profile)" = "" ]; then  # 1 equal sign. wtf bash.
+    echo "" >> $HOME/.profile
+    echo "### Akka" >> $HOME/.profile
+    echo "export HAS_AKKA=\"yes\"" >> ~/.profile
+    echo "export PATH=$QUICKNESS_SRC/$AKKA_VERSION/bin:\$PATH" >> ~/.profile
+fi
+
+
+###
+### Wrap up
+###
+
+if [ $PROFILE_UPDATE = "yes" ]; then
+    echo "Please source your profile: "
+    echo ""
+    echo "    source $HOME/.profile"
+    echo ""
+    echo "This step will happen automatically from now on."
+fi
+
 
 cd $PREV_DIR
 
