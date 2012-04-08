@@ -11,4 +11,28 @@ apt-get -y install \
     python-pip
 
 
+### Install at system level
+sudo pip install virtualenv virtualenvwrapper
+
+
+### Update Profile
+if [ "$(grep VirtualEnv $HOME/.profile)" = "" ]; then  # 1 equal sign. wtf bash.
+    echo "" >> $HOME/.profile
+    echo "### VirtualEnv" >> $HOME/.profile
+    echo "HAS_VIRTUALENV=\"yes\"" >> ~/.profile
+    echo "WORKON_HOME=\"~/.virtualenvs\"" >> ~/.profile
+    echo ". /usr/local/bin/virtualenvwrapper.sh" >> $HOME/.profile
+    echo "mkdir -p "\"~/.virtualenvs\"  #idempotent" >> ~/.profile
+
+    echo "Please source virtualenvwrapper: "
+    echo ""
+    echo "    source /usr/local/bin/virtualenvwrapper.sh"
+    echo ""
+    echo "This step will happen automatically from now on. Also, consider reading"
+    echo "this for information about virtualenv:"
+    echo ""
+    echo "    http://j2labs.tumblr.com/post/5181438807/quick-dirty-virtualenv-virtualenvwrapper"
+fi
+
+
 cd $PREV_DIR
