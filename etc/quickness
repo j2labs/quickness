@@ -12,6 +12,23 @@ export QUICKNESS_HOME=$HOME/.quickness
 export QUICKNESS_SRC=$HOME/.quickness/src
 
 
+### Get major and minor number for OS
+OS_VER=$(lsb_release -r | cut -d ":" -f 2 | sed 's/^[\t ]*//g')
+OS_MAJOR=$(echo $OS_VER | cut -d "." -f 1)
+OS_MINOR=$(echo $OS_VER | cut -d "." -f 2)
+
+
+### Set the OS name
+OS_NAME="lucid"  # default
+if [ $OS_MAJOR -eq 10 ] && [ $OS_MINOR -eq 10 ]; then
+    OS_NAME="maverick"
+elif [ $OS_MAJOR -eq 11 ] && [ $OS_MINOR -eq 04 ]; then
+    OS_NAME="natty"
+elif [ $OS_MAJOR -eq 11 ] && [ $OS_MINOR -eq 10 ]; then
+    OS_NAME="oneiric"
+fi
+
+
 ###
 ### Quickness Workspaces
 ###
