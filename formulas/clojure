@@ -2,30 +2,37 @@
 ### Settings
 ###
 
+APP_VERSION="clojure-1.3.0"
+APP_VERSION_NUM="1.3.0"
 PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 
 ###
-### SRCunla Depenencies
+### Formula Depenencies
 ###
 
 sudo $QUICKNESS_BIN/quick quick_install java
+apt-get install -y unzip
 
 
 ###
 ### Clojure
 ###
 
-if [ -d clojure ]; then
-    rm -rf clojure
+if [ -d $APP_VERSION ]; then
+    rm -rf $APP_VERSION
+fi
+if [ -d $APP_VERSION.zip ]; then
+    rm -rf $APP_VERSION.zip
 fi
 
-git clone https://github.com/clojure/clojure.git
-cd clojure
-mvn package
+curl http://repo1.maven.org/maven2/org/clojure/clojure/$APP_VERSION_NUM/$APP_VERSION.zip > $APP_VERSION.zip
+unzip $APP_VERSION
+cd $APP_VERSION
+
 
 cd $PREV_DIR
 
-echo "java -cp $QUICKNESS_SRC/clojure/target/clojure-1.4.0-master-SNAPSHOT.jar clojure.main" > $QUICKNESS_BIN/clj
+echo "java -cp $QUICKNESS_SRC/$APP_VERSION/ clojure.main" > $QUICKNESS_BIN/clj
 chmod 755 $QUICKNESS_BIN/clj
