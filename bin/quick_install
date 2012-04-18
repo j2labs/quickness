@@ -13,3 +13,6 @@ else
     echo "Quick Installing: $formula_name"
     sudo $QUICKNESS_BIN/quick $QUICKNESS_FORMULAS/$formula_name
 fi
+
+sudo chown -R $USER:$USER $QUICKNESS_SRC
+sudo chown -R $USER:$USER $QUICKNESS_BIN
