@@ -11,6 +11,7 @@ cd $QUICKNESS_SRC
 ###
 
 sudo $QUICKNESS_BIN/quick quick_install evented_libs
+sudo apt-get install tcl8.5
 
 
 ###
