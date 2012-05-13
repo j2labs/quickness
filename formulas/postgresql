@@ -1,0 +1,8 @@
+###
+### MySQL
+###
+
+sudo apt-get -y install postgresql libpq-dev
+
+echo "Server: sudo service postgresql start - (it's already up though)"
+echo "Client: psql <dbname>"
