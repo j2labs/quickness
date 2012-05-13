@@ -10,7 +10,7 @@
 if [ $OS_MAJOR -lt 11 ] && [ $OS_MINOR -lt 10 ]; then
     export APT_SOURCE="deb http://downloads-distro.mongodb.org/repo/debian-sysvinit dist 10gen"
 else
-    export APT_SOURCE="http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen" 
+    export APT_SOURCE="deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen"
 fi
 
 
