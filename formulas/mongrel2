@@ -31,8 +31,8 @@ apt-get -y install \
 ### Mongrel2
 ###
 
-if [ -d $MONGREL2VERSION ]; then
-    rm -rf ./$MONGREL2VERSION
+if [ -d $MONGREL2_VERSION ]; then
+    rm -rf ./$MONGREL2_VERSION
 fi
 if [ -f $MONGREL2_VERSION.tar.bz2 ]; then
     rm -f $MONGREL2_VERSION.tar.bz2
