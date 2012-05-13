@@ -15,7 +15,7 @@ You can use a fresh Ubuntu box from anywhere, including local VM's.
 
 After launching a fresh box, SSH to it and run the following steps.
 
-    ubuntu@host:~$ sudo apt-get -y install git-core
+    ubuntu@host:~$ sudo apt-get -y install git
     ubuntu@host:~$ git clone https://github.com/j2labs/quickness.git
     ubuntu@host:~$ source quickness/etc/profile
 
@@ -36,14 +36,13 @@ Create a vagrant instance like this.
 Then SSH to the machine and you will have a quickness prompt ready to go.
 
     $ vagrant ssh
-    Linux lucid64 2.6.32-33-server #70-Ubuntu SMP Thu Jul 7 22:28:30 UTC 2011 x86_64 GNU/Linux
-    Ubuntu 10.04.3 LTS
+    Welcome to Ubuntu 12.04 LTS (GNU/Linux 3.2.0-23-generic x86_64)
 
-    Welcome to the Ubuntu Server!
-    * Documentation:  http://www.ubuntu.com/server/doc
-    Last login: Sat Mar 31 09:32:49 2012 from 10.0.2.2
-    
-    ubuntu@host : 02:52:16 : ~
+     * Documentation:  https://help.ubuntu.com/
+    Welcome to your Vagrant-built virtual machine.
+    Last login: Sun May 13 16:13:27 2012 from 10.0.2.2
+
+    vagrant@precise64 : 19:31:50 : ~
     Q: 
 
 There's the quickness prompt again.

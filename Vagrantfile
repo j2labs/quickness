@@ -1,9 +1,9 @@
 Vagrant::Config.run do |config|
     ### 64-bit Ubuntu
-    config.vm.box = "lucid64"
+    config.vm.box = "precise64"
 
     ### URL to get image if not cached
-    config.vm.box_url = "http://files.vagrantup.com/lucid64.box"
+    config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
     ### Network config, based on Vagrant version
     (maj, min, dot) = Vagrant::VERSION.split('.')

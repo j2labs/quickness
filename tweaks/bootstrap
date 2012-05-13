@@ -23,7 +23,7 @@ apt-get -y install \
     automake \
     libtool \
     uuid-dev \
-    git-core \
+    git \
     mercurial \
     curl \
     unzip
