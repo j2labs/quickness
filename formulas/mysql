@@ -8,4 +8,4 @@ echo "Server: sudo service mysql start - (it's already up though)"
 echo "Client: mysql -u root -p"
 echo
 echo "Worth reading:"
-echo "- Adding users: http://dev.mysql.com/doc/en/adding-users.html
+echo "- Adding users: http://dev.mysql.com/doc/en/adding-users.html"
