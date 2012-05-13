@@ -8,7 +8,7 @@ cd $QUICKNESS_SRC
 
 
 ###
-### System Depenencies
+### System Dependencies
 ###
 
 apt-get -y install \

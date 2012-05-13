@@ -11,7 +11,7 @@ cd $QUICKNESS_SRC
 PROFILE_UPDATED="no"
 
 ###
-### System Depenencies
+### System Dependencies
 ###
 
 sudo $QUICKNESS_BIN/quick quick_install java

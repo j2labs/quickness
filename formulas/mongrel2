@@ -19,7 +19,7 @@ sudo $QUICK_BIN/quick quick_install evented_libs
 
 
 ###
-### System Depenencies
+### System Dependencies
 ###
 
 apt-get -y install \

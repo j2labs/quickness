@@ -9,7 +9,7 @@ cd $QUICKNESS_SRC
 
 
 ###
-### Formula Depenencies
+### Formula Dependencies
 ###
 
 sudo $QUICKNESS_BIN/quick quick_install java
