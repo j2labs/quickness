@@ -16,15 +16,7 @@ cd $QUICKNESS_SRC
 ###
 
 sudo $QUICK_BIN/quick quick_install evented_libs
-
-
-###
-### System Dependencies
-###
-
-apt-get -y install \
-    libsqlite3-dev \
-    sqlite3
+sudo $QUICK_BIN/quick quick_install sqlite
 
 
 ###

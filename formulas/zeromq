@@ -11,15 +11,7 @@ cd $QUICKNESS_SRC
 ###
 
 sudo $QUICKNESS_BIN/quick quick_install evented_libs
-
-
-###
-### System Dependencies
-###
-
-apt-get -y install \
-    libsqlite3-dev \
-    sqlite3 
+sudo $QUICKNESS_BIN/quick quick_install sqlite
 
 
 ###
@@ -33,7 +25,7 @@ if [ -f $ZMQ_VERSION.tar.gz ]; then
     rm -f $ZMQ_VERSION.tar.gz
 fi
 
-wget http://download.zeromq.org/$ZMQ_VERSION.tar.gz 
+wget http://download.zeromq.org/$ZMQ_VERSION.tar.gz
 tar zxf $ZMQ_VERSION.tar.gz
 cd $ZMQ_VERSION
 ./autogen.sh
