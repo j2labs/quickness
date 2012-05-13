@@ -13,7 +13,6 @@ cd $QUICKNESS_SRC
 ###
 
 sudo $QUICKNESS_BIN/quick quick_install java
-apt-get install -y unzip
 
 
 ###

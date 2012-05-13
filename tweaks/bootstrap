@@ -25,7 +25,8 @@ apt-get -y install \
     uuid-dev \
     git-core \
     mercurial \
-    curl
+    curl \
+    unzip
 
 
 ### Update library cache
