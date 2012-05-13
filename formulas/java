@@ -27,3 +27,5 @@ sudo update-alternatives --config java
 apt-get -y install \
     ant \
     maven2  # Ugh. Maven wants to install x11
+
+cd $PREV_DIR

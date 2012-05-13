@@ -27,6 +27,8 @@ apt-get -y install \
     nodejs
 
 
+cd $PREV_DIR
+
 ###
 ### Node Package Manager
 ###
