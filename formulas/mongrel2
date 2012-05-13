@@ -15,8 +15,8 @@ cd $QUICKNESS_SRC
 ### Formula Dependencies
 ###
 
-sudo $QUICK_BIN/quick quick_install evented_libs
-sudo $QUICK_BIN/quick quick_install sqlite
+sudo $QUICKNESS_BIN/quick quick_install evented_libs
+sudo $QUICKNESS_BIN/quick quick_install sqlite
 
 
 ###
