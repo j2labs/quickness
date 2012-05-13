@@ -1,7 +1,3 @@
-### Brubeck installs consist of installing ZeroMQ, Mongrel2 and some Python
-### packages. This script currently covers all of this, though it'd be ideal
-### to break it apart into more modular components.
-
 ###
 ### Settings
 ###
@@ -33,6 +29,6 @@ fi
 wget http://mongrel2.org/static/downloads/$MONGREL2_VERSION.tar.bz2
 tar jxf $MONGREL2_VERSION.tar.bz2
 cd $MONGREL2_VERSION
-make && make install
+make && sudo make install
 
 cd $PREV_DIR

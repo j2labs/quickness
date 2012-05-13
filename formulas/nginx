@@ -11,13 +11,11 @@ cd $QUICKNESS_SRC
 ###
 
 sudo $QUICKNESS_BIN/quick quick_install evented_libs
-apt-get install -y libpcre3 libpcre3-dev
+sudo apt-get -y install libpcre3 libpcre3-dev
 
 ###
 ### Formula Details
 ###
-
-# apt-get -y install nginx
 
 if [ -d nginx ]; then
     rm -rf ./nginx
@@ -26,6 +24,6 @@ fi
 git clone https://github.com/git-mirror/nginx.git
 cd nginx
 ./auto/configure --with-http_ssl_module --prefix=/usr/local
-make && make install
+make && sudo make install
 
 cd $PREV_DIR

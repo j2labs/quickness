@@ -1,31 +1,15 @@
 ###
-### Settings
-###
-
-echo "OSN: $OS_NAME"
-echo "QK SRC: $QUICKNESS_SRC"
-APT_SOURCE="deb http://archive.canonical.com/ $OS_NAME partner"
-PREV_DIR=$PWD
-cd $QUICKNESS_SRC
-
-
-###
 ### Java
 ###
 
-sudo echo "$APT_SOURCE" >> /etc/apt/sources.list
-sudo apt-get update
-#sudo apt-get install sun-java6-jre sun-java6-plugin
-sudo apt-get install -y openjdk-6-jdk
-sudo update-alternatives --config java
+sudo apt-get -y install \
+    default-jdk
 
 
 ###
 ### Java Tools
 ###
 
-apt-get -y install \
+sudo apt-get -y install \
     ant \
     maven2  # Ugh. Maven wants to install x11
-
-cd $PREV_DIR

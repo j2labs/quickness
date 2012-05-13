@@ -1,1 +1,6 @@
-apt-get -y install siege
+###
+### Siege
+###
+
+sudo apt-get -y install \
+    siege

@@ -29,7 +29,7 @@ wget http://download.zeromq.org/$ZMQ_VERSION.tar.gz
 tar zxf $ZMQ_VERSION.tar.gz
 cd $ZMQ_VERSION
 ./autogen.sh
-./configure && make && make install
+./configure && make && sudo make install
 
 ldconfig # update library cache
 

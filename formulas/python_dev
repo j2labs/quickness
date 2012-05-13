@@ -6,7 +6,7 @@ PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 
-apt-get -y install \
+sudo apt-get -y install \
     python-dev \
     python-pip
 

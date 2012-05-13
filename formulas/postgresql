@@ -5,4 +5,9 @@
 sudo apt-get -y install postgresql libpq-dev
 
 echo "Server: sudo service postgresql start - (it's already up though)"
+echo "Create User:"
+echo " $ sudo su - postgres"
+echo " $ createuser -P -s <username>"
+echo " $ exit"
+echo " $ createdb <dbname>"
 echo "Client: psql <dbname>"

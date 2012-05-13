@@ -23,7 +23,7 @@ sudo apt-get update
 
 
 ### Install Node
-apt-get -y install \
+sudo apt-get -y install \
     nodejs
 
 
