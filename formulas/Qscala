@@ -5,7 +5,7 @@
 APP_VERSION="scala-2.9.1-1"
 SBT_VERSION="0.11.2"
 AKKA_VERSION="akka-2.0"
-PREV_DIR=$PWD
+SCALA_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 PROFILE_UPDATED="no"
@@ -14,7 +14,7 @@ PROFILE_UPDATED="no"
 ### System Dependencies
 ###
 
-$QUICKNESS_BIN/quick quick_install java
+. Qjava
 
 
 ###
@@ -85,5 +85,5 @@ if [ $PROFILE_UPDATE = "yes" ]; then
 fi
 
 
-cd $PREV_DIR
+cd $SCALA_PREV_DIR
 

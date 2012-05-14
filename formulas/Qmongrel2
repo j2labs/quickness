@@ -3,7 +3,7 @@
 ###
 
 MONGREL2_VERSION="mongrel2-1.7.5"
-PREV_DIR=$PWD
+MONGREL2_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 
@@ -11,8 +11,8 @@ cd $QUICKNESS_SRC
 ### Formula Dependencies
 ###
 
-$QUICKNESS_BIN/quick quick_install evented_libs
-$QUICKNESS_BIN/quick quick_install sqlite
+. Qevented_libs
+. Qsqlite
 
 
 ###
@@ -31,4 +31,4 @@ tar jxf $MONGREL2_VERSION.tar.bz2
 cd $MONGREL2_VERSION
 make && sudo make install
 
-cd $PREV_DIR
+cd $MONGREL2_PREV_DIR

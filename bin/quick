@@ -6,7 +6,7 @@ if [ -z $BASH_SOURCE ]; then
 else
     export QUICKNESS=$(dirname $(dirname ${BASH_SOURCE[0]}))
 fi
-. $QUICKNESS/etc/quickness
+. $QUICKNESS_ETC/quickness
 
 
 ### Execute any provided commands in created environment

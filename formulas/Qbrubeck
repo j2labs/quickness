@@ -6,7 +6,7 @@
 ### Settings
 ###
 
-PREV_DIR=$PWD
+BRUBECK_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 
@@ -14,11 +14,16 @@ cd $QUICKNESS_SRC
 ### Formula Dependencies
 ###
 
-$QUICKNESS_BIN/quick quick_install evented_libs
-$QUICKNESS_BIN/quick quick_install python_dev
-$QUICKNESS_BIN/quick quick_install zeromq
-$QUICKNESS_BIN/quick quick_install mongrel2
+. Qevented_libs
+. Qpython_dev
+. Qzeromq
+. Qmongrel2
 
+###
+### VirtualEnv
+###
+
+mkvirtualenv brubeck
 
 ###
 ### Concurrency with Gevent
@@ -32,7 +37,7 @@ if [ -d "gevent-zeromq" ]; then
 fi
 git clone https://github.com/traviscline/gevent-zeromq
 cd gevent-zeromq
-sudo python ./setup.py install
+sudo python setup.py install
 cd ..
 
 
@@ -55,6 +60,6 @@ pip install -I -r envs/brubeck.reqs
 
 
 ### Install Brubeck itself
-python ./setup.py install
+python setup.py install
 
-cd $PREV_DIR
+cd $BRUBECK_PREV_DIR

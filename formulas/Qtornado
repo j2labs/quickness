@@ -1,0 +1,20 @@
+###
+### Settings
+###
+
+TORNADO_PREV_DIR=$PWD
+cd $QUICKNESS_SRC
+
+
+###
+### Formula Dependencies
+###
+
+. Qpython_dev
+. Qevented_libs
+
+mkvirtualenv tornado
+
+pip install tornado
+
+cd $TORNADO_PREV_DIR

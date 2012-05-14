@@ -2,7 +2,7 @@
 ### vim bundles
 ###
 
-PREV_DIR=$PWD
+VIM_PREV_DIR=$PWD
 
 sudo apt-get -y install \
     vim-nox
@@ -40,4 +40,4 @@ echo "tmp/*" >> $HOME/.vim/.git/info/exclude
 
 cp $QUICKNESS/etc/vimrc $HOME/.vimrc
 
-cd $PREV_DIR
+cd $VIM_PREV_DIR

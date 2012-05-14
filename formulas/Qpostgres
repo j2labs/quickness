@@ -4,10 +4,8 @@
 
 sudo apt-get -y install postgresql libpq-dev
 
+su -l -c "createuser -P -s vagrant" postgres
+
 echo "Server: sudo service postgresql start - (it's already up though)"
-echo "Create User:"
-echo " $ sudo su - postgres"
-echo " $ createuser -P -s <username>"
-echo " $ exit"
-echo " $ createdb <dbname>"
+echo "Create db: createdb <dbname>"
 echo "Client: psql <dbname>"

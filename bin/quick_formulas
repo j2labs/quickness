@@ -1,6 +1,6 @@
 ### Import quickness/etc/quickness
 export QUICKNESS=$(cd $(dirname $(dirname $0)); pwd)
-. $QUICKNESS/etc/quickness
+. $QUICKNESS_ETC/quickness
 
 
 ### Formulas

@@ -3,7 +3,7 @@
 ###
 
 APP_VERSION="httperf-0.9.0"
-PREV_DIR=$PWD
+HTTPPERF_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 
@@ -21,4 +21,4 @@ cd $APP_VERSION
 ./configure && make
 sudo make install
 
-cd $PREV_DIR
+cd $HTTPPERF_PREV_DIR

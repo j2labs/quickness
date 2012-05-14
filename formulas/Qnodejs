@@ -2,7 +2,7 @@
 ### Settings
 ###
 
-PREV_DIR=$PWD
+NODEJS_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 
@@ -10,7 +10,7 @@ cd $QUICKNESS_SRC
 ### Formula Dependencies
 ###
 
-$QUICKNESS_BIN/quick quick_install evented_libs
+. Qevented_libs
 
 
 ###
@@ -27,7 +27,7 @@ sudo apt-get -y install \
     nodejs
 
 
-cd $PREV_DIR
+cd $NODEJS_PREV_DIR
 
 ###
 ### Node Package Manager

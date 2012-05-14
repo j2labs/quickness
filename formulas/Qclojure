@@ -4,7 +4,7 @@
 
 APP_VERSION="clojure-1.3.0"
 APP_VERSION_NUM="1.3.0"
-PREV_DIR=$PWD
+CLOJURE_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 
@@ -12,7 +12,7 @@ cd $QUICKNESS_SRC
 ### Formula Dependencies
 ###
 
-$QUICKNESS_BIN/quick quick_install java
+. Qjava
 
 
 ###
@@ -31,7 +31,7 @@ unzip $APP_VERSION
 cd $APP_VERSION
 
 
-cd $PREV_DIR
+cd $CLOJURE_PREV_DIR
 
 echo "java -cp $QUICKNESS_SRC/$APP_VERSION/ clojure.main" > $QUICKNESS_BIN/clj
 chmod 755 $QUICKNESS_BIN/clj

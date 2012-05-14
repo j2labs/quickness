@@ -2,7 +2,7 @@
 ### Settings
 ###
 
-PREV_DIR=$PWD
+NGINX_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 
@@ -10,7 +10,7 @@ cd $QUICKNESS_SRC
 ### Formula Dependencies
 ###
 
-$QUICKNESS_BIN/quick quick_install evented_libs
+. Qevented_libs
 sudo apt-get -y install libpcre3 libpcre3-dev
 
 ###
@@ -26,4 +26,4 @@ cd nginx
 ./auto/configure --with-http_ssl_module --prefix=/usr/local
 make && sudo make install
 
-cd $PREV_DIR
+cd $NGINX_PREV_DIR

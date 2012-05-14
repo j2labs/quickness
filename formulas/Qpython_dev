@@ -2,7 +2,7 @@
 ### Settings
 ###
 
-PREV_DIR=$PWD
+PYTHON_DEV_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 
@@ -25,22 +25,13 @@ if [ -d "$HOME/.vim/bundle" ] ; then
     cd $HOME
 fi
 
-sudo cp $QUICKNESS/etc/django_bash_completion /etc/bash_completion.d/
-
 ### Update Profile
 if [ "$(grep VirtualEnv $HOME/.profile)" = "" ]; then  # 1 equal sign. wtf bash.
     echo "" >> $HOME/.profile
     echo "### VirtualEnv" >> $HOME/.profile
     echo ". /usr/local/bin/virtualenvwrapper.sh" >> $HOME/.profile
-
-    echo "Please source virtualenvwrapper: "
-    echo ""
-    echo "    source /usr/local/bin/virtualenvwrapper.sh"
-    echo ""
-    echo "This step will happen automatically from now on. Also, consider reading"
-    echo "this for information about virtualenv:"
-    echo ""
-    echo "    http://j2labs.tumblr.com/post/5181438807/quick-dirty-virtualenv-virtualenvwrapper"
 fi
 
-cd $PREV_DIR
+. /usr/local/bin/virtualenvwrapper.sh
+
+cd $PYTHON_DEV_PREV_DIR

@@ -2,11 +2,10 @@
 ### Quickness Settings
 ###
 
-#export QUICKNESS_REPO=$(cd $(dirname $(dirname $0)); pwd)
-export QUICKNESS_REPO=$QUICKNESS
-export QUICKNESS_FORMULAS=$QUICKNESS_REPO/formulas
-export QUICKNESS_TWEAKS=$QUICKNESS_REPO/tweaks
-export QUICKNESS_BIN=$QUICKNESS_REPO/bin
+export QUICKNESS_BIN=$QUICKNESS/bin
+export QUICKNESS_ETC=$QUICKNESS/etc
+export QUICKNESS_FORMULAS=$QUICKNESS/formulas
+export QUICKNESS_TWEAKS=$QUICKNESS/tweaks
 
 export QUICKNESS_HOME=$HOME/.quickness
 export QUICKNESS_SRC=$HOME/.quickness/src
@@ -31,16 +30,6 @@ elif [ $OS_MAJOR -eq 12 ] && [ $OS_MINOR -eq 04 ]; then
     export OS_NAME="precise"  # default
 fi
 
-### Link formulas in bin to make sourcing easier
-for f in $QUICKNESS_FORMULAS/*
-do
-    filename=$(echo $f | cut -d "/" -f 4)
-    if [ ! -L $QUICKNESS_BIN/Q$filename ]; then
-        echo "Linking $filename"
-        ln -s $f $QUICKNESS_BIN/Q$filename
-    fi
-done
-
 ###
 ### Quickness Workspaces
 ###
@@ -54,4 +43,4 @@ fi
 
 
 ### Path
-export PATH=$QUICKNESS_BIN:$PATH
+export PATH=$QUICKNESS_BIN:$PATH:$QUICKNESS_FORMULAS

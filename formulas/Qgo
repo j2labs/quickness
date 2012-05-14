@@ -2,7 +2,7 @@
 ### golang
 ###
 
-PREV_DIR=$PWD
+GO_PREV_DIR=$PWD
 
 sudo apt-get -y install \
     golang
@@ -27,11 +27,7 @@ if [ -d "$HOME/ext/bin" ] ; then
     PATH="$HOME/ext/bin:$HOME/mygo/bin:$PATH"
 fi' >> $HOME/.profile
 
-echo "Please copy/paste following 2 lines"
-echo ""
-echo '    export GOPATH="$HOME/ext:$HOME/mygo"'
-echo '    export PATH="$HOME/ext/bin:$HOME/mygo/bin:$PATH"'
-echo ""
-echo "This step will happen automatically from now on. Also, consider reading"
+export GOPATH="$HOME/ext:$HOME/mygo"
+export PATH="$HOME/ext/bin:$HOME/mygo/bin:$PATH"
 
-cd $PREV_DIR
+cd $GO_PREV_DIR

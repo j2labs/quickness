@@ -1,0 +1,23 @@
+###
+### Settings
+###
+
+DJANGO_PREV_DIR=$PWD
+cd $QUICKNESS_SRC
+
+
+###
+### Formula Dependencies
+###
+
+. Qpostgres
+. Qpython_dev
+. Qrabbitmq
+
+sudo cp $QUICKNESS/etc/django_bash_completion /etc/bash_completion.d/
+
+mkvirtualenv django
+
+pip install -r $QUICKNESS/etc/requirements.txt
+
+cd $DJANGO_PREV_DIR
