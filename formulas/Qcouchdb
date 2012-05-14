@@ -1,0 +1,48 @@
+###
+### CouchDB
+###
+
+COUCHDB_VERSION="apache-couchdb-1.2.0"
+COUCHDB_PREV_DIR=$PWD
+cd $QUICKNESS_SRC
+
+
+. Qerlang
+
+sudo apt-get -y install \
+    help2man \
+    libcurl4-gnutls-dev \
+    libicu-dev \
+    libmozjs185-dev \
+    libtool
+
+sudo adduser --system \
+  --home /usr/local/var/lib/couchdb \
+  --no-create-home \
+  --shell /bin/bash \
+  --group \
+  --gecos "CouchDB Administrator" \
+  couchdb
+
+if [ -d $COUCHDB_VERSION ]; then
+    rm -rf ./$COUCHDB_VERSION
+fi
+if [ ! -f $COUCHDB_VERSION.tar.gz ]; then
+    wget http://mirror.cc.columbia.edu/pub/software/apache/couchdb/releases/1.2.0/$COUCHDB_VERSION.tar.gz
+fi
+
+tar zxf $COUCHDB_VERSION.tar.gz
+cd $COUCHDB_VERSION
+./configure && make && sudo make install
+
+
+sudo chown -R couchdb:couchdb /usr/local/var/lib/couchdb
+sudo chown -R couchdb:couchdb /usr/local/var/log/couchdb
+sudo chown -R couchdb:couchdb /usr/local/var/run/couchdb
+sudo chown -R couchdb:couchdb /usr/local/etc/couchdb
+
+sudo su -l -c "couchdb -b" couchdb
+
+echo "Server: sudo su -l -c \"couchdb -b\" couchdb (it's already up though)"
+
+cd $COUCHDB_PREV_DIR
