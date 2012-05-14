@@ -2,7 +2,3 @@
 sudo apt-get -y install \
     libevent-dev \
     libev-dev
-
-
-### Update library cache
-ldconfig

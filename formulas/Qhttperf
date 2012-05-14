@@ -21,7 +21,6 @@ fi
 
 tar xzf $APP_VERSION.tar.gz
 cd $APP_VERSION
-./configure && make
-sudo make install
+./configure && make && sudo make install
 
 cd $HTTPPERF_PREV_DIR

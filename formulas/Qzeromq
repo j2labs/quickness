@@ -4,7 +4,3 @@
 
 sudo apt-get -y install \
     libzmq-dev
-
-
-ldconfig # update library cache
-
