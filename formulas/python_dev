@@ -8,21 +8,22 @@ cd $QUICKNESS_SRC
 
 sudo apt-get -y install \
     python-dev \
-    python-pip
-
+    python-setuptools \
+    libfreetype6-dev \
+    libgmp3-dev \
+    libjpeg8-dev \
+    liblcms1-dev \
+    zlib1g-dev
 
 ### Install at system level
-sudo pip install virtualenv virtualenvwrapper
+sudo easy_install virtualenv virtualenvwrapper
 
 
 ### Update Profile
 if [ "$(grep VirtualEnv $HOME/.profile)" = "" ]; then  # 1 equal sign. wtf bash.
     echo "" >> $HOME/.profile
     echo "### VirtualEnv" >> $HOME/.profile
-    echo "HAS_VIRTUALENV=\"yes\"" >> ~/.profile
-    echo "WORKON_HOME=\"~/.virtualenvs\"" >> ~/.profile
     echo ". /usr/local/bin/virtualenvwrapper.sh" >> $HOME/.profile
-    echo "mkdir -p "\"~/.virtualenvs\"  #idempotent" >> ~/.profile
 
     echo "Please source virtualenvwrapper: "
     echo ""
@@ -33,6 +34,5 @@ if [ "$(grep VirtualEnv $HOME/.profile)" = "" ]; then  # 1 equal sign. wtf bash.
     echo ""
     echo "    http://j2labs.tumblr.com/post/5181438807/quick-dirty-virtualenv-virtualenvwrapper"
 fi
-
 
 cd $PREV_DIR
