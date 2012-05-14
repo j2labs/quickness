@@ -16,38 +16,30 @@ fi
 
 ### Colorful prompt with special colors for root
 if [ $USER = "root" ]; then
-	PS_COLOR="31m"
+    PS_COLOR="31m"
 else
-	PS_COLOR="32m"
+    PS_COLOR="32m"
         if [ ! -d "$HOME/.tmp" ]; then
             mkdir $HOME/.tmp
         fi
-	export TMPDIR="$HOME/.tmp"
+    export TMPDIR="$HOME/.tmp"
 fi
-export PS1="\n[01;$PS_COLOR\u@\h[0m : \t : [01;34m\w[0m\nQ: "
-
-
-### Default Arguments
-alias ls="ls -F --color"
-alias rm="rm -i"
-alias cp="cp -i"
-alias mv="mv -i"
 
 
 ### Short Cuts
-alias l="ls"
-alias sl="ls"
-alias lss="ls --hide=*~"
-alias la="ls -a"
-alias ll="ls -l"
-alias lal="ls -al"
-alias lsd="ls -l | grep ^d"
-alias psg="ps ax | grep"
-alias clpy="rm -f *~ *pyc"
-alias pwdd="pwd -P"
-alias sudoo="sudo /bin/bash -l"
+alias dj="./manage.py runserver 0.0.0.0:8000"
+alias findcss='find . -name "*.css" | xargs grep'
+alias findhtml='find . -name "*.html" | xargs grep'
+alias findjs='find . -name "*.js" | xargs grep'
+alias findpy='find . -name "*.py" | xargs grep'
+alias greppy='egrep "^ *(#|class |def )"'
+alias rmpyc='find . -name "*.pyc" | xargs rm'
 
+export EDITOR=vi
 
-### Starters
-alias mongodb='sudo mongod --config /etc/mongodb.conf --fork && sleep 1 && tail -20 /var/log/mongodb/mongodb.log'
-alias rediss='redis-server /etc/redis.conf'
+GIT_PS1_SHOWDIRTYSTATE=yes
+GIT_PS1_SHOWSTASHSTATE=yes
+GIT_PS1_SHOWUNTRACKEDFILES=yes
+GIT_PS1_SHOWUPSTREAM="auto verbose"
+
+export PS1='\n[01;$PS_COLOR\u@\h[0m : \t : [01;34m\w[0m$(__git_ps1 " (%s)")\nQ: '
