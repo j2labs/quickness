@@ -42,4 +42,4 @@ GIT_PS1_SHOWSTASHSTATE=yes
 GIT_PS1_SHOWUNTRACKEDFILES=yes
 GIT_PS1_SHOWUPSTREAM="auto verbose"
 
-export PS1='\n[01;$PS_COLOR\u@\h[0m : \t : [01;34m\w[0m$(__git_ps1 " (%s)")\nQ: '
+export PS1='\u@\h \w$(__git_ps1 " (%s)")\nQ: '
