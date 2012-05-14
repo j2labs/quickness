@@ -24,12 +24,11 @@ PROFILE_UPDATED="no"
 if [ -d $APP_VERSION ]; then
     rm -rf $APP_VERSION
 fi
-if [ -f $APP_VERSION.tgz ]; then
-    rm -f $APP_VERSION.tgz
+if [ ! -f $APP_VERSION.tgz ]; then
+    wget http://www.scala-lang.org/downloads/distrib/files/$APP_VERSION.tgz
 fi
 
-wget http://www.scala-lang.org/downloads/distrib/files/$APP_VERSION.tgz
-tar zxvf $APP_VERSION.tgz
+tar zxf $APP_VERSION.tgz
 cd $APP_VERSION
 
 ### Update Profile

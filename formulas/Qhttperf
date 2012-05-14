@@ -14,9 +14,12 @@ cd $QUICKNESS_SRC
 if [ -d $APP_VERSION ]; then
     rm -rf ./$APP_VERSION
 fi
+if [ ! -f $APP_VERSION.tar.bz2 ]; then
+    wget ftp://ftp.hpl.hp.com/pub/httperf/$APP_VERSION.tar.gz
+fi
 
-wget ftp://ftp.hpl.hp.com/pub/httperf/$APP_VERSION
-tar xvzf $APP_VERSION.tar.gz
+
+tar xzf $APP_VERSION.tar.gz
 cd $APP_VERSION
 ./configure && make
 sudo make install

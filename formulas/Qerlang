@@ -1,6 +1,7 @@
 ###
 ### Erlang
 ###
+
 sudo apt-get -y install \
     erlang-nox
 
