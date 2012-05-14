@@ -1,0 +1,28 @@
+###
+### golang
+###
+
+PREV_DIR=$PWD
+
+sudo apt-get -y install \
+    golang
+
+cd ~
+mkdir ext
+mkdir -p mygo/{bin,src}
+export GOPATH="$HOME/ext:$HOME/mygo"
+go get github.com/nsf/gocode
+
+if [ -d "$HOME/.vim/bundle" ] ; then
+    cd ~/.vim/bundle
+    ln -s ~/ext/src/github.com/nsf/gocode/vim gocode
+    cd ~
+fi
+
+echo '
+if [ -d "$HOME/ext/bin" ] ; then
+    GOPATH="$HOME/ext:$HOME/mygo"
+    PATH="$HOME/ext/bin:$HOME/mygo/bin:$PATH"
+fi' >> ~/.profile
+
+cd $PREV_DIR
