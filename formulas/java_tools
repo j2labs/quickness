@@ -1,0 +1,9 @@
+###
+### Java Tools
+###
+
+sudo $QUICKNESS_BIN/quick quick_install java
+
+sudo apt-get -y install \
+    ant \
+    maven2  # Ugh. Maven wants to install x11

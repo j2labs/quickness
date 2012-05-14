@@ -4,12 +4,3 @@
 
 sudo apt-get -y install \
     default-jdk
-
-
-###
-### Java Tools
-###
-
-sudo apt-get -y install \
-    ant \
-    maven2  # Ugh. Maven wants to install x11
