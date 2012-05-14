@@ -1,37 +1,13 @@
 ###
-### Settings
+### Redis
 ###
-
-PREV_DIR=$PWD
-cd $QUICKNESS_SRC
-
-
-###
-### Formula Dependencies
-###
-
-$QUICKNESS_BIN/quick quick_install evented_libs
 
 sudo apt-get -y install \
-    tcl8.5
+    redis-server
 
-
-###
-### Formula Details
-###
-
-if [ -d redis ]; then
-    rm -rf ./redis
-fi
-
-git clone https://github.com/antirez/redis.git
-cd redis
-make && sudo make install
 
 echo "Server: redis-server"
 echo "Client: redis-cli"
 echo
 echo "Worth reading:"
 echo "- http://redis.io/commands/auth"
-
-cd $PREV_DIR

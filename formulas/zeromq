@@ -1,36 +1,10 @@
 ###
-### Settings
-###
-
-ZMQ_VERSION="zeromq-2.1.11"
-PREV_DIR=$PWD
-cd $QUICKNESS_SRC
-
-###
-### Formula Dependencies
-###
-
-$QUICKNESS_BIN/quick quick_install evented_libs
-$QUICKNESS_BIN/quick quick_install sqlite
-
-
-###
 ### ZeroMQ
 ###
 
-if [ -d $ZMQ_VERSION ]; then
-    rm -rf ./$ZMQ_VERSION
-fi
-if [ -f $ZMQ_VERSION.tar.gz ]; then
-    rm -f $ZMQ_VERSION.tar.gz
-fi
+sudo apt-get -y install \
+    libzmq-dev
 
-wget http://download.zeromq.org/$ZMQ_VERSION.tar.gz
-tar zxf $ZMQ_VERSION.tar.gz
-cd $ZMQ_VERSION
-./autogen.sh
-./configure && make && sudo make install
 
 ldconfig # update library cache
 
-cd $PREV_DIR
