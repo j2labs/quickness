@@ -31,6 +31,15 @@ elif [ $OS_MAJOR -eq 12 ] && [ $OS_MINOR -eq 04 ]; then
     export OS_NAME="precise"  # default
 fi
 
+### Link formulas in bin to make sourcing easier
+for f in $QUICKNESS_FORMULAS/*
+do
+    filename=$(echo $f | cut -d "/" -f 4)
+    if [ ! -L $QUICKNESS_BIN/Q$filename ]; then
+        echo "Linking $filename"
+        ln -s $f $QUICKNESS_BIN/Q$filename
+    fi
+done
 
 ###
 ### Quickness Workspaces
