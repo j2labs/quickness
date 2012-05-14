@@ -1,0 +1,7 @@
+###
+### Memcached
+###
+
+sudo apt-get -y install \
+    memcached \
+    libmemcached-dev
