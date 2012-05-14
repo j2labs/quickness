@@ -9,4 +9,4 @@ sudo apt-get -y install \
 ### Agner
 ###
 
-curl https://raw.github.com/agner/agner/master/scripts/oneliner | sh
+#curl https://raw.github.com/agner/agner/master/scripts/oneliner | sh

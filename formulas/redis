@@ -10,8 +10,10 @@ cd $QUICKNESS_SRC
 ### Formula Dependencies
 ###
 
-sudo $QUICKNESS_BIN/quick quick_install evented_libs
-sudo apt-get install tcl8.5
+$QUICKNESS_BIN/quick quick_install evented_libs
+
+sudo apt-get -y install \
+    tcl8.5
 
 
 ###

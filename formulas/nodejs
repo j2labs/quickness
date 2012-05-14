@@ -10,7 +10,7 @@ cd $QUICKNESS_SRC
 ### Formula Dependencies
 ###
 
-sudo $QUICKNESS_BIN/quick quick_install evented_libs
+$QUICKNESS_BIN/quick quick_install evented_libs
 
 
 ###

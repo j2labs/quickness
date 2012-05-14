@@ -14,7 +14,7 @@ PROFILE_UPDATED="no"
 ### System Dependencies
 ###
 
-sudo $QUICKNESS_BIN/quick quick_install java
+$QUICKNESS_BIN/quick quick_install java
 
 
 ###

@@ -1,2 +1,3 @@
 ### Package install
-sudo apt-get install rabbitmq-server
+sudo apt-get -y install \
+    rabbitmq-server

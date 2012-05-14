@@ -2,7 +2,7 @@
 ### Java Tools
 ###
 
-sudo $QUICKNESS_BIN/quick quick_install java
+$QUICKNESS_BIN/quick quick_install java
 
 sudo apt-get -y install \
     ant \

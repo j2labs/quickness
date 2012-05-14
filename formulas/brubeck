@@ -14,10 +14,10 @@ cd $QUICKNESS_SRC
 ### Formula Dependencies
 ###
 
-sudo $QUICKNESS_BIN/quick quick_install evented_libs
-sudo $QUICKNESS_BIN/quick quick_install python_dev
-sudo $QUICKNESS_BIN/quick quick_install zeromq
-sudo $QUICKNESS_BIN/quick quick_install mongrel2
+$QUICKNESS_BIN/quick quick_install evented_libs
+$QUICKNESS_BIN/quick quick_install python_dev
+$QUICKNESS_BIN/quick quick_install zeromq
+$QUICKNESS_BIN/quick quick_install mongrel2
 
 
 ###
