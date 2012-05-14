@@ -14,18 +14,6 @@ fi
 . $QUICKNESS/etc/quickness
 
 
-### Colorful prompt with special colors for root
-if [ $USER = "root" ]; then
-    PS_COLOR="31m"
-else
-    PS_COLOR="32m"
-        if [ ! -d "$HOME/.tmp" ]; then
-            mkdir $HOME/.tmp
-        fi
-    export TMPDIR="$HOME/.tmp"
-fi
-
-
 ### Short Cuts
 alias dj="./manage.py runserver 0.0.0.0:8000"
 alias findcss='find . -name "*.css" | xargs grep'
