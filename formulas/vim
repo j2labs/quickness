@@ -1,0 +1,43 @@
+###
+### vim bundles
+###
+
+PREV_DIR=$PWD
+
+sudo apt-get -y install \
+    vim-nox
+
+sudo easy_install pyflakes
+
+cd $HOME
+git clone https://github.com/tpope/vim-pathogen.git .vim
+mkdir .vim/{backup,bundle,tmp}
+
+cd $HOME/.vim/bundle
+git clone https://github.com/kien/ctrlp.vim.git
+git clone https://github.com/scrooloose/nerdcommenter.git
+git clone https://github.com/scrooloose/nerdtree.git
+git clone https://github.com/scrooloose/syntastic.git
+git clone https://github.com/jeetsukumaran/vim-buffergator.git
+git clone https://github.com/tpope/vim-fugitive.git
+
+# check to see if golang was installed
+if [ -d "$HOME/ext" ]; then
+   git clone https://github.com/jnwhiteh/vim-golang.git
+   ln -s $HOME/ext/src/github.com/nsf/gocode/vim gocode
+fi
+
+# check to see if python_dev was installed
+if [ -d "$HOME/.virtualenvs" ]; then
+    git clone https://github.com/jmcantrell/vim-virtualenv.git
+fi
+
+
+cd $HOME
+echo "backup/*" >> $HOME/.vim/.git/info/exclude
+echo "bundle/*" >> $HOME/.vim/.git/info/exclude
+echo "tmp/*" >> $HOME/.vim/.git/info/exclude
+
+cp $QUICKNESS/etc/vimrc $HOME/.vimrc
+
+cd $PREV_DIR

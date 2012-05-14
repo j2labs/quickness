@@ -33,8 +33,7 @@ apt-get -y install \
     ntp \
     subversion \
     unzip \
-    uuid-dev \
-    vim-nox
+    uuid-dev
 
 ### Update library cache
 ldconfig

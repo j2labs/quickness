@@ -1,0 +1,54 @@
+set nocompatible
+
+call pathogen#infect()
+let g:syntastic_python_checker = 'pyflakes'
+
+filetype indent plugin on
+syntax on
+
+set background=dark
+set backspace=indent,eol,start
+set backup
+set backupdir=~/.vim/backup
+set directory=~/.vim/tmp
+set fileformats=unix,mac,dos
+set expandtab
+set formatoptions-=o
+set hidden
+set incsearch
+set ignorecase
+set laststatus=2
+set list
+set listchars=tab:>-,trail:-
+set modeline
+set nowrap
+set number
+set pastetoggle=<F2>
+set scrolloff=5
+set shiftwidth=4
+set showcmd
+set showmatch
+set showmode
+set sidescrolloff=10
+set smartcase
+set softtabstop=4
+set statusline=%f%m%r%h%w\ [b%n]%=%{VirtualEnvStatusline()}\ %{fugitive#statusline()}\ [%{strlen(&fenc)?&fenc:'none'},%{&ff}]\ [%Y]\ [%l\/%L,%v]
+set t_Co=256
+set tabstop=4
+set whichwrap=b,s,h,l,<,>,~,[,]
+set wildignore=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc,*.swp,*.jpg,*.gif,*.png
+set wildmenu
+set wildmode=list:longest,full
+
+" Delete trailing white space, useful for Python ;)
+function StripTrailingWhitespace()
+    if !&binary && &filetype != 'diff'
+        normal mz
+        normal Hmy
+        %s/\s\+$//e
+        normal 'yz<CR>
+        normal `z
+    endif
+endfunction
+
+command -bar -nargs=0 StripTrailingWhitespace <line1>,<line2>call StripTrailingWhitespace()

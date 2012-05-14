@@ -19,6 +19,6 @@ Vagrant::Config.run do |config|
     end
 
     ### Install and bootstrap Quickness
-    config.vm.provision :shell, :inline => "echo \". /vagrant/etc/profile\" >> /home/vagrant/.profile"
+    config.vm.provision :shell, :inline => "echo -e \"\n### Vagrant \n. /vagrant/etc/profile\" >> /home/vagrant/.profile"
     config.vm.provision :shell, :inline => "/vagrant/bin/quick_new"
 end

@@ -7,22 +7,31 @@ PREV_DIR=$PWD
 sudo apt-get -y install \
     golang
 
-cd ~
+cd $HOME
 mkdir ext
 mkdir -p mygo/{bin,src}
 export GOPATH="$HOME/ext:$HOME/mygo"
 go get github.com/nsf/gocode
 
 if [ -d "$HOME/.vim/bundle" ] ; then
-    cd ~/.vim/bundle
-    ln -s ~/ext/src/github.com/nsf/gocode/vim gocode
-    cd ~
+    cd $HOME/.vim/bundle
+    git clone https://github.com/jnwhiteh/vim-golang.git
+    ln -s $HOME/ext/src/github.com/nsf/gocode/vim gocode
+    cd $HOME
 fi
 
 echo '
+### golang
 if [ -d "$HOME/ext/bin" ] ; then
     GOPATH="$HOME/ext:$HOME/mygo"
     PATH="$HOME/ext/bin:$HOME/mygo/bin:$PATH"
-fi' >> ~/.profile
+fi' >> $HOME/.profile
+
+echo "Please copy/paste following 2 lines"
+echo ""
+echo '    export GOPATH="$HOME/ext:$HOME/mygo"'
+echo '    export PATH="$HOME/ext/bin:$HOME/mygo/bin:$PATH"'
+echo ""
+echo "This step will happen automatically from now on. Also, consider reading"
 
 cd $PREV_DIR

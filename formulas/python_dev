@@ -19,6 +19,13 @@ sudo apt-get -y install \
 sudo easy_install virtualenv virtualenvwrapper
 
 
+if [ -d "$HOME/.vim/bundle" ] ; then
+    cd $HOME/.vim/bundle
+    git clone https://github.com/jmcantrell/vim-virtualenv.git
+    cd $HOME
+fi
+
+
 ### Update Profile
 if [ "$(grep VirtualEnv $HOME/.profile)" = "" ]; then  # 1 equal sign. wtf bash.
     echo "" >> $HOME/.profile
