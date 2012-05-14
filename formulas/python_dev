@@ -25,6 +25,7 @@ if [ -d "$HOME/.vim/bundle" ] ; then
     cd $HOME
 fi
 
+sudo cp $QUICKNESS/etc/django_bash_completion /etc/bash_completion.d/
 
 ### Update Profile
 if [ "$(grep VirtualEnv $HOME/.profile)" = "" ]; then  # 1 equal sign. wtf bash.
