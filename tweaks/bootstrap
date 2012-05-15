@@ -20,13 +20,8 @@ echo "Installing essential system tools"
 sudo apt-get -y install \
     autoconf \
     automake \
-    bison \
     build-essential \
     curl \
-    flex \
-    gawk \
     git \
-    libtool \
     ntp \
-    unzip \
-    uuid-dev
+    unzip
