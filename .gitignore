@@ -8,8 +8,9 @@
 ### Ignore anything added to bin, but track changes on quickness commands
 bin/*
 !bin/quick
-!bin/quick_install
-!bin/quick_formulas
 !bin/quick_apply
+!bin/quick_formulas
+!bin/quick_install
+!bin/quick_new
 !bin/quick_tweaks
 
