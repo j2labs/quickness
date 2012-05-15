@@ -87,6 +87,8 @@ The `quickness/etc` directory is where vanilla system configs are stored. An ins
 
 For now these files still need editing in a deploy. They come with basic configs for typical use cases but the network addresses still need to be filled in. They will eventually be based on templates.
 
+Place your custom configs inside `quickness/etc/private` to keep them out of git.
+
 
 ## Formulas
 
@@ -96,7 +98,9 @@ The idea here is to think in terms of servers and say, "I need a Brubeck server"
 
 Eventually, the formulas, and any other relevant scripts, will be sent to one or more servers for executon.
 
-By convention all formula names start with a capital Q (to keep them from clashing with other linux commands). To install a formula source it, the formula directory is in the PATH.
+By convention all quickness formula names start with a capital Q (to keep them from clashing with other linux commands). To install a formula source it, the formula directory is in the PATH.
+
+Also by convention formulas starting with a P are ignored by git and can be use to construct your custom personal and private builds (information you would not want to end up in a public github repo).
 
 
 ## Tweaks
