@@ -47,8 +47,7 @@ Then SSH to the machine and you will have a quickness prompt ready to go.
       \___\_\\__,_|_|\___|_|\_\_| |_|\___|___/___/
 
     Last login: Mon May  7 19:16:13 2012 from 10.0.2.2
-
-    vagrant@precise64 ~
+    vagrant@precise64 : 22:24:03 : ~
     Q: 
 
 There's the quickness prompt again.
@@ -88,6 +87,8 @@ The `quickness/etc` directory is where vanilla system configs are stored. An ins
 For now these files still need editing in a deploy. They come with basic configs for typical use cases but the network addresses still need to be filled in. They will eventually be based on templates.
 
 Place your custom configs inside `quickness/etc/private` to keep them out of git.
+
+During login `etc/profile` tries to source `etc/private/bash.profile`.  To get you started copy `etc/bash.profile.sample` into `etc/private`.
 
 
 ## Formulas
