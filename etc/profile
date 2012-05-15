@@ -14,6 +14,25 @@ fi
 . $QUICKNESS/etc/quickness
 
 
+### Set-up prompt
+GIT_PS1_SHOWDIRTYSTATE=yes
+GIT_PS1_SHOWSTASHSTATE=yes
+GIT_PS1_SHOWUNTRACKEDFILES=yes
+GIT_PS1_SHOWUPSTREAM="auto verbose"
+
+### Colorful prompt with special colors for root
+if [ $USER = "root" ]; then
+    PS_COLOR="31m"
+else
+    PS_COLOR="32m"
+        if [ ! -d "$HOME/.tmp" ]; then
+            mkdir $HOME/.tmp
+        fi
+    export TMPDIR="$HOME/.tmp"
+fi
+export PS1='\[\e[1;$PS_COLOR\]\u@\h\[\e[0m\] : \t : \[\e[1;34m\]\w\[\e[0m\]$(__git_ps1 " (%s)")\nQ: '
+
+
 ### Short Cuts
 alias dj="./manage.py runserver 0.0.0.0:8000"
 alias findcss='find . -name "*.css" | xargs grep'
@@ -24,10 +43,3 @@ alias greppy='egrep "^ *(#|class |def )"'
 alias rmpyc='find . -name "*.pyc" | xargs rm'
 
 export EDITOR=vi
-
-GIT_PS1_SHOWDIRTYSTATE=yes
-GIT_PS1_SHOWSTASHSTATE=yes
-GIT_PS1_SHOWUNTRACKEDFILES=yes
-GIT_PS1_SHOWUPSTREAM="auto verbose"
-
-export PS1='\u@\h \w$(__git_ps1 " (%s)")\nQ: '
