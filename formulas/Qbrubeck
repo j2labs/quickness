@@ -37,7 +37,7 @@ if [ -d "gevent-zeromq" ]; then
 fi
 git clone https://github.com/traviscline/gevent-zeromq
 cd gevent-zeromq
-sudo python setup.py install
+python setup.py install
 cd ..
 
 
