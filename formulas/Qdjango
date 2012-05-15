@@ -15,7 +15,9 @@ cd $QUICKNESS_SRC
 . Qpython_dev
 . Qrabbitmq
 
-sudo cp $QUICKNESS/etc/django_bash_completion /etc/bash_completion.d/
+if [ ! -f /etc/bash_completion.d/django_bash_completion ]; then
+    sudo cp $QUICKNESS/etc/django_bash_completion /etc/bash_completion.d/
+fi
 
 mkvirtualenv django
 
