@@ -1,6 +1,5 @@
 echo "Quickness Bootstrap"
 
-
 ### Headless install
 export DEBIAN_FRONTEND=noninteractive
 
@@ -25,3 +24,5 @@ sudo apt-get -y install \
     git \
     ntp \
     unzip
+
+sudo cp $QUICKNESS_ETC/motd.tail /etc/motd.tail
