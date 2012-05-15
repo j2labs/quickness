@@ -1,0 +1,9 @@
+###
+### Version Control Systems (besides git)
+###
+
+sudo apt-get -y install \
+    bzr \
+    cvs \
+    mercurial \
+    subversion
