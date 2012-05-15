@@ -1,0 +1,7 @@
+###
+### pcre libs
+###
+
+sudo apt-get -y install \
+    libpcre3 \
+    libpcre3-dev
