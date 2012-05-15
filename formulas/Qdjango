@@ -10,6 +10,7 @@ cd $QUICKNESS_SRC
 ### Formula Dependencies
 ###
 
+. Qmemcached
 . Qpostgres
 . Qpython_dev
 . Qrabbitmq
