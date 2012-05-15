@@ -12,7 +12,8 @@ Vagrant::Config.run do |config|
     else
         config.vm.network "33.33.33.11"
     end
-    #config.vm.forward_port "http", 80, 6767
+    config.vm.forward_port 6767, 6767
+    config.vm.forward_port 8000, 8000
 
     config.vm.customize do |vm|
         vm.memory_size = 1024
