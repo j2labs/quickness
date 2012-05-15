@@ -10,27 +10,21 @@ cd $QUICKNESS_SRC
 ### Formula Dependencies
 ###
 
-. Qevented_libs
+sudo apt-get -y install \
+    python-software-properties
 
 
 ###
 ### System Dependencies
 ###
 
-sudo apt-get -y install python-software-properties
-sudo add-apt-repository ppa:chris-lea/node.js
+sudo add-apt-repository -y ppa:chris-lea/node.js
 sudo apt-get update
 
 
 ### Install Node
 sudo apt-get -y install \
-    nodejs
-
+    nodejs \
+    npm
 
 cd $NODEJS_PREV_DIR
-
-###
-### Node Package Manager
-###
-
-sudo curl "http://npmjs.org/install.sh" | sudo sh  # this is su ridiculous
