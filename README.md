@@ -32,17 +32,23 @@ Create a vagrant instance like this.
     $ git clone https://github.com/j2labs/quickness.git
     $ cd quickness
     $ vagrant up
-    
+
 Then SSH to the machine and you will have a quickness prompt ready to go.
 
     $ vagrant ssh
     Welcome to Ubuntu 12.04 LTS (GNU/Linux 3.2.0-23-generic x86_64)
 
      * Documentation:  https://help.ubuntu.com/
-    Welcome to your Vagrant-built virtual machine.
-    Last login: Sun May 13 16:13:27 2012 from 10.0.2.2
+       ____        _      _
+      / __ \      (_)    | |
+     | |  | |_   _ _  ___| | ___ __   ___ ___ ___
+     | |  | | | | | |/ __| |/ / '_ \ / _ | __/ __|
+     | |__| | |_| | | (__|   <| | | |  __|__ \__ \
+      \___\_\\__,_|_|\___|_|\_\_| |_|\___|___/___/
 
-    vagrant@precise64 : 19:31:50 : ~
+    Last login: Mon May  7 19:16:13 2012 from 10.0.2.2
+
+    vagrant@precise64 ~
     Q: 
 
 There's the quickness prompt again.
@@ -54,7 +60,7 @@ I usually build a system with a few commands. That looks like:
 
     Q: quick_new
     Q: quick_apply max_files
-    Q: quick_install brubeck
+    Q: . Qbrubeck
 
 Done.
 
@@ -68,7 +74,7 @@ After source'ing `quickness/etc/profile` you will have a few commands available 
 | `quick_new`      | Run this command first. It bootstraps the system with things every developer needs.                                  |
 | `quick_apply`    | This applies a system tweak. The word 'apply' is used to signal that these change a system's config.                 |
 | `quick_tweaks`   | Lists all the available tweaks.                                                                                      |
-| `quick_install`  | Installs a formula, which is to say it runs a script which installs 1 or more packages.                              |                          
+| `quick_install`  | (deprecated, source instead) Installs a formula, which is to say it runs a script which installs 1 or more packages.                              |                          
 | `quick_formulas` | Lists all the concepts that have been captured as formulas.                                                          |
 | `quick`          | Can be used to prefix commands to create the environment they need to run in. Generally used by other commands only. |
 
@@ -84,11 +90,13 @@ For now these files still need editing in a deploy. They come with basic configs
 
 ## Formulas
 
-The `quickness/formulas` directory is where the logic for deploying Brubeck, Node.js, etc is. 
+The `quickness/formulas` directory is where the logic for deploying Brubeck, Node.js, etc is.
 
 The idea here is to think in terms of servers and say, "I need a Brubeck server" or "I need my usual Node deployment."
 
 Eventually, the formulas, and any other relevant scripts, will be sent to one or more servers for executon.
+
+By convention all formula names start with a capital Q (to keep them from clashing with other linux commands). To install a formula source it, the formula directory is in the PATH.
 
 
 ## Tweaks
