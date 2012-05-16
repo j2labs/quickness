@@ -15,31 +15,18 @@ cd $QUICKNESS_SRC
 ###
 
 . Qevented_libs
-. Qpython_dev
 . Qzeromq
 . Qmongrel2
+
 
 ###
 ### VirtualEnv
 ###
 
-mkvirtualenv brubeck
-
-###
-### Concurrency with Gevent
-###
-
-pip install gevent
-
-### Gevent + ZeroMQ requires a little special handling right now
-if [ -d "gevent-zeromq" ]; then
-    rm -rf gevent-zeromq
+if [ $VIRTUAL_ENV -eq "" ]; then
+    . Qpython_dev
+    mkvirtualenv brubeck
 fi
-git clone https://github.com/traviscline/gevent-zeromq
-cd gevent-zeromq
-python setup.py install
-cd ..
-
 
 ###
 ### Brubeck
@@ -57,6 +44,7 @@ cd brubeck
 
 ### Install Brubeck's dependencies
 pip install -I -r envs/brubeck.reqs
+pip install -I -r envs/gevent.reqs
 
 
 ### Install Brubeck itself
