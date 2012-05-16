@@ -2,7 +2,7 @@
 ### Java Tools
 ###
 
-. Qjava
+. $Q/java
 
 sudo apt-get -y install \
     ant \

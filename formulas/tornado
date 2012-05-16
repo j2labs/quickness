@@ -10,8 +10,8 @@ cd $QUICKNESS_SRC
 ### Formula Dependencies
 ###
 
-. Qpython_dev
-. Qevented_libs
+. $Q/python_dev
+. $Q/evented_libs
 
 mkvirtualenv tornado
 

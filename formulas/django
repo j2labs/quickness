@@ -10,10 +10,9 @@ cd $QUICKNESS_SRC
 ### Formula Dependencies
 ###
 
-. Qmemcached
-. Qpostgres
-. Qpython_dev
-. Qrabbitmq
+. $Q/postgres
+. $Q/python_dev
+. $Q/python_imaging
 
 if [ ! -f /etc/bash_completion.d/django_bash_completion ]; then
     sudo cp $QUICKNESS/etc/django_bash_completion /etc/bash_completion.d/

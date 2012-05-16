@@ -4,4 +4,4 @@ export QUICKNESS=$(cd $(dirname $(dirname $0)); pwd)
 
 
 ### Formulas
-ls $QUICKNESS_FORMULAS
+ls $Q

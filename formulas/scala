@@ -14,7 +14,7 @@ PROFILE_UPDATED="no"
 ### System Dependencies
 ###
 
-. Qjava
+. $Q/java
 
 
 ###

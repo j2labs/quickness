@@ -2,10 +2,11 @@
 ### Quickness Settings
 ###
 
+# This should allow for quick sourcing of formulas
+export Q=$QUICKNESS/formulas
+
 export QUICKNESS_BIN=$QUICKNESS/bin
 export QUICKNESS_ETC=$QUICKNESS/etc
-export QUICKNESS_FORMULAS=$QUICKNESS/formulas
-export QUICKNESS_PRIVATE=$QUICKNESS_ETC/private
 export QUICKNESS_TWEAKS=$QUICKNESS/tweaks
 
 export QUICKNESS_HOME=$HOME/.quickness
@@ -42,6 +43,37 @@ if [ ! -d $QUICKNESS_SRC ]; then
     mkdir $QUICKNESS_SRC
 fi
 
+# experimental functions to gather up all the echo statements from the formulas, so we can display them all at once at the end of the run
+export QUICKNESS_MSG=/tmp/quickness.msg
+
+quickness_init() {
+    if [ -z "$1" ]; then
+        echo "Pass <formula> argument to quickness_init"
+    else
+        if [ -z "$QUICKNESS_FORMULA_NAME" ]; then
+            export QUICKNESS_FORMULA_NAME="$1"
+            if [ -f $QUICKNESS_MSG ]; then
+                rm $QUICKNESS_MSG
+            fi
+            touch $QUICKNESS_MSG
+        fi
+    fi
+}
+
+quickness_msg() {
+    echo "$@" >> $QUICKNESS_MSG
+}
+
+quickness_teardown() {
+    if [ -z "$1" ]; then
+        echo "Pass <formula> argument to quickness_teardown"
+    else
+        if [ "$1" = "$QUICKNESS_FORMULA_NAME" ]; then
+            cat $QUICKNESS_MSG
+            rm $QUICKNESS_MSG
+        fi
+    fi
+}
 
 ### Path
-export PATH=$QUICKNESS_BIN:$PATH:$QUICKNESS_FORMULAS
+export PATH=$QUICKNESS_BIN:$PATH

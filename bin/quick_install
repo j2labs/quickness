@@ -11,5 +11,5 @@ then
     echo "Pass <formula> argument to quick_install"
 else
     echo "Quick Installing: $formula_name"
-    $QUICKNESS_BIN/quick $QUICKNESS_FORMULAS/$formula_name
+    $QUICKNESS_BIN/quick $Q/$formula_name
 fi

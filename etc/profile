@@ -36,6 +36,6 @@ export PS1='\[\e[1;$PS_COLOR\]\u@\h\[\e[0m\] : \t : \[\e[1;34m\]\w\[\e[0m\]$(__g
 export EDITOR=vi
 
 ### Now load in any custom bash config
-if [ -f $QUICKNESS_PRIVATE/bash.profile ]; then
-    . $QUICKNESS_PRIVATE/bash.profile
+if [ -f $QUICKNESS_ETC/bash.private ]; then
+    . $QUICKNESS_ETC/bash.private
 fi

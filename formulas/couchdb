@@ -1,13 +1,14 @@
 ###
 ### CouchDB
 ###
+quickness_init "couchdb"
 
 APP_VERSION="apache-couchdb-1.2.0"
 COUCHDB_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 
-. Qerlang
+. $Q/erlang
 
 sudo apt-get -y install \
     help2man \
@@ -43,6 +44,10 @@ sudo chown -R couchdb:couchdb /usr/local/etc/couchdb
 
 sudo su -l -c "couchdb -b" couchdb
 
-echo "Server: sudo su -l -c \"couchdb -b\" couchdb (it's already up though)"
+quickness_msg $(cat <<EOF
+### CouchDB
+Server: sudo su -l -c \"couchdb -b\" couchdb (it's already up though)
+EOF)
+quickness_teardown "couchdb"
 
 cd $COUCHDB_PREV_DIR

@@ -1,0 +1,16 @@
+###
+### PostgreSQL
+###
+quickness_init "postgres"
+
+sudo apt-get -y install postgresql libpq-dev
+
+su -l -c "createuser -P -s vagrant" postgres
+
+quickness_msg $(cat <<EOF
+### PostgreSQL
+Server: sudo service postgresql start - (it's already up though)
+Create db: createdb <dbname>
+Client: psql <dbname>
+EOF)
+quickness_teardown "postgres"

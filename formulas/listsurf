@@ -1,0 +1,37 @@
+###
+### listsurf (sample brubeck application)
+###
+quickness_init "listsurf"
+
+cd $QUICKNESS_SRC
+
+###
+### Formula Dependencies
+###
+
+. $Q/python_dev
+
+# Start up a virtualenv so brubeck formula doesn't
+mkvirtualenv listsurf
+
+. $Q/brubeck
+. $Q/mongodb
+
+
+###
+### Install listsurf from github
+###
+
+git clone https://github.com/j2labs/listsurf.git
+cd listsurf
+m2sh load
+
+quickness_msg $(cat <<EOF
+### Listsurf
+Start mongrel2 with: m2sh start -every
+With that terminal occupied open a new one and run
+  cd $QUICKNESS_SRC/listsurf
+  workon listsurf
+  ./listsurf.py
+EOF)
+quickness_teardown "listsurf"

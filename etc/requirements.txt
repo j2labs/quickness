@@ -1,5 +1,4 @@
 Django
-Celery
 Fabric
 Pillow
 South
@@ -7,8 +6,6 @@ South
 boto
 bpython
 psycopg2
-django-celery
 django-debug-toolbar
 django-extensions
-django-haystack
 django-registration

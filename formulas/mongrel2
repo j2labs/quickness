@@ -11,8 +11,8 @@ cd $QUICKNESS_SRC
 ### Formula Dependencies
 ###
 
-. Qevented_libs
-. Qsqlite
+. $Q/evented_libs
+. $Q/sqlite
 
 
 ###

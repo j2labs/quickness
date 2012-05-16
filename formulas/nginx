@@ -1,6 +1,7 @@
 ###
 ### Settings
 ###
+quickness_init "nginx"
 
 APP_VERSION=nginx-1.2.0
 NGINX_PREV_DIR=$PWD
@@ -11,8 +12,8 @@ cd $QUICKNESS_SRC
 ### Formula Dependencies
 ###
 
-. Qevented_libs
-. Qpcre
+. $Q/evented_libs
+. $Q/pcre
 
 
 ###
@@ -33,6 +34,10 @@ make && sudo make install
 
 sudo ln -s /usr/local/nginx/sbin/nginx /usr/local/bin/
 
-echo "Server: sudo nginx"
+quickness_msg $(cat <<EOF
+### nginx
+Server: sudo nginx
+EOF)
+quickness_teardown "nginx"
 
 cd $NGINX_PREV_DIR

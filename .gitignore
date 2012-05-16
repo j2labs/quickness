@@ -14,5 +14,5 @@ bin/*
 !bin/quick_new
 !bin/quick_tweaks
 
-### Ignore anything in formulas that starts with a P (Private/Personal)
-formulas/P*
+### Ignore anything that ends in .private
+*.private

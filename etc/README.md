@@ -1,3 +1,4 @@
 # Quickness /etc Directory
 
-You will need edit any files in this directory that you use. Go figure, right?
+Remember any files ending with .private, are ignored by git.
+This can be used to store information you wouldn't want on github (like passwords)

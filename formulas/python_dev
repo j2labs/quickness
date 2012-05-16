@@ -6,14 +6,11 @@ PYTHON_DEV_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 
+# libgmp3-dev is an optional dependency for Fabric
 sudo apt-get -y install \
     python-dev \
     python-setuptools \
-    libfreetype6-dev \
-    libgmp3-dev \
-    libjpeg8-dev \
-    liblcms1-dev \
-    zlib1g-dev
+    libgmp3-dev
 
 ### Install at system level
 sudo easy_install virtualenv virtualenvwrapper

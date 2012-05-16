@@ -12,7 +12,7 @@ cd $QUICKNESS_SRC
 ### Formula Dependencies
 ###
 
-. Qjava
+. $Q/java
 
 
 ###

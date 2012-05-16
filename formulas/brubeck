@@ -14,9 +14,9 @@ cd $QUICKNESS_SRC
 ### Formula Dependencies
 ###
 
-. Qevented_libs
-. Qzeromq
-. Qmongrel2
+. $Q/evented_libs
+. $Q/zeromq
+. $Q/mongrel2
 
 
 ###
@@ -24,7 +24,7 @@ cd $QUICKNESS_SRC
 ###
 
 if [ $VIRTUAL_ENV -eq "" ]; then
-    . Qpython_dev
+    . $Q/python_dev
     mkvirtualenv brubeck
 fi
 

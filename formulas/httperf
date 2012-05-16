@@ -3,7 +3,7 @@
 ###
 
 APP_VERSION="httperf-0.9.0"
-HTTPPERF_PREV_DIR=$PWD
+HTTPERF_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 
@@ -23,4 +23,4 @@ tar xzf $APP_VERSION.tar.gz
 cd $APP_VERSION
 ./configure && make && sudo make install
 
-cd $HTTPPERF_PREV_DIR
+cd $HTTPERF_PREV_DIR

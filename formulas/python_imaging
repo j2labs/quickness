@@ -1,0 +1,6 @@
+# this formula just installs the dependencie needed to compile PIL (I recommend pip installing Pillow)
+sudo apt-get -y install \
+    libfreetype6-dev \
+    libjpeg8-dev \
+    liblcms1-dev \
+    zlib1g-dev
