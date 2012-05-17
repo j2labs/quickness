@@ -1,34 +1,59 @@
 ###
-### listsurf (sample brubeck application)
+### listsurf
 ###
-cd $QUICKNESS_SRC
+### sample brubeck application
+###
+
+###
+### init
+###
+
+if [ "$(is_formula_installed)" = "yes" ]; then
+    quickness_teardown
+    return
+fi
+
+
+###
+### Settings
+###
+
+cd $HOME
+
 
 ###
 ### Formula Dependencies
 ###
 
-. $Q/python_dev
-
-# Start up a virtualenv so brubeck formula doesn't
-mkvirtualenv listsurf
-
-. $Q/brubeck
 . $Q/mongodb
+. $Q/python_dev listsurf
+. $Q/brubeck
 
 
 ###
-### Install listsurf from github
+### Installation & Configuration
 ###
 
+quickness_msg "cloning from j2labs@github"
 git clone https://github.com/j2labs/listsurf.git
 cd listsurf
 m2sh load
 
-### Echo Message
-quickness_msg "print" "
-### ${BASH_SOURCE##*/}
+
+###
+### Messages
+###
+
+quickness_msg "
   Start mongrel2 with: m2sh start -every
   With that terminal occupied open a new one and run
-    cd $QUICKNESS_SRC/listsurf
+    cd $HOME/listsurf
     workon listsurf
     ./listsurf.py"
+
+
+###
+### Teardown
+###
+
+quickness_teardown

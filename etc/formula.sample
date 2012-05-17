@@ -7,30 +7,56 @@
 ###
 
 ###
+### init
+###
+
+if [ "$(is_formula_installed)" = "yes" ]; then
+    quickness_teardown
+    return
+fi
+
+
+###
 ### Settings
 ###
 
+quickness_msg "Include comments as needed"
 <set any variables here, like>
+# Since formulas can be nested use swap <formula> with the actual name of the formula
 <formula>_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 
 ###
-### Dependencies
+### System Dependencies
 ###
 
-sudo apt-get install <packages>
-. $Q/formula
+sudo apt-get -y install \
+    <package> \
+    <package> \
+    <package>
+
+
+###
+### Formula Dependencies
+###
+
+. $Q/formula-a
+. $Q/formula-b
+. $Q/formula-c
 
 
 ###
 ### Installation & Configuration
 ###
 
+quickness_msg "Include comments as needed"
+
 git clone ...
 wget http://...
 tar ...
 blah blah
+### Comments within a section
 make && sudo make install
 
 
@@ -38,7 +64,8 @@ make && sudo make install
 ### Cleanup
 ###
 
-rm <any dirs or zips that aren't needed>
+rm <any dirs or zips that aren't needed anymore>
+### cd back from where you came
 cd $<formula>_PREV_DIR
 
 
@@ -46,10 +73,16 @@ cd $<formula>_PREV_DIR
 ### Messages
 ###
 
-quickness_msg "print" "
-### ${BASH_SOURCE##*/}
+quickness_msg "
   Put any messages, notices or doc links here.
   They will be gathered up and printed when the top-level formula
-  completes.  If for some reason you have more than 1 message dispersed
-  throughout a formula replace the 'print' argument of the other above
-  with 'add'"
+  completes.  You could just use echo statements but if your formula
+  gets used in other formulas the messages might get lost in the terminal.
+  Multiline comments should be indented twice and start on a new line"
+
+
+###
+### Teardown
+###
+
+quickness_teardown

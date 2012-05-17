@@ -1,6 +1,21 @@
-### Brubeck installs consist of installing ZeroMQ, Mongrel2 and some Python
-### packages. This script currently covers all of this, though it'd be ideal
-### to break it apart into more modular components.
+###
+### Brubeck
+###
+### Install consists of installing ZeroMQ and Mongrel2 as well as all
+### Python dependencies.  To create an actual brubeck application you
+### should create a <project_name>.private file in the formula directory
+### and source this formula in (look at the listsurf formula for ideas).
+###
+
+###
+### init
+###
+
+if [ "$(is_formula_installed)" = "yes" ]; then
+    quickness_teardown
+    return
+fi
+
 
 ###
 ### Settings
@@ -17,37 +32,46 @@ cd $QUICKNESS_SRC
 . $Q/evented_libs
 . $Q/zeromq
 . $Q/mongrel2
+. $Q/python_dev brubeck
 
 
 ###
-### VirtualEnv
+### Installation and Configuration
 ###
-
-if [ $VIRTUAL_ENV -eq "" ]; then
-    . $Q/python_dev
-    mkvirtualenv brubeck
-fi
-
-###
-### Brubeck
-###
-
 
 if [ -d "brubeck" ]; then
-    rm -rf brubeck
+    cd brubeck
+    git checkout master
+    git pull
+else
+    git clone https://github.com/j2labs/brubeck.git
+    cd brubeck
 fi
-
-git clone https://github.com/j2labs/brubeck.git
-cd brubeck
-
-### The next few steps leave a `build/` in the brubeck directory
 
 ### Install Brubeck's dependencies
 pip install -I -r envs/brubeck.reqs
 pip install -I -r envs/gevent.reqs
 
-
 ### Install Brubeck itself
 python setup.py install
 
+
+###
+### Cleanup
+###
+
 cd $BRUBECK_PREV_DIR
+
+
+###
+### Messages
+###
+
+quickness_msg "This formula uses gevent"
+
+
+###
+### Teardown
+###
+
+quickness_teardown

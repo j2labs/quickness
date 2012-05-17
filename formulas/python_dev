@@ -1,4 +1,20 @@
 ###
+### Python Development Libraries
+###
+### This formula takes an optional name argument that will create a virtualenv
+###
+
+###
+### init
+###
+
+if [ "$(is_formula_installed)" = "yes" ]; then
+    quickness_teardown
+    return
+fi
+
+
+###
 ### Settings
 ###
 
@@ -6,29 +22,58 @@ PYTHON_DEV_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 
-# libgmp3-dev is an optional dependency for Fabric
+###
+### System Dependencies
+###
+
+### libgmp3-dev is an optional dependency for Fabric
 sudo apt-get -y install \
     python-dev \
     python-setuptools \
+    python-pip \
     libgmp3-dev
 
+
+###
+### Installation & Configuration
+###
+
 ### Install at system level
-sudo easy_install virtualenv virtualenvwrapper
-
-
-if [ -d "$HOME/.vim/bundle" ] ; then
-    cd $HOME/.vim/bundle
-    git clone https://github.com/jmcantrell/vim-virtualenv.git
-    cd $HOME
+if [ -z "$VIRTUAL_ENV" ]; then
+    sudo easy_install virtualenv virtualenvwrapper
+    if [ -d "$HOME/.vim/bundle" ]; then
+        cd $HOME/.vim/bundle
+        git clone https://github.com/jmcantrell/vim-virtualenv.git
+        cd $QUICKNESS_SRC
+    fi
 fi
 
 ### Update Profile
-if [ "$(grep VirtualEnv $HOME/.profile)" = "" ]; then  # 1 equal sign. wtf bash.
+if [ -z "$(grep VirtualEnv $HOME/.profile)" ]; then
     echo "" >> $HOME/.profile
     echo "### VirtualEnv" >> $HOME/.profile
     echo ". /usr/local/bin/virtualenvwrapper.sh" >> $HOME/.profile
 fi
 
+### Source this so they don't need to logout/login
 . /usr/local/bin/virtualenvwrapper.sh
 
+### Only create the virtualenv when not already in one
+if [ -z "$VIRTUAL_ENV" ] && [ ! -z "$1" ]; then
+    quickness_msg "a virtualenv has been created named $1"
+    mkvirtualenv $1
+fi
+
+
+###
+### Cleanup
+###
+
 cd $PYTHON_DEV_PREV_DIR
+
+
+###
+### Teardown
+###
+
+quickness_teardown

@@ -12,6 +12,9 @@ export QUICKNESS_TWEAKS=$QUICKNESS/tweaks
 export QUICKNESS_HOME=$HOME/.quickness
 export QUICKNESS_SRC=$HOME/.quickness/src
 
+export QUICKNESS_INSTALLED=$QUICKNESS_HOME/.installed
+export QUICKNESS_MSG=/tmp/quickness.msg
+
 
 ### Get major and minor number for OS
 export OS_VER=$(lsb_release -r | cut -d ":" -f 2 | sed 's/^[\t ]*//g')
@@ -32,6 +35,7 @@ elif [ $OS_MAJOR -eq 12 ] && [ $OS_MINOR -eq 04 ]; then
     export OS_NAME="precise"  # default
 fi
 
+
 ###
 ### Quickness Workspaces
 ###
@@ -43,19 +47,48 @@ if [ ! -d $QUICKNESS_SRC ]; then
     mkdir $QUICKNESS_SRC
 fi
 
-# experimental function to gather up all the echo statements from the formulas, so we can display them all at once at the end of the run
-export QUICKNESS_MSG=/tmp/quickness.msg
-quickness_msg() {
-    command="$1"
-    msg="$2"
 
-    echo "$msg" >> $QUICKNESS_MSG
-    if [ "${#BASH_SOURCE[@]}" = "2" ] && [ "$command" = "print" ]; then
+###
+### Various methods to accumalate messages and keep track of what's been installed
+###
+
+if [ -f $QUICKNESS_MSG ]; then
+    rm $QUICKNESS_MSG
+fi
+
+if [ ! -f $QUICKNESS_INSTALLED ]; then
+    echo "#ONLY REMOVE THINGS FROM HERE YOU WANT TO TRY AND REINSTALL" >> $QUICKNESS_INSTALLED
+fi
+
+is_formula_installed() {
+    if [ ! -z "$(grep ${BASH_SOURCE[1]##*/} $QUICKNESS_INSTALLED)" ]; then
+        quickness_msg "ALERT: ${BASH_SOURCE[1]##*/} already installed, skipping over"
+        echo "yes"
+    else
+        echo "no"
+    fi
+}
+
+quickness_teardown() {
+    echo "${BASH_SOURCE[1]##*/}" >> $QUICKNESS_INSTALLED
+    if [ "${#BASH_SOURCE[@]}" = "2" ]; then
         echo "" >> $QUICKNESS_MSG
         cat $QUICKNESS_MSG
         rm $QUICKNESS_MSG
     fi
 }
 
+quickness_msg() {
+    if [ ! -f $QUICKNESS_MSG ]; then
+        echo "" >> $QUICKNESS_MSG
+    fi
+    echo "[${BASH_SOURCE[1]##*/}] $1" >> $QUICKNESS_MSG
+    echo "" >> $QUICKNESS_MSG
+}
+
+
+###
 ### Path
+###
+
 export PATH=$QUICKNESS_BIN:$PATH
