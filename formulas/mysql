@@ -1,7 +1,6 @@
 ###
 ### MySQL
 ###
-quickness_init "mysql"
 
 # Since mysql asks for a password lets automate
 sudo apt-get -y install debconf-utils
@@ -12,16 +11,15 @@ cat mysql.preseed | sudo debconf-set-selections
 
 sudo apt-get -y install mysql-server libmysqlclient-dev
 
-quickness_msg $(cat <<EOF
-### MySQL
-NOTE: The formula sets a default mysql password of toor
-To change the password for root in your own formulas try the following:
-mysql -u root -ptoor -e \"SET PASSWORD FOR 'root'@'localhost' = PASSWORD('blah');\"
+### Echo Message
+quickness_msg "print" "
+### ${BASH_SOURCE##*/}
+  NOTE: The formula sets a default mysql password of toor
+  To change the password for root in your own formulas try the following:
+  mysql -u root -ptoor -e \"SET PASSWORD FOR 'root'@'localhost' = PASSWORD('blah');\"
 
-Server: sudo service mysql start - (it's already up though)
-Client: mysql -u root -p
+  Server: sudo service mysql start - (it's already up though)
+  Client: mysql -u root -p
 
-Worth reading:
- - Adding users: http://dev.mysql.com/doc/en/adding-users.html
-EOF)
-quickness_teardown "mysql"
+  Worth reading:
+   - Adding users: http://dev.mysql.com/doc/en/adding-users.html"
