@@ -1,0 +1,55 @@
+###
+### Forumula Name
+###
+### Any information important to future developers.
+### This is a guideline, sometimes formulas don't
+### allow for something quite so simple.
+###
+
+###
+### Settings
+###
+
+<set any variables here, like>
+<formula>_PREV_DIR=$PWD
+cd $QUICKNESS_SRC
+
+
+###
+### Dependencies
+###
+
+sudo apt-get install <packages>
+. $Q/formula
+
+
+###
+### Installation & Configuration
+###
+
+git clone ...
+wget http://...
+tar ...
+blah blah
+make && sudo make install
+
+
+###
+### Cleanup
+###
+
+rm <any dirs or zips that aren't needed>
+cd $<formula>_PREV_DIR
+
+
+###
+### Messages
+###
+
+quickness_msg "print" "
+### ${BASH_SOURCE##*/}
+  Put any messages, notices or doc links here.
+  They will be gathered up and printed when the top-level formula
+  completes.  If for some reason you have more than 1 message dispersed
+  throughout a formula replace the 'print' argument of the other above
+  with 'add'"
