@@ -20,7 +20,7 @@ VIM_PREV_DIR=$PWD
 sudo apt-get -y install \
     vim-nox
 
-sudo easy_install pyflakes
+sudo pip install pyflakes
 
 cd $HOME
 git clone https://github.com/tpope/vim-pathogen.git .vim

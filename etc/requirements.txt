@@ -5,6 +5,5 @@ South
 
 boto
 bpython
-psycopg2
 django-extensions
 django-registration

@@ -44,8 +44,8 @@ else
 fi
 
 ### Install Brubeck's dependencies
-pip install -I -r envs/brubeck.reqs
-pip install -I -r envs/gevent.reqs
+pip install -r envs/brubeck.reqs
+pip install -r envs/gevent.reqs
 
 ### Install Brubeck itself
 python setup.py install
