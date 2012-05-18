@@ -1,0 +1,42 @@
+###
+### Simple Build Tool
+###
+
+###
+### Initialize
+###
+
+if [ "$(is_formula_installed)" = "yes" ]; then
+    quickness_teardown
+    return
+fi
+
+APP_VERSION="0.11.3"
+SBT_PREV_DIR=$PWD
+cd $QUICKNESS_SRC
+
+###
+### Dependencies
+###
+
+. $Q/scala
+
+
+###
+### Installation
+###
+
+cd $QUICKNESS_SRC/scala-*/bin
+wget "http://typesafe.artifactoryonline.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/$APP_VERSION/sbt-launch.jar"
+
+echo 'java -Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=384M -jar `dirname $0`/sbt-launch.jar "$@"' > sbt
+chmod 755 sbt
+
+
+###
+### Teardown
+###
+
+cd $SBT_PREV_DIR
+
+quickness_teardown

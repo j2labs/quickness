@@ -1,25 +1,48 @@
 ###
-### Settings
+### Django
 ###
+
+###
+### Initialize
+###
+
+if [ "$(is_formula_installed)" = "yes" ]; then
+    quickness_teardown
+    return
+fi
+
+if [ ! -f /etc/bash_completion.d/django_bash_completion ]; then
+    sudo cp $QUICKNESS/etc/django_bash_completion /etc/bash_completion.d/
+fi
 
 DJANGO_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 
 ###
-### Formula Dependencies
+### Dependencies
 ###
 
 . $Q/postgres
-. $Q/python_dev
+. $Q/python_dev django
 . $Q/python_imaging
 
-if [ ! -f /etc/bash_completion.d/django_bash_completion ]; then
-    sudo cp $QUICKNESS/etc/django_bash_completion /etc/bash_completion.d/
+
+###
+### Installation
+###
+
+if [ -f $QUICKNESS/etc/requirements.private ]; then
+    pip install -r $QUICKNESS/etc/requirements.private
+else
+    quickness_msg "using default requirements, create etc/requirements.private to load in your own requirements"
+    pip install -r $QUICKNESS/etc/requirements.txt
 fi
 
-mkvirtualenv django
-
-pip install -r $QUICKNESS/etc/requirements.txt
+###
+### Teardown
+###
 
 cd $DJANGO_PREV_DIR
+
+quickness_teardown

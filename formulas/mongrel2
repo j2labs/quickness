@@ -1,6 +1,15 @@
 ###
-### Settings
+### MongoDB
 ###
+
+###
+### Initialize
+###
+
+if [ "$(is_formula_installed)" = "yes" ]; then
+    quickness_teardown
+    return
+fi
 
 APP_VERSION="mongrel2-1.7.5"
 MONGREL2_PREV_DIR=$PWD
@@ -8,7 +17,7 @@ cd $QUICKNESS_SRC
 
 
 ###
-### Formula Dependencies
+### Dependencies
 ###
 
 . $Q/evented_libs
@@ -16,7 +25,7 @@ cd $QUICKNESS_SRC
 
 
 ###
-### Mongrel2
+### Installation
 ###
 
 if [ -d $APP_VERSION ]; then
@@ -30,4 +39,11 @@ tar jxf $APP_VERSION.tar.bz2
 cd $APP_VERSION
 make && sudo make install
 
+
+###
+### Teardown
+###
+
 cd $MONGREL2_PREV_DIR
+
+quickness_teardown

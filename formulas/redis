@@ -2,13 +2,22 @@
 ### Redis
 ###
 
+###
+### Initialize
+###
+
+if [ "$(is_formula_installed)" = "yes" ]; then
+    quickness_teardown
+    return
+fi
+
 APP_VERSION=redis-2.4.13
 REDIS_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 
 ###
-### Formula Details
+### Installation
 ###
 
 if [ -d $APP_VERSION ]; then
@@ -23,13 +32,18 @@ cd $APP_VERSION
 make && sudo make install
 
 
+###
+### Teardown
+###
+
 cd $REDIS_PREV_DIR
 
-quickness_msg "print" "
-### ${BASH_SOURCE##*/}
+quickness_msg "
   Server: redis-server
    - Optionally: redis-server /path/to/redis.conf
   Client: redis-cli
 
   Worth reading:
    - http://redis.io/commands/auth"
+
+quickness_teardown

@@ -1,6 +1,15 @@
 ###
-### Settings
+### Httperf
 ###
+
+###
+### Initialize
+###
+
+if [ "$(is_formula_installed)" = "yes" ]; then
+    quickness_teardown
+    return
+fi
 
 APP_VERSION="httperf-0.9.0"
 HTTPERF_PREV_DIR=$PWD
@@ -8,7 +17,7 @@ cd $QUICKNESS_SRC
 
 
 ###
-### Httperf
+### Installation
 ###
 
 if [ -d $APP_VERSION ]; then
@@ -23,4 +32,11 @@ tar xzf $APP_VERSION.tar.gz
 cd $APP_VERSION
 ./configure && make && sudo make install
 
+
+###
+### Teardown
+###
+
 cd $HTTPERF_PREV_DIR
+
+quickness_teardown

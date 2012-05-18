@@ -8,7 +8,7 @@
 ###
 
 ###
-### init
+### Initialize
 ###
 
 if [ "$(is_formula_installed)" = "yes" ]; then
@@ -16,17 +16,12 @@ if [ "$(is_formula_installed)" = "yes" ]; then
     return
 fi
 
-
-###
-### Settings
-###
-
 BRUBECK_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 
 ###
-### Formula Dependencies
+### Dependencies
 ###
 
 . $Q/evented_libs
@@ -36,7 +31,7 @@ cd $QUICKNESS_SRC
 
 
 ###
-### Installation and Configuration
+### Installation
 ###
 
 if [ -d "brubeck" ]; then
@@ -57,21 +52,11 @@ python setup.py install
 
 
 ###
-### Cleanup
+### Teardown
 ###
 
 cd $BRUBECK_PREV_DIR
 
-
-###
-### Messages
-###
-
 quickness_msg "This formula uses gevent"
-
-
-###
-### Teardown
-###
 
 quickness_teardown

@@ -1,7 +1,31 @@
-### Package install
+###
+### RabbitMQ
+###
+
+###
+### Initialize
+###
+
+if [ "$(is_formula_installed)" = "yes" ]; then
+    quickness_teardown
+    return
+fi
+
+
+###
+### Installation
+###
+
 sudo apt-get -y install \
     rabbitmq-server
 
 sudo rabbitmqctl add_user vagrant vagrant
 sudo rabbitmqctl add_vhost vagrant_vhost
 sudo rabbitmqctl set_permissions -p vagrant_vhost vagrant ".*" ".*" ".*"
+
+
+###
+### Teardown
+###
+
+quickness_teardown

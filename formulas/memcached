@@ -2,6 +2,26 @@
 ### Memcached
 ###
 
+###
+### Initialize
+###
+
+if [ "$(is_formula_installed)" = "yes" ]; then
+    quickness_teardown
+    return
+fi
+
+
+###
+### Installation
+###
+
 sudo apt-get -y install \
     memcached \
     libmemcached-dev
+
+###
+### Teardown
+###
+
+quickness_teardown

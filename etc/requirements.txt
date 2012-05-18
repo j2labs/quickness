@@ -6,6 +6,5 @@ South
 boto
 bpython
 psycopg2
-django-debug-toolbar
 django-extensions
 django-registration

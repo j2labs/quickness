@@ -2,5 +2,28 @@
 ### Siege
 ###
 
+###
+### Initialize
+###
+
+if [ "$(is_formula_installed)" = "yes" ]; then
+    quickness_teardown
+    return
+fi
+
+
+###
+### Installation
+###
+
 sudo apt-get -y install \
     siege
+
+
+###
+### Teardown
+###
+
+cd $SIEGE_PREV_DIR
+
+quickness_teardown

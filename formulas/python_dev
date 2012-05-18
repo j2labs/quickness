@@ -5,7 +5,7 @@
 ###
 
 ###
-### init
+### Initialize
 ###
 
 if [ "$(is_formula_installed)" = "yes" ]; then
@@ -13,30 +13,27 @@ if [ "$(is_formula_installed)" = "yes" ]; then
     return
 fi
 
-
-###
-### Settings
-###
-
 PYTHON_DEV_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 
 ###
-### System Dependencies
+### Dependencies
 ###
 
-### libgmp3-dev is an optional dependency for Fabric
+### optional dependency for Fabric
 sudo apt-get -y install \
-    python-dev \
-    python-setuptools \
-    python-pip \
     libgmp3-dev
 
 
 ###
-### Installation & Configuration
+### Installation
 ###
+
+sudo apt-get -y install \
+    python-dev \
+    python-setuptools \
+    python-pip
 
 ### Install at system level
 if [ -z "$VIRTUAL_ENV" ]; then
@@ -66,14 +63,9 @@ fi
 
 
 ###
-### Cleanup
+### Teardown
 ###
 
 cd $PYTHON_DEV_PREV_DIR
-
-
-###
-### Teardown
-###
 
 quickness_teardown

@@ -1,4 +1,28 @@
-### Install libevent and libev
+###
+### Evented Libraries
+###
+
+###
+### Initialize
+###
+
+if [ "$(is_formula_installed)" = "yes" ]; then
+    quickness_teardown
+    return
+fi
+
+
+###
+### Installation
+###
+
 sudo apt-get -y install \
     libevent-dev \
     libev-dev
+
+
+###
+### Teardown
+###
+
+quickness_teardown

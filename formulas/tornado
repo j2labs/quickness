@@ -1,20 +1,39 @@
 ###
-### Settings
+### Tornado
 ###
+
+###
+### Initialize
+###
+
+if [ "$(is_formula_installed)" = "yes" ]; then
+    quickness_teardown
+    return
+fi
 
 TORNADO_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 
 ###
-### Formula Dependencies
+### Dependencies
 ###
 
-. $Q/python_dev
 . $Q/evented_libs
+. $Q/python_dev tornado
 
-mkvirtualenv tornado
+
+###
+### Installation
+###
 
 pip install tornado
 
+
+###
+### Teardown
+###
+
 cd $TORNADO_PREV_DIR
+
+quickness_teardown

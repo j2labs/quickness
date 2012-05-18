@@ -1,6 +1,15 @@
 ###
-### Settings
+### Clojure
 ###
+
+###
+### Initialize
+###
+
+if [ "$(is_formula_installed)" = "yes" ]; then
+    quickness_teardown
+    return
+fi
 
 APP_VERSION_NUM="1.4.0"
 APP_VERSION="clojure-$APP_VERSION_NUM"
@@ -9,14 +18,14 @@ cd $QUICKNESS_SRC
 
 
 ###
-### Formula Dependencies
+### Dependencies
 ###
 
 . $Q/java
 
 
 ###
-### Clojure
+### Installation
 ###
 
 if [ -d $APP_VERSION ]; then
@@ -28,10 +37,14 @@ fi
 
 curl http://repo1.maven.org/maven2/org/clojure/clojure/$APP_VERSION_NUM/$APP_VERSION.zip > $APP_VERSION.zip
 unzip $APP_VERSION
-cd $APP_VERSION
+echo "java -cp $QUICKNESS_SRC/$APP_VERSION/ clojure.main" > $QUICKNESS_BIN/clj
+chmod 755 $QUICKNESS_BIN/clj
 
+
+###
+### Teardown
+###
 
 cd $CLOJURE_PREV_DIR
 
-echo "java -cp $QUICKNESS_SRC/$APP_VERSION/ clojure.main" > $QUICKNESS_BIN/clj
-chmod 755 $QUICKNESS_BIN/clj
+quickness_teardown

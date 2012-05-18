@@ -1,7 +1,28 @@
 ###
-### pcre libs
+### pcre
+###
+
+###
+### Initialize
+###
+
+if [ "$(is_formula_installed)" = "yes" ]; then
+    quickness_teardown
+    return
+fi
+
+
+###
+### Installation
 ###
 
 sudo apt-get -y install \
     libpcre3 \
     libpcre3-dev
+
+
+###
+### Teardown
+###
+
+quickness_teardown

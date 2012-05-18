@@ -5,7 +5,7 @@
 ###
 
 ###
-### init
+### Initialize
 ###
 
 if [ "$(is_formula_installed)" = "yes" ]; then
@@ -13,16 +13,11 @@ if [ "$(is_formula_installed)" = "yes" ]; then
     return
 fi
 
-
-###
-### Settings
-###
-
 cd $HOME
 
 
 ###
-### Formula Dependencies
+### Dependencies
 ###
 
 . $Q/mongodb
@@ -31,7 +26,7 @@ cd $HOME
 
 
 ###
-### Installation & Configuration
+### Installation
 ###
 
 quickness_msg "cloning from j2labs@github"
@@ -41,7 +36,7 @@ m2sh load
 
 
 ###
-### Messages
+### Teardown
 ###
 
 quickness_msg "
@@ -50,10 +45,5 @@ quickness_msg "
     cd $HOME/listsurf
     workon listsurf
     ./listsurf.py"
-
-
-###
-### Teardown
-###
 
 quickness_teardown

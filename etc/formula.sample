@@ -7,18 +7,12 @@
 ###
 
 ###
-### init
+### Initialize
 ###
-
 if [ "$(is_formula_installed)" = "yes" ]; then
     quickness_teardown
     return
 fi
-
-
-###
-### Settings
-###
 
 quickness_msg "Include comments as needed"
 <set any variables here, like>
@@ -28,7 +22,7 @@ cd $QUICKNESS_SRC
 
 
 ###
-### System Dependencies
+### Dependencies
 ###
 
 sudo apt-get -y install \
@@ -36,18 +30,13 @@ sudo apt-get -y install \
     <package> \
     <package>
 
-
-###
-### Formula Dependencies
-###
-
 . $Q/formula-a
 . $Q/formula-b
 . $Q/formula-c
 
 
 ###
-### Installation & Configuration
+### Installation
 ###
 
 quickness_msg "Include comments as needed"
@@ -61,28 +50,20 @@ make && sudo make install
 
 
 ###
-### Cleanup
+### Teardown
 ###
 
+# cleanup
 rm <any dirs or zips that aren't needed anymore>
-### cd back from where you came
 cd $<formula>_PREV_DIR
 
-
-###
-### Messages
-###
-
+# Final Message
 quickness_msg "
-  Put any messages, notices or doc links here.
+  Put any final messages, notices or doc links here.
   They will be gathered up and printed when the top-level formula
   completes.  You could just use echo statements but if your formula
   gets used in other formulas the messages might get lost in the terminal.
   Multiline comments should be indented twice and start on a new line"
 
-
-###
-### Teardown
-###
-
+# This should try to be last statement in any formula
 quickness_teardown

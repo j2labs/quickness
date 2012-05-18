@@ -1,5 +1,5 @@
 ###
-### Scala
+### Akka Actor Library
 ###
 
 ###
@@ -11,36 +11,29 @@ if [ "$(is_formula_installed)" = "yes" ]; then
     return
 fi
 
-APP_VERSION="scala-2.9.2"
-SCALA_PREV_DIR=$PWD
+APP_VERSION="akka-2.0.1"
+AKKA_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 ###
 ### Dependencies
 ###
 
-. $Q/java
+. $Q/scala
 
 
 ###
 ### Installation
 ###
 
-if [ -d $APP_VERSION ]; then
-    rm -rf $APP_VERSION
-fi
-if [ ! -f $APP_VERSION.tgz ]; then
-    wget http://www.scala-lang.org/downloads/distrib/files/$APP_VERSION.tgz
-fi
-
+wget http://download.akka.io/downloads/$APP_VERSION.tgz
 tar zxf $APP_VERSION.tgz
-cd $APP_VERSION
 
 export PATH=$QUICKNESS_SRC/$APP_VERSION/bin:\$PATH
-# Update Profile
-if [ "$(grep Scala $HOME/.profile)" = "" ]; then  # 1 equal sign. wtf bash.
+### Update Profile
+if [ "$(grep Akka $HOME/.profile)" = "" ]; then
     echo "" >> $HOME/.profile
-    echo "### Scala" >> $HOME/.profile
+    echo "### Akka" >> $HOME/.profile
     echo "export PATH=$QUICKNESS_SRC/$APP_VERSION/bin:\$PATH" >> ~/.profile
 fi
 
@@ -49,6 +42,6 @@ fi
 ### Teardown
 ###
 
-cd $SCALA_PREV_DIR
+cd $AKKA_PREV_DIR
 
 quickness_teardown

@@ -2,10 +2,23 @@
 ### CouchDB
 ###
 
+###
+### Initialize
+###
+
+if [ "$(is_formula_installed)" = "yes" ]; then
+    quickness_teardown
+    return
+fi
+
 APP_VERSION="apache-couchdb-1.2.0"
 COUCHDB_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
+
+###
+### Dependencies
+###
 
 . $Q/erlang
 
@@ -15,6 +28,10 @@ sudo apt-get -y install \
     libicu-dev \
     libmozjs185-dev \
     libtool
+
+###
+### Installation
+###
 
 sudo adduser --system \
   --home /usr/local/var/lib/couchdb \
@@ -35,7 +52,6 @@ tar zxf $APP_VERSION.tar.gz
 cd $APP_VERSION
 ./configure && make && sudo make install
 
-
 sudo chown -R couchdb:couchdb /usr/local/var/lib/couchdb
 sudo chown -R couchdb:couchdb /usr/local/var/log/couchdb
 sudo chown -R couchdb:couchdb /usr/local/var/run/couchdb
@@ -43,9 +59,12 @@ sudo chown -R couchdb:couchdb /usr/local/etc/couchdb
 
 sudo su -l -c "couchdb -b" couchdb
 
+
+###
+### Teardown
+###
+
 cd $COUCHDB_PREV_DIR
 
-### Echo Message
-quickness_msg "print" "
-### ${BASH_SOURCE##*/}
-  Server: sudo su -l -c \"couchdb -b\" couchdb (it's already up though)"
+quickness_msg "Server: sudo su -l -c \"couchdb -b\" couchdb (it's already up though)"
+quickness_teardown

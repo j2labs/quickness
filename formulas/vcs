@@ -2,8 +2,29 @@
 ### Version Control Systems (besides git)
 ###
 
+###
+### Initialize
+###
+
+if [ "$(is_formula_installed)" = "yes" ]; then
+    quickness_teardown
+    return
+fi
+
+
+###
+### Installation
+###
+
 sudo apt-get -y install \
     bzr \
     cvs \
     mercurial \
     subversion
+
+
+###
+### Teardown
+###
+
+quickness_teardown
