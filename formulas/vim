@@ -33,18 +33,13 @@ git clone https://github.com/scrooloose/nerdtree.git
 git clone https://github.com/scrooloose/syntastic.git
 git clone https://github.com/jeetsukumaran/vim-buffergator.git
 git clone https://github.com/tpope/vim-fugitive.git
+git clone https://github.com/jmcantrell/vim-virtualenv.git
 
 # check to see if golang was installed
 if [ -d "$HOME/ext" ]; then
    git clone https://github.com/jnwhiteh/vim-golang.git
    ln -s $HOME/ext/src/github.com/nsf/gocode/vim gocode
 fi
-
-# check to see if python_dev was installed
-if [ -d "$HOME/.virtualenvs" ]; then
-    git clone https://github.com/jmcantrell/vim-virtualenv.git
-fi
-
 
 cd $HOME
 echo "backup/*" >> $HOME/.vim/.git/info/exclude

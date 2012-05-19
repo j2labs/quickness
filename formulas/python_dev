@@ -38,11 +38,6 @@ sudo apt-get -y install \
 ### Install at system level
 if [ -z "$VIRTUAL_ENV" ]; then
     sudo pip install virtualenv virtualenvwrapper
-    if [ -d "$HOME/.vim/bundle" ]; then
-        cd $HOME/.vim/bundle
-        git clone https://github.com/jmcantrell/vim-virtualenv.git
-        cd $QUICKNESS_SRC
-    fi
 fi
 
 ### Update Profile
