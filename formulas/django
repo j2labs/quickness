@@ -1,8 +1,10 @@
 ###
 ### Django
 ###
-### This formula takes an optional name argument
-### that it will pass on to python_dev
+### To create an actual django application you should create
+### a <project_name>.private file in the formula directory
+### and source 'python_dev <envname>' and this formula in.
+### Remember to create a etc/django.reqs.private
 ###
 
 ###
@@ -23,7 +25,7 @@ fi
 ### Dependencies
 ###
 
-. $Q/python_dev $1
+. $Q/python_dev django
 . $Q/python_imaging
 
 
@@ -33,16 +35,12 @@ fi
 
 # Only loadup the requirements if a virtualenv was created
 if [ ! -z "$1" ]; then
-    if [ -f $QUICKNESS/etc/requirements.private ]; then
-        pip install -r $QUICKNESS/etc/requirements.private
+    if [ -f $QUICKNESS/etc/django.reqs.private ]; then
+        pip install -r $QUICKNESS/etc/django.reqs.private
     else
-        quickness_msg "using default requirements, create etc/requirements.private to load in your own requirements"
-        pip install -r $QUICKNESS/etc/requirements.txt
+        quickness_msg "using default requirements, create etc/django.reqs.private to load in your own requirements"
+        pip install -r $QUICKNESS/etc/django.reqs.txt
     fi
-else
-    quickness_msg "
-  Pass in a name to the django formula and it will create
-  a virtualenv and install requirements"
 fi
 
 
