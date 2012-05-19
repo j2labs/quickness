@@ -25,6 +25,20 @@ After launching a fresh box, SSH to it and run the following steps.
 Your prompt will change to something colorful with a newline before the command entry point. `ls` is colorful too, along with other aliases. 
 
 
+## New Amazon ec2 Box (requires boto)
+
+Copy ec2_sample.py to ec2_private.py and update with your own preferences (files named *_private.py are ignored by git)
+
+    # this command will return the instance id and public dns
+    ./qserver.py
+
+Give it a few extra minutes to bootstrap the environment.
+
+    ssh -i </path/to/amazonkey> ubuntu@<public.dns>
+
+If you login and don't see the quickness ascii art your environment is not ready, exit and wait a minute.
+
+
 ## Using Vagrant
 
 Create a vagrant instance like this.
@@ -57,13 +71,12 @@ There's the quickness prompt again.
 
 I usually build a system with a few commands. That looks like:
 
-    Q: quick_new
     Q: quick_apply max_files
     Q: . $Q/brubeck
 
 Done.
 
-For convenience the `$Q` variable points to the formula directory to make sourcing formulas quite easy.
+For your convenience the `$Q` variable points to the formula directory to make sourcing formulas quite easy.
 
 
 ## Commands
