@@ -14,5 +14,6 @@ bin/*
 !bin/quick_new
 !bin/quick_tweaks
 
-### Ignore anything that ends in .private
+### Ignore anything that ends in .private or _private.py
 *.private
+*_private.py
