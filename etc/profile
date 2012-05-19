@@ -6,10 +6,14 @@
 ### Import quickness/etc/quickness
 ###
 ### If you change this, change `quickness/bin/quick` too
-if [[ $BASH_SOURCE ]]; then
-    export QUICKNESS=$(dirname $(dirname ${BASH_SOURCE[0]}))
+if [ -d $HOME/.quickness_repo ]; then
+    export QUICKNESS=$HOME/.quickness_repo
 else
-    export QUICKNESS=$(cd $(dirname $(dirname $0)); pwd)
+    if [[ $BASH_SOURCE ]]; then
+        export QUICKNESS=$(dirname $(dirname ${BASH_SOURCE[0]}))
+    else
+        export QUICKNESS=$(cd $(dirname $(dirname $0)); pwd)
+    fi
 fi
 . $QUICKNESS/etc/quickness
 
