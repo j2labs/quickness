@@ -9,11 +9,14 @@
 bin/*
 !bin/quick
 !bin/quick_apply
+!bin/quick_ec2
+!bin/quick_ec2server
 !bin/quick_formulas
 !bin/quick_install
+!bin/quick_instances
 !bin/quick_new
 !bin/quick_tweaks
 
-### Ignore anything that ends in .private or _private.py
+### Ignore anything that ends in .private or .private.conf
 *.private
-*_private.py
+*.private.conf

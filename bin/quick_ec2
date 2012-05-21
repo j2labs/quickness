@@ -1,0 +1,37 @@
+#!/bin/bash
+
+if [ ! "$#" = "2" ]; then
+    echo "This scripts takes an action and a machine name"
+    echo "Valid actions are reboot, ssh, start, stop and terminate"
+    exit
+fi
+
+if [ -z "$AWS_IDENTITY" ]; then
+    echo "Set the environment variable AWS_IDENTITY to the location of your amazon key"
+    exit
+fi
+
+if [ "$1" = "ssh" ]; then
+    ec2_dns="$(python scripts/ec2search.py $2)"
+    if [ ! -z $ec2_dns ]; then
+        ssh -i $AWS_IDENTITY ubuntu@$ec2_dns
+    else
+        echo "Unable to find machine $1"
+    fi
+fi
+
+if [ "$1" = "reboot" ]; then
+    python scripts/ec2reboot.py $2
+fi
+
+if [ "$1" = "start" ]; then
+    python scripts/ec2start.py $2
+fi
+
+if [ "$1" = "stop" ]; then
+    python scripts/ec2stop.py $2
+fi
+
+if [ "$1" = "terminate" ]; then
+    python scripts/ec2terminate.py $2
+fi

@@ -1,0 +1,88 @@
+#!/usr/bin/env python
+
+import argparse
+import os
+import sys
+import time
+from ConfigParser import SafeConfigParser
+
+import boto
+
+
+aparser = argparse.ArgumentParser(description='Create an ec2 instance.')
+aparser.add_argument('-f', '--file', metavar='file', dest='filename', default='ec2.private.conf',
+                           help='Name of the config file in etc - defaults to ec2.private.conf')
+aparser.add_argument('section', metavar='section', type=str,
+                           help='Name of the section within the config file')
+aparser.add_argument('name', metavar='name', type=str,
+                           help='Name of the quickness machine')
+args = aparser.parse_args()
+
+
+cparser = SafeConfigParser()
+cparser.read(os.path.join('etc/', args.filename))
+
+
+profile_text = """
+### Quickness
+. \$HOME/.quickness_repo/etc/profile"""
+
+custom_user_data = """#!/bin/bash
+export DEBIAN_FRONTEND=noninteractive
+sudo apt-get update
+sudo apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy upgrade
+sudo apt-get install -y \
+    autoconf \
+    automake \
+    build-essential \
+    git \
+    ntp
+
+if [ -d /home/ubuntu ]; then
+    su -l -c "git clone git://github.com/jserver/quickness.git .quickness_repo" ubuntu
+    su -l -c "echo '%s' >> .profile" ubuntu
+fi
+
+cp /home/ubuntu/.quickness_repo/etc/motd.tail /etc/motd.tail
+""" % profile_text
+
+conn = boto.connect_ec2()
+
+# Make sure quickness name is going to be unique
+quick_machines = []
+instances = conn.get_all_instances()
+for res in instances:
+    for instance in res.instances:
+        if instance.tags.has_key('Quickness'):
+            quick_machines.append(instance.tags.get('Quickness'))
+
+if args.name in quick_machines:
+    print 'Quickness machine names must be unique'
+    sys.exit()
+
+if args.section not in cparser.sections():
+    print 'Section not found'
+    sys.exit()
+
+print 'Attempting to create an instance with Quickness tag %s' % args.name
+image = conn.get_image(cparser.get(args.section, 'image'))
+
+reservation = image.run(key_name=cparser.get(args.section, 'key_name'),
+                        instance_type=cparser.get(args.section, 'instance_type'),
+                        placement=cparser.get(args.section, 'placement'),
+                        security_group_ids=[cparser.get(args.section, 'security_group')],
+                        user_data=custom_user_data)
+instance = reservation.instances[0]
+conn.create_tags([instance.id], {'Name': 'quickness', 'Quickness': args.name})
+
+print 'Checking every 10 seconds'
+while True:
+    time.sleep(10)
+    status = instance.update()
+    if status == 'running':
+        break
+    else:
+        print status
+
+print instance.id
+print instance.public_dns_name
