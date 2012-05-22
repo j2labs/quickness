@@ -19,9 +19,9 @@ fi
 sudo apt-get -y install \
     rabbitmq-server
 
-sudo rabbitmqctl add_user vagrant vagrant
-sudo rabbitmqctl add_vhost vagrant_vhost
-sudo rabbitmqctl set_permissions -p vagrant_vhost vagrant ".*" ".*" ".*"
+sudo rabbitmqctl add_user $USER $USER
+sudo rabbitmqctl add_vhost $USER_vhost
+sudo rabbitmqctl set_permissions -p ${USER}_vhost $USER ".*" ".*" ".*"
 
 
 ###

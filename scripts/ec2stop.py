@@ -8,11 +8,11 @@ import boto
 
 aparser = argparse.ArgumentParser(description='Stop a quickness ec2 instance.')
 aparser.add_argument('name', metavar='name', type=str,
-                           help='Name of the quickness machine')
+                     help='Name of the quickness machine')
 args = aparser.parse_args()
 
-conn = boto.connect_ec2()
 
+conn = boto.connect_ec2()
 
 # Make sure quickness machine exists and if it does stop it
 instances = conn.get_all_instances()

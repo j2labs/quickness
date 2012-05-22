@@ -6,13 +6,13 @@ import sys
 import boto
 
 
-aparser = argparse.ArgumentParser(description='Create an ec2 instance.')
+aparser = argparse.ArgumentParser(description='Return the public_dns of one of your instances.')
 aparser.add_argument('name', metavar='name', type=str,
-                           help='Name of the quickness machine')
+                     help='Name of the quickness machine')
 args = aparser.parse_args()
 
-conn = boto.connect_ec2()
 
+conn = boto.connect_ec2()
 
 # Make sure quickness name is going to be unique
 instances = conn.get_all_instances()

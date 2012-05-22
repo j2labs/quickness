@@ -7,6 +7,7 @@ export Q=$QUICKNESS/formulas
 
 export QUICKNESS_BIN=$QUICKNESS/bin
 export QUICKNESS_ETC=$QUICKNESS/etc
+export QUICKNESS_PRIVATE=$QUICKNESS_ETC/private
 export QUICKNESS_TWEAKS=$QUICKNESS/tweaks
 
 export QUICKNESS_HOME=$HOME/.quickness

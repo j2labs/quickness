@@ -27,7 +27,7 @@ Your prompt will change to something colorful with a newline before the command 
 
 ## New Amazon ec2 Box (requires boto and an environment variable named AWS\_IDENTITY that points to your key)
 
-Copy ec2.sample.conf to ec2.private.conf and update with your own preferences (files ending in .private.conf are ignored by git)
+Copy ec2.sample to ec2/private/ec2.conf and update with your own preferences (files in etc/private are ignored by git)
 
     bin/ec2server precise64 devbox
 
@@ -87,7 +87,7 @@ After source'ing `quickness/etc/profile` you will have a few commands available 
 | `quick_new`      | Run this command first. It bootstraps the system with things every developer needs.                                  |
 | `quick_apply`    | This applies a system tweak. The word 'apply' is used to signal that these change a system's config.                 |
 | `quick_tweaks`   | Lists all the available tweaks.                                                                                      |
-| `quick_install`  | (deprecated, source instead) Installs a formula, which is to say it runs a script which installs 1 or more packages.                              |                          
+| `quick_install`  | (deprecated, source instead) Installs a formula, which is to say it runs a script which installs 1 or more packages. |
 | `quick_formulas` | Lists all the concepts that have been captured as formulas.                                                          |
 | `quick`          | Can be used to prefix commands to create the environment they need to run in. Generally used by other commands only. |
 
@@ -100,9 +100,9 @@ The `quickness/etc` directory is where vanilla system configs are stored. An ins
 
 For now these files still need editing in a deploy. They come with basic configs for typical use cases but the network addresses still need to be filled in. They will eventually be based on templates.
 
-By default quickness ignores any files that end in `.private`, so for sensitive data like a `.boto` file you can store it in `quickness/etc` as `boto.private` and have your formula copy it to the right place ($HOME in this case)
+By default quickness is configured to ignore any files in `etc/private`, so for sensitive data like a `.boto` file you can store it in `etc/private` and have your formula copy it to the right place ($HOME in this case)
 
-During login `etc/profile` tries to source `etc/bash.private`.  To get you started copy `etc/bash.sample` to `etc/bash.private`.
+During login `etc/profile` tries to source `etc/private/bash.profile`.  To get you started copy `etc/bash.sample` to `etc/private/bash.profile`.
 
 
 ## Formulas

@@ -2,5 +2,5 @@
 key_name: xxxkey
 image: ami-a29943cb
 instance_type: t1.micro
-placment: us-east-1b
+placement: us-east-1b
 security_group: sg-xxx

@@ -21,8 +21,7 @@ cd $HOME
 ###
 
 . $Q/mongodb
-. $Q/python_dev listsurf
-. $Q/brubeck
+. $Q/brubeck listsurf
 
 
 ###

@@ -20,12 +20,17 @@ if [ ! -f /etc/bash_completion.d/django_bash_completion ]; then
     sudo cp $QUICKNESS/etc/django_bash_completion /etc/bash_completion.d/
 fi
 
+APP_NAME="django"
+if [ ! -z "$1" ]; then
+    APP_NAME="$1"
+fi
+
 
 ###
 ### Dependencies
 ###
 
-. $Q/python_dev django
+. $Q/python_dev $APP_NAME
 . $Q/python_imaging
 
 
@@ -33,14 +38,11 @@ fi
 ### Installation
 ###
 
-# Only loadup the requirements if a virtualenv was created
-if [ ! -z "$1" ]; then
-    if [ -f $QUICKNESS/etc/django.reqs.private ]; then
-        pip install -r $QUICKNESS/etc/django.reqs.private
-    else
-        quickness_msg "using default requirements, create etc/django.reqs.private to load in your own requirements"
-        pip install -r $QUICKNESS/etc/django.reqs.txt
-    fi
+if [ -f $QUICKNESS/etc/private/django.requirements ]; then
+    pip install -r $QUICKNESS/etc/private/django.requirements
+else
+    quickness_msg "using default requirements, create etc/private/django.requirements to load in your own requirements"
+    pip install -r $QUICKNESS/etc/django.requirements
 fi
 
 

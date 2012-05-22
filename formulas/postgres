@@ -20,7 +20,8 @@ sudo apt-get -y install \
     postgresql \
     libpq-dev
 
-sudo su -l -c 'createuser -s vagrant' postgres
+sudo su -l -c 'createuser -s $USER' postgres
+
 
 ###
 ### Teardown
@@ -31,6 +32,6 @@ quickness_msg "
   Create db: createdb <dbname>
   Client: psql <dbname>
 
-  This formula creates a superuser named vagrant to make development easier"
+  This formula creates a superuser named $USER to make development easier"
 
 quickness_teardown

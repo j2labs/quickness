@@ -2,6 +2,7 @@
 
 import argparse
 import os
+import subprocess
 import sys
 import time
 from ConfigParser import SafeConfigParser
@@ -10,8 +11,8 @@ import boto
 
 
 aparser = argparse.ArgumentParser(description='Create an ec2 instance.')
-aparser.add_argument('-f', '--file', metavar='file', dest='filename', default='ec2.private.conf',
-                           help='Name of the config file in etc - defaults to ec2.private.conf')
+aparser.add_argument('-f', '--file', metavar='file', dest='filename', default='ec2.conf',
+                           help='Name of the config file in etc - defaults to ec2.conf')
 aparser.add_argument('section', metavar='section', type=str,
                            help='Name of the section within the config file')
 aparser.add_argument('name', metavar='name', type=str,
@@ -20,7 +21,7 @@ args = aparser.parse_args()
 
 
 cparser = SafeConfigParser()
-cparser.read(os.path.join('etc/', args.filename))
+cparser.read(os.path.join('etc/private/', args.filename))
 
 
 profile_text = """
@@ -28,10 +29,11 @@ profile_text = """
 . \$HOME/.quickness_repo/etc/profile"""
 
 custom_user_data = """#!/bin/bash
+su -l -c "mkdir bin && echo 'echo -n loading' > bin/bootstrap_status && chmod 755 bin/bootstrap_status" ubuntu
 export DEBIAN_FRONTEND=noninteractive
-sudo apt-get update
-sudo apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy upgrade
-sudo apt-get install -y \
+apt-get update
+apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy upgrade
+apt-get install -y \
     autoconf \
     automake \
     build-essential \
@@ -40,10 +42,11 @@ sudo apt-get install -y \
 
 if [ -d /home/ubuntu ]; then
     su -l -c "git clone git://github.com/jserver/quickness.git .quickness_repo" ubuntu
-    su -l -c "echo '%s' >> .profile" ubuntu
+    su -l -c "echo '%s' > .profile" ubuntu
 fi
 
 cp /home/ubuntu/.quickness_repo/etc/motd.tail /etc/motd.tail
+su -l -c "echo 'echo -n finished' > bin/bootstrap_status" ubuntu
 """ % profile_text
 
 conn = boto.connect_ec2()
@@ -64,7 +67,7 @@ if args.section not in cparser.sections():
     print 'Section not found'
     sys.exit()
 
-print 'Attempting to create an instance with Quickness tag %s' % args.name
+print 'Attempting to create an instance with Quickness tag %s...' % args.name
 image = conn.get_image(cparser.get(args.section, 'image'))
 
 reservation = image.run(key_name=cparser.get(args.section, 'key_name'),
@@ -75,14 +78,44 @@ reservation = image.run(key_name=cparser.get(args.section, 'key_name'),
 instance = reservation.instances[0]
 conn.create_tags([instance.id], {'Name': 'quickness', 'Quickness': args.name})
 
-print 'Checking every 10 seconds'
 while True:
-    time.sleep(10)
+    time.sleep(20)
     status = instance.update()
     if status == 'running':
         break
-    else:
+    print status
+
+# Now that the server is up and running, check to see when bootstrapping finishes
+print 'Your instance is now running, waiting for bootstrapping to complete...'
+aws_identity = os.environ['AWS_IDENTITY']
+if aws_identity:
+    # give it a min to get the bootstrapping started
+    time.sleep(60)
+    file_exists = False
+    while True:
+        time.sleep(30)
+        if not file_exists:
+            status = subprocess.check_output(
+                    'ssh -o "StrictHostKeyChecking no" -i $AWS_IDENTITY ubuntu@%s "test -e bin/bootstrap_status && echo -n true || echo -n false"' % instance.public_dns_name,
+                    shell=True)
+            if status == 'true':
+                print 'bootstrap started'
+                file_exists = True
+            else:
+                print 'waiting on bootstrap'
+            continue
+        status = subprocess.check_output(
+                'ssh -o "StrictHostKeyChecking no" -i $AWS_IDENTITY ubuntu@%s bin/bootstrap_status' % instance.public_dns_name,
+                shell=True)
+        if status == 'finished':
+            break
         print status
 
-print instance.id
-print instance.public_dns_name
+    # time to copy in the private files
+    subprocess.call('scp -i $AWS_IDENTITY etc/private/* ubuntu@%s:~/.quickness_repo/etc/private' % instance.public_dns_name, shell=True)
+    subprocess.call('scp -i $AWS_IDENTITY formulas/*.private ubuntu@%s:~/.quickness_repo/formulas' % instance.public_dns_name, shell=True)
+
+else:
+    print 'Please set the AWS_IDENTITY environment variable to login to your new machine'
+
+print '%s [%s]: %s (%s)' % (args.name, instance.id, instance.state, instance.public_dns_name)

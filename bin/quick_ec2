@@ -14,24 +14,20 @@ fi
 if [ "$1" = "ssh" ]; then
     ec2_dns="$(python scripts/ec2search.py $2)"
     if [ ! -z $ec2_dns ]; then
+        # check to make sure bootstrapping is complete
+        for (( ; ; ))
+        do
+            status="$(ssh -i $AWS_IDENTITY ubuntu@$ec2_dns bin/bootstrap_status)"
+            if [ "$status" = "finished" ]; then
+                break
+            fi
+            echo "$status..."
+            sleep 10s
+        done
         ssh -i $AWS_IDENTITY ubuntu@$ec2_dns
     else
         echo "Unable to find machine $1"
     fi
-fi
-
-if [ "$1" = "reboot" ]; then
-    python scripts/ec2reboot.py $2
-fi
-
-if [ "$1" = "start" ]; then
-    python scripts/ec2start.py $2
-fi
-
-if [ "$1" = "stop" ]; then
-    python scripts/ec2stop.py $2
-fi
-
-if [ "$1" = "terminate" ]; then
-    python scripts/ec2terminate.py $2
+else
+    python scripts/ec2$1.py $2
 fi
