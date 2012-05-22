@@ -27,8 +27,8 @@ if [ "$1" = "ubuntu" ]; then
 else
     sudo sh -c 'echo "deb http://www.rabbitmq.com/debian/ testing main" >> /etc/apt/sources.list'
     wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
-    sudo apt-get update
     sudo apt-key add rabbitmq-signing-key-public.asc
+    sudo apt-get update
     sudo apt-get install rabbitmq-server
     rm rabbitmq-signing-key-public.asc
 fi

@@ -12,7 +12,7 @@ import boto
 
 aparser = argparse.ArgumentParser(description='Create an ec2 instance.')
 aparser.add_argument('-f', '--file', metavar='file', dest='filename', default='ec2.conf',
-                           help='Name of the config file in etc - defaults to ec2.conf')
+                           help='Name of the config file in etc/private - defaults to ec2.conf')
 aparser.add_argument('section', metavar='section', type=str,
                            help='Name of the section within the config file')
 aparser.add_argument('name', metavar='name', type=str,
@@ -120,3 +120,4 @@ else:
     print 'Please set the AWS_IDENTITY environment variable to login to your new machine'
 
 print '%s [%s]: %s (%s)' % (args.name, instance.id, instance.state, instance.public_dns_name)
+print 'login in to your new machine using the command - bin/quick_ec2 ssh %s' % args.name
