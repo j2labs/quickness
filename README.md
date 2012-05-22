@@ -25,15 +25,15 @@ After launching a fresh box, SSH to it and run the following steps.
 Your prompt will change to something colorful with a newline before the command entry point. `ls` is colorful too, along with other aliases. 
 
 
-## New Amazon ec2 Box (requires boto and an environment variable named AWS\_IDENTITY that points to your key)
+## New Amazon ec2 Box (requires boto)
 
-Copy ec2.sample to ec2/private/ec2.conf and update with your own preferences (files in etc/private are ignored by git)
+Create an environment variable named AWS\_IDENTITY which points to your amazon key.  Copy ec2.sample to ec2/private/ec2.conf and update with your own preferences (files in etc/private are ignored by git)
 
-    bin/ec2server precise64 devbox
+    bin/quick_ec2server precise64 devbox
 
 Give it a few extra minutes to bootstrap the environment.
 
-    bin/quick_ssh devbox
+    bin/quick_ec2 ssh devbox
 
 If you login and don't see the quickness ascii art your environment is not ready, exit and wait a minute.
 
@@ -82,14 +82,17 @@ For your convenience the `$Q` variable points to the formula directory to make s
 
 After source'ing `quickness/etc/profile` you will have a few commands available to you. Each of them begin with `quick_` and live in `quickness/bin/`, so you can tab them out.
 
-| **Command**      | **Function**                                                                                                         |
-|-----------------:|:---------------------------------------------------------------------------------------------------------------------|
-| `quick_new`      | Run this command first. It bootstraps the system with things every developer needs.                                  |
-| `quick_apply`    | This applies a system tweak. The word 'apply' is used to signal that these change a system's config.                 |
-| `quick_tweaks`   | Lists all the available tweaks.                                                                                      |
-| `quick_install`  | (deprecated, source instead) Installs a formula, which is to say it runs a script which installs 1 or more packages. |
-| `quick_formulas` | Lists all the concepts that have been captured as formulas.                                                          |
-| `quick`          | Can be used to prefix commands to create the environment they need to run in. Generally used by other commands only. |
+| **Command**       | **Function**                                                                                                         |
+|------------------:|:---------------------------------------------------------------------------------------------------------------------|
+| `quick_new`       | Run this command first. It bootstraps the system with things every developer needs.                                  |
+| `quick_apply`     | This applies a system tweak. The word 'apply' is used to signal that these change a system's config.                 |
+| `quick_tweaks`    | Lists all the available tweaks.                                                                                      |
+| `quick_install`   | (deprecated, source instead) Installs a formula, which is to say it runs a script which installs 1 or more packages. |
+| `quick_formulas`  | Lists all the concepts that have been captured as formulas.                                                          |
+| `quick`           | Can be used to prefix commands to create the environment they need to run in. Generally used by other commands only. |
+| `quick_instances` | Lists all ec2 instances that have been created with quickness.                                                       |
+| `quick_ec2server` | Create an ec2 server as defined by etc/private/ec2.conf.                                                             |
+| `quick_ec2`       | Allows you to ssh, reboot, start, stop and terminate a quickness ec2 instances.                                      |
 
 These commands can be any kind of script, they just have to be in `quickness/bin`.  Use your Fabric scripts, or whatever you already have.
 
@@ -113,7 +116,7 @@ The idea here is to think in terms of servers and say, "I need a Brubeck server"
 
 Eventually, the formulas, and any other relevant scripts, will be sent to one or more servers for executon.
 
-Remember any files ending `.private` will be ignored by git, feel free to create custom formulas that need not be shared to the world.
+Remember any formulas ending in `.private` will be ignored by git, feel free to create custom formulas that need not be shared to the world.
 
 ## Tweaks
 
