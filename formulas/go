@@ -18,8 +18,8 @@ GO_PREV_DIR=$PWD
 ### Dependencies
 ###
 
-sudo apt-get -y install \
-    golang
+sudo apt-get -y install golang
+
 
 ###
 ### Installation
@@ -34,8 +34,10 @@ go get github.com/nsf/gocode
 # check to see if emacs was installed
 if [ -d "$HOME/.emacs.d" ] ; then
     sudo apt-get -y install golang-mode
-    cp $HOME/ext/src/github.com/nsf/gocode/emacs/go-autocomplete.el $HOME/.emacs.d
+    mkdir $HOME/.emacs.d/gocode
+    cp $HOME/ext/src/github.com/nsf/gocode/emacs/go-autocomplete.el $HOME/.emacs.d/gocode
     echo "" >> $HOME/.emacs
+    echo "(add-to-list 'load-path \"~/.emacs.d/gocode/\")" >> $HOME/.emacs
     echo "(require 'go-autocomplete)" >> $HOME/.emacs
     echo "(require 'auto-complete-config)" >> $HOME/.emacs
 fi
