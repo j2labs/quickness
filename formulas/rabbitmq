@@ -1,6 +1,11 @@
 ###
 ### RabbitMQ
 ###
+### As of the release of precise pangolin rabbitmq is
+### fairly up-to-date, if you want to just install the
+### the version in the standard repo pass the ubuntu
+### argument to the formula '. $Q/rabbitmq ubuntu'
+###
 
 ###
 ### Initialize
@@ -16,16 +21,29 @@ fi
 ### Installation
 ###
 
-sudo apt-get -y install \
-    rabbitmq-server
+if [ "$1" = "ubuntu" ]; then
+    sudo apt-get -y install \
+        rabbitmq-server
+else
+    sudo sh -c 'echo "deb http://www.rabbitmq.com/debian/ testing main" >> /etc/apt/sources.list'
+    wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+    sudo apt-get update
+    sudo apt-key add rabbitmq-signing-key-public.asc
+    sudo apt-get install rabbitmq-server
+    rm rabbitmq-signing-key-public.asc
+fi
 
 sudo rabbitmqctl add_user $USER $USER
-sudo rabbitmqctl add_vhost $USER_vhost
+sudo rabbitmqctl add_vhost ${USER}_vhost
 sudo rabbitmqctl set_permissions -p ${USER}_vhost $USER ".*" ".*" ".*"
 
 
 ###
 ### Teardown
 ###
+
+quickness_msg "
+    a new rabbit user was created named $USER,
+    along with a vhost named ${USER}_vhost"
 
 quickness_teardown
