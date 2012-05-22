@@ -61,6 +61,8 @@ python setup.py install
 ###
 
 cd $BRUBECK_PREV_DIR
+unset BRUBECK_PREV_DIR
+unset APP_NAME
 
 quickness_msg "This formula uses gevent"
 

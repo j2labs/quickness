@@ -16,8 +16,7 @@ fi
 ### Dependencies
 ###
 
-sudo apt-get -y install \
-    python-software-properties
+sudo apt-get -y install python-software-properties
 sudo add-apt-repository -y ppa:chris-lea/node.js
 sudo apt-get update
 

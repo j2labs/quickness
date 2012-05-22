@@ -1,5 +1,5 @@
 ###
-### vim bundles
+### vim
 ###
 
 ###
@@ -60,5 +60,6 @@ fi
 ###
 
 cd $VIM_PREV_DIR
+unset VIM_PREV_DIR
 
 quickness_teardown

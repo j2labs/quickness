@@ -31,6 +31,16 @@ mkdir -p mygo/{bin,src}
 export GOPATH="$HOME/ext:$HOME/mygo"
 go get github.com/nsf/gocode
 
+# check to see if emacs was installed
+if [ -d "$HOME/.emacs.d" ] ; then
+    sudo apt-get -y install golang-mode
+    cp $HOME/ext/src/github.com/nsf/gocode/emacs/go-autocomplete.el $HOME/.emacs.d
+    echo "" >> $HOME/.emacs
+    echo "(require 'go-autocomplete)" >> $HOME/.emacs
+    echo "(require 'auto-complete-config)" >> $HOME/.emacs
+fi
+
+# check to see if vim was installed
 if [ -d "$HOME/.vim/bundle" ] ; then
     cd $HOME/.vim/bundle
     git clone https://github.com/jnwhiteh/vim-golang.git
@@ -54,5 +64,6 @@ export PATH="$HOME/ext/bin:$HOME/mygo/bin:$PATH"
 ###
 
 cd $GO_PREV_DIR
+unset GO_PREV_DIR
 
 quickness_teardown

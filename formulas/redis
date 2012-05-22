@@ -26,11 +26,9 @@ cd $QUICKNESS_SRC
 ###
 
 if [ "$1" = "ubuntu" ]; then
-    sudo apt-get install -y \
-        redis-server
+    sudo apt-get -y install redis-server
 else
-    sudo apt-get install -y \
-        tcl8.5
+    sudo apt-get -y install tcl8.5
 
     if [ -d $APP_VERSION ]; then
         rm -rf $APP_VERSION
@@ -49,6 +47,8 @@ fi
 ###
 
 cd $REDIS_PREV_DIR
+unset APP_VERSION
+unset REDIS_PREV_DIR
 
 quickness_msg "
   Server: redis-server

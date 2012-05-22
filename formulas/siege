@@ -16,14 +16,11 @@ fi
 ### Installation
 ###
 
-sudo apt-get -y install \
-    siege
+sudo apt-get -y install siege
 
 
 ###
 ### Teardown
 ###
-
-cd $SIEGE_PREV_DIR
 
 quickness_teardown

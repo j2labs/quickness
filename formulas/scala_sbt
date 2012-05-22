@@ -38,5 +38,7 @@ chmod 755 sbt
 ###
 
 cd $SBT_PREV_DIR
+unset APP_VERSION
+unset SBT_PREV_DIR
 
 quickness_teardown

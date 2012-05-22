@@ -60,5 +60,6 @@ fi
 ###
 
 cd $PYTHON_DEV_PREV_DIR
+unset PYTHON_DEV_PREV_DIR
 
 quickness_teardown

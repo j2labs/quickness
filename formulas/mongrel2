@@ -45,5 +45,7 @@ make && sudo make install
 ###
 
 cd $MONGREL2_PREV_DIR
+unset APP_VERSION
+unset MONGREL2_PREV_DIR
 
 quickness_teardown

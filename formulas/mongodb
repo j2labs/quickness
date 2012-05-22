@@ -22,13 +22,12 @@ fi
 ###
 
 if [ "$1" = "ubuntu" ]; then
-    sudo apt-get install -y \
-        mongodb
+    sudo apt-get -y install mongodb
 else
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
     sudo sh -c 'echo "deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen" >> /etc/apt/sources.list'
     sudo apt-get update
-    sudo apt-get install mongodb-10gen
+    sudo apt-get -y install mongodb-10gen
 fi
 
 

@@ -65,6 +65,8 @@ sudo su -l -c "couchdb -b" couchdb
 ###
 
 cd $COUCHDB_PREV_DIR
+unset APP_VERSION
+unset COUCHDB_PREV_DIR
 
 quickness_msg "Server: sudo su -l -c \"couchdb -b\" couchdb (it's already up though)"
 quickness_teardown

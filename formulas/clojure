@@ -46,5 +46,8 @@ chmod 755 $QUICKNESS_BIN/clj
 ###
 
 cd $CLOJURE_PREV_DIR
+unset APP_VERSION_NUM
+unset APP_VERSION
+unset CLOJURE_PREV_DIR
 
 quickness_teardown

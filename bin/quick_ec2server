@@ -33,7 +33,7 @@ su -l -c "mkdir bin && echo 'echo -n loading' > bin/bootstrap_status && chmod 75
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
 apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy upgrade
-apt-get install -y \
+apt-get -y install \
     autoconf \
     automake \
     build-essential \

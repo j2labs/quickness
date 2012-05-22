@@ -43,5 +43,7 @@ fi
 ###
 
 cd $AKKA_PREV_DIR
+unset APP_VERSION
+unset AKKA_PREV_DIR
 
 quickness_teardown

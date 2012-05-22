@@ -36,8 +36,7 @@ fi
 ###
 
 if [ "$1" = "ubuntu" ]; then
-    sudo apt-get install -y \
-        nginx
+    sudo apt-get -y install nginx
 else
     if [ -d nginx ]; then
         rm -rf ./nginx
@@ -60,6 +59,8 @@ fi
 ###
 
 cd $NGINX_PREV_DIR
+unset APP_VERSION
+unset NGINX_PREV_DIR
 
 quickness_msg "
   Server: sudo nginx

@@ -49,4 +49,6 @@ fi
 ### Teardown
 ###
 
+unset APP_NAME
+
 quickness_teardown

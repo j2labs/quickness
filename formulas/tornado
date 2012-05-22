@@ -46,5 +46,6 @@ pip install tornado
 ###
 
 cd $TORNADO_PREV_DIR
+unset TORNADO_PREV_DIR
 
 quickness_teardown

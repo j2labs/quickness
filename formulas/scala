@@ -50,5 +50,7 @@ fi
 ###
 
 cd $SCALA_PREV_DIR
+unset APP_VERSION
+unset SCALA_PREV_DIR
 
 quickness_teardown
