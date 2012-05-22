@@ -1,6 +1,11 @@
 ###
 ### nginx
 ###
+### As of the release of precise pangolin nginx is
+### fairly old, if you want to just install the
+### the version in the standard repo pass the ubuntu
+### argument to the formula '. $Q/nginx ubuntu'
+###
 
 ###
 ### Initialize
@@ -20,27 +25,34 @@ cd $QUICKNESS_SRC
 ### Dependencies
 ###
 
-. $Q/evented_libs
-. $Q/pcre
+if [ ! "$1" = "ubuntu" ]; then
+    . $Q/evented_libs
+    . $Q/pcre
+fi
 
 
 ###
 ### Installation
 ###
 
-if [ -d nginx ]; then
-    rm -rf ./nginx
-fi
-if [ ! -f $APP_VERSION.tar.gz ]; then
-    wget http://nginx.org/download/$APP_VERSION.tar.gz
-fi
+if [ "$1" = "ubuntu" ]; then
+    sudo apt-get install -y \
+        nginx
+else
+    if [ -d nginx ]; then
+        rm -rf ./nginx
+    fi
+    if [ ! -f $APP_VERSION.tar.gz ]; then
+        wget http://nginx.org/download/$APP_VERSION.tar.gz
+    fi
 
-tar zxf $APP_VERSION.tar.gz
-cd $APP_VERSION
-./configure --with-http_ssl_module
-make && sudo make install
+    tar zxf $APP_VERSION.tar.gz
+    cd $APP_VERSION
+    ./configure --with-http_ssl_module
+    make && sudo make install
 
-sudo ln -s /usr/local/nginx/sbin/nginx /usr/local/bin/
+    sudo ln -s /usr/local/nginx/sbin/nginx /usr/local/bin/
+fi
 
 
 ###
@@ -49,6 +61,8 @@ sudo ln -s /usr/local/nginx/sbin/nginx /usr/local/bin/
 
 cd $NGINX_PREV_DIR
 
-quickness_msg "Server: sudo nginx"
+quickness_msg "
+  Server: sudo nginx
+   - Note: if you installed from standard repos run 'sudo service nginx start'"
 
 quickness_teardown

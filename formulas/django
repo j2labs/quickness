@@ -3,8 +3,9 @@
 ###
 ### To create an actual django application you should create
 ### a <project_name>.private file in the formula directory
-### and source 'python_dev <envname>' and this formula in.
-### Remember to create a etc/django.reqs.private
+### and source '. django <project_name>' this will create
+### a virtualenv with the name of the project.  Also
+### remember to create a etc/private/django.requirements.
 ###
 
 ###
@@ -16,9 +17,7 @@ if [ "$(is_formula_installed)" = "yes" ]; then
     return
 fi
 
-if [ ! -f /etc/bash_completion.d/django_bash_completion ]; then
-    sudo cp $QUICKNESS/etc/django_bash_completion /etc/bash_completion.d/
-fi
+sudo cp $QUICKNESS_ETC/django_bash_completion /etc/bash_completion.d
 
 APP_NAME="django"
 if [ ! -z "$1" ]; then
@@ -38,11 +37,11 @@ fi
 ### Installation
 ###
 
-if [ -f $QUICKNESS/etc/private/django.requirements ]; then
-    pip install -r $QUICKNESS/etc/private/django.requirements
+if [ -f $QUICKNESS_PRIVATE/django.requirements ]; then
+    pip install -r $QUICKNESS_PRIVATE/django.requirements
 else
     quickness_msg "using default requirements, create etc/private/django.requirements to load in your own requirements"
-    pip install -r $QUICKNESS/etc/django.requirements
+    pip install -r $QUICKNESS_ETC/django.requirements
 fi
 
 

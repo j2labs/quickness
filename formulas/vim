@@ -20,7 +20,8 @@ VIM_PREV_DIR=$PWD
 sudo apt-get -y install \
     vim-nox
 
-sudo pip install pyflakes
+# needed for python development using the syntastic plugin
+sudo easy_install pyflakes
 
 cd $HOME
 git clone https://github.com/tpope/vim-pathogen.git .vim
@@ -46,11 +47,11 @@ echo "backup/*" >> $HOME/.vim/.git/info/exclude
 echo "bundle/*" >> $HOME/.vim/.git/info/exclude
 echo "tmp/*" >> $HOME/.vim/.git/info/exclude
 
-if [ -f $QUICKNESS/etc/vimrc.private ]; then
-    cp $QUICKNESS/etc/vimrc.private $HOME/.vimrc
+if [ -f $QUICKNESS_PRIVATE/vimrc ]; then
+    cp $QUICKNESS_PRIVATE/vimrc $HOME/.vimrc
 else
-    quickness_msg "using default vimrc, create etc/vimrc.private to load in your own vimrc"
-    cp $QUICKNESS/etc/vimrc $HOME/.vimrc
+    quickness_msg "using default vimrc, create etc/private/vimrc to load in your own vimrc"
+    cp $QUICKNESS_ETC/vimrc $HOME/.vimrc
 fi
 
 

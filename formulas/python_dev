@@ -31,13 +31,11 @@ sudo apt-get -y install \
 ###
 
 sudo apt-get -y install \
-    python-dev \
-    python-setuptools \
-    python-pip
+    python-dev
 
 ### Install at system level
 if [ -z "$VIRTUAL_ENV" ]; then
-    sudo pip install virtualenv virtualenvwrapper
+    sudo easy_install virtualenv virtualenvwrapper
 fi
 
 ### Update Profile

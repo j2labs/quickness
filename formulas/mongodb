@@ -1,6 +1,11 @@
 ###
 ### MongoDB
 ###
+### As of the release of precise pangolin mongodb is
+### fairly up-to-date, if you want to just install the
+### the version in the standard repo pass the ubuntu
+### argument to the formula '. $Q/mongodb ubuntu'
+###
 
 ###
 ### Initialize
@@ -16,8 +21,15 @@ fi
 ### Installation
 ###
 
-sudo apt-get -y install \
-    mongodb
+if [ "$1" = "ubuntu" ]; then
+    sudo apt-get install -y \
+        mongodb
+else
+    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+    sudo sh -c 'echo "deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen" >> /etc/apt/sources.list'
+    sudo apt-get update
+    sudo apt-get install mongodb-10gen
+fi
 
 
 ###

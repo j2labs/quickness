@@ -1,6 +1,11 @@
 ###
 ### Redis
 ###
+### As of the release of precise pangolin redis is
+### a version behind, if you want to just install the
+### the version in the standard repo pass the ubuntu
+### argument to the formula '. $Q/redis ubuntu'
+###
 
 ###
 ### Initialize
@@ -20,17 +25,24 @@ cd $QUICKNESS_SRC
 ### Installation
 ###
 
-if [ -d $APP_VERSION ]; then
-    rm -rf $APP_VERSION
-fi
-if [ ! -f $APP_VERSION.tar.gz ]; then
-    wget http://redis.googlecode.com/files/redis-2.4.13.tar.gz
-fi
+if [ "$1" = "ubuntu" ]; then
+    sudo apt-get install -y \
+        redis-server
+else
+    sudo apt-get install -y \
+        tcl8.5
 
-tar zxf $APP_VERSION.tar.gz
-cd $APP_VERSION
-make && sudo make install
+    if [ -d $APP_VERSION ]; then
+        rm -rf $APP_VERSION
+    fi
+    if [ ! -f $APP_VERSION.tar.gz ]; then
+        wget http://redis.googlecode.com/files/redis-2.4.13.tar.gz
+    fi
 
+    tar zxf $APP_VERSION.tar.gz
+    cd $APP_VERSION
+    make && sudo make install
+fi
 
 ###
 ### Teardown
@@ -41,6 +53,7 @@ cd $REDIS_PREV_DIR
 quickness_msg "
   Server: redis-server
    - Optionally: redis-server /path/to/redis.conf
+   - Note: If you installed from standard repo's redis should already be running
   Client: redis-cli
 
   Worth reading:

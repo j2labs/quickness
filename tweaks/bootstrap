@@ -23,6 +23,7 @@ sudo apt-get -y install \
     curl \
     git \
     ntp \
+    python-setuptools \
     unzip
 
 sudo cp $QUICKNESS_ETC/motd.tail /etc/motd.tail
