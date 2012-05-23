@@ -11,8 +11,8 @@ if [ "$(is_formula_installed)" = "yes" ]; then
     return
 fi
 
-APP_VERSION_NUM="1.4.0"
-APP_VERSION="clojure-$APP_VERSION_NUM"
+CLOJURE_VERSION_NUM="1.4.0"
+CLOJURE_VERSION="clojure-$CLOJURE_VERSION_NUM"
 CLOJURE_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
@@ -28,16 +28,16 @@ cd $QUICKNESS_SRC
 ### Installation
 ###
 
-if [ -d $APP_VERSION ]; then
-    rm -rf $APP_VERSION
+if [ -d $CLOJURE_VERSION ]; then
+    rm -rf $CLOJURE_VERSION
 fi
-if [ -d $APP_VERSION.zip ]; then
-    rm -rf $APP_VERSION.zip
+if [ -d $CLOJURE_VERSION.zip ]; then
+    rm -rf $CLOJURE_VERSION.zip
 fi
 
-curl http://repo1.maven.org/maven2/org/clojure/clojure/$APP_VERSION_NUM/$APP_VERSION.zip > $APP_VERSION.zip
-unzip $APP_VERSION
-echo "java -cp $QUICKNESS_SRC/$APP_VERSION/ clojure.main" > $QUICKNESS_BIN/clj
+curl http://repo1.maven.org/maven2/org/clojure/clojure/$CLOJURE_VERSION_NUM/$CLOJURE_VERSION.zip > $CLOJURE_VERSION.zip
+unzip $CLOJURE_VERSION
+echo "java -cp $QUICKNESS_SRC/$CLOJURE_VERSION/ clojure.main" > $QUICKNESS_BIN/clj
 chmod 755 $QUICKNESS_BIN/clj
 
 
@@ -46,8 +46,8 @@ chmod 755 $QUICKNESS_BIN/clj
 ###
 
 cd $CLOJURE_PREV_DIR
-unset APP_VERSION_NUM
-unset APP_VERSION
+unset CLOJURE_VERSION_NUM
+unset CLOJURE_VERSION
 unset CLOJURE_PREV_DIR
 
 quickness_teardown

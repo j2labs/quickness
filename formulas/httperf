@@ -11,7 +11,7 @@ if [ "$(is_formula_installed)" = "yes" ]; then
     return
 fi
 
-APP_VERSION="httperf-0.9.0"
+HTTPERF_VERSION="httperf-0.9.0"
 HTTPERF_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
@@ -20,16 +20,16 @@ cd $QUICKNESS_SRC
 ### Installation
 ###
 
-if [ -d $APP_VERSION ]; then
-    rm -rf ./$APP_VERSION
+if [ -d $HTTPERF_VERSION ]; then
+    rm -rf ./$HTTPERF_VERSION
 fi
-if [ ! -f $APP_VERSION.tar.bz2 ]; then
-    wget ftp://ftp.hpl.hp.com/pub/httperf/$APP_VERSION.tar.gz
+if [ ! -f $HTTPERF_VERSION.tar.bz2 ]; then
+    wget ftp://ftp.hpl.hp.com/pub/httperf/$HTTPERF_VERSION.tar.gz
 fi
 
 
-tar xzf $APP_VERSION.tar.gz
-cd $APP_VERSION
+tar xzf $HTTPERF_VERSION.tar.gz
+cd $HTTPERF_VERSION
 ./configure && make && sudo make install
 
 
@@ -38,7 +38,7 @@ cd $APP_VERSION
 ###
 
 cd $HTTPERF_PREV_DIR
-unset APP_VERSION
+unset HTTPERF_VERSION
 unset HTTPERF_PREV_DIR
 
 quickness_teardown

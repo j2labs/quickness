@@ -1,6 +1,11 @@
 ###
 ### ZeroMQ
 ###
+### As of the release of precise pangolin zeromq is
+### a version behind, if you want to just install the
+### the version in the standard repo pass the ubuntu
+### argument to the formula '. $Q/zeromq ubuntu'
+###
 
 ###
 ### Initialize
@@ -11,7 +16,7 @@ if [ "$(is_formula_installed)" = "yes" ]; then
     return
 fi
 
-APP_VERSION="zeromq-2.2.0"
+ZEROMQ_VERSION="zeromq-2.2.0"
 ZEROMQ_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
@@ -23,21 +28,21 @@ cd $QUICKNESS_SRC
 if [ "$1" = "ubuntu" ]; then
     sudo apt-get -y install libzmq-dev
 else
-    if [ -d $APP_VERSION ]; then
-        rm -rf $APP_VERSION
+    if [ -d $ZEROMQ_VERSION ]; then
+        rm -rf $ZEROMQ_VERSION
     fi
-    if [ ! -f $APP_VERSION.tar.gz ]; then
-        wget http://download.zeromq.org/$ZMQ_VERSION.tar.gz
+    if [ ! -f $ZEROMQ_VERSION.tar.gz ]; then
+        wget http://download.zeromq.org/$ZEROMQ_VERSION.tar.gz
     fi
 
     . $Q/sqlite
 
-    sudo apt-get install \
+    sudo apt-get -y install \
         libtool \
         uuid-dev
 
-    tar zxf $ZMQ_VERSION.tar.gz
-    cd $ZMQ_VERSION
+    tar zxf $ZEROMQ_VERSION.tar.gz
+    cd $ZEROMQ_VERSION
     ./configure && make && sudo make install
     sudo ldconfig
 fi
@@ -48,7 +53,7 @@ fi
 ###
 
 cd $ZEROMQ_PREV_DIR
-unset APP_VERSION
+unset ZEROMQ_VERSION
 unset ZEROMQ_PREV_DIR
 
 quickness_teardown

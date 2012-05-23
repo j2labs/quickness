@@ -11,7 +11,7 @@ if [ "$(is_formula_installed)" = "yes" ]; then
     return
 fi
 
-APP_VERSION="scala-2.9.2"
+SCALA_VERSION="scala-2.9.2"
 SCALA_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
@@ -26,22 +26,22 @@ cd $QUICKNESS_SRC
 ### Installation
 ###
 
-if [ -d $APP_VERSION ]; then
-    rm -rf $APP_VERSION
+if [ -d $SCALA_VERSION ]; then
+    rm -rf $SCALA_VERSION
 fi
-if [ ! -f $APP_VERSION.tgz ]; then
-    wget http://www.scala-lang.org/downloads/distrib/files/$APP_VERSION.tgz
+if [ ! -f $SCALA_VERSION.tgz ]; then
+    wget http://www.scala-lang.org/downloads/distrib/files/$SCALA_VERSION.tgz
 fi
 
-tar zxf $APP_VERSION.tgz
-cd $APP_VERSION
+tar zxf $SCALA_VERSION.tgz
+cd $SCALA_VERSION
 
-export PATH=$QUICKNESS_SRC/$APP_VERSION/bin:\$PATH
+export PATH=$QUICKNESS_SRC/$SCALA_VERSION/bin:\$PATH
 # Update Profile
 if [ "$(grep Scala $HOME/.profile)" = "" ]; then  # 1 equal sign. wtf bash.
     echo "" >> $HOME/.profile
     echo "### Scala" >> $HOME/.profile
-    echo "export PATH=$QUICKNESS_SRC/$APP_VERSION/bin:\$PATH" >> ~/.profile
+    echo "export PATH=$QUICKNESS_SRC/$SCALA_VERSION/bin:\$PATH" >> ~/.profile
 fi
 
 
@@ -50,7 +50,7 @@ fi
 ###
 
 cd $SCALA_PREV_DIR
-unset APP_VERSION
+unset SCALA_VERSION
 unset SCALA_PREV_DIR
 
 quickness_teardown

@@ -16,7 +16,7 @@ if [ "$(is_formula_installed)" = "yes" ]; then
     return
 fi
 
-APP_VERSION=redis-2.4.13
+REDIS_VERSION="redis-2.4.14"
 REDIS_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
@@ -30,24 +30,25 @@ if [ "$1" = "ubuntu" ]; then
 else
     sudo apt-get -y install tcl8.5
 
-    if [ -d $APP_VERSION ]; then
-        rm -rf $APP_VERSION
+    if [ -d $REDIS_VERSION ]; then
+        rm -rf $REDIS_VERSION
     fi
-    if [ ! -f $APP_VERSION.tar.gz ]; then
-        wget http://redis.googlecode.com/files/redis-2.4.13.tar.gz
+    if [ ! -f $REDIS_VERSION.tar.gz ]; then
+        wget http://redis.googlecode.com/files/$REDIS_VERSION.tar.gz
     fi
 
-    tar zxf $APP_VERSION.tar.gz
-    cd $APP_VERSION
+    tar zxf $REDIS_VERSION.tar.gz
+    cd $REDIS_VERSION
     make && sudo make install
 fi
+
 
 ###
 ### Teardown
 ###
 
 cd $REDIS_PREV_DIR
-unset APP_VERSION
+unset REDIS_VERSION
 unset REDIS_PREV_DIR
 
 quickness_msg "

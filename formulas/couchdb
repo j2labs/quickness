@@ -11,7 +11,7 @@ if [ "$(is_formula_installed)" = "yes" ]; then
     return
 fi
 
-APP_VERSION="apache-couchdb-1.2.0"
+COUCHDB_VERSION="apache-couchdb-1.2.0"
 COUCHDB_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
@@ -41,15 +41,15 @@ sudo adduser --system \
   --gecos "CouchDB Administrator" \
   couchdb
 
-if [ -d $APP_VERSION ]; then
-    rm -rf ./$APP_VERSION
+if [ -d $COUCHDB_VERSION ]; then
+    rm -rf ./$COUCHDB_VERSION
 fi
-if [ ! -f $APP_VERSION.tar.gz ]; then
-    wget http://mirror.cc.columbia.edu/pub/software/apache/couchdb/releases/1.2.0/$APP_VERSION.tar.gz
+if [ ! -f $COUCHDB_VERSION.tar.gz ]; then
+    wget http://mirror.cc.columbia.edu/pub/software/apache/couchdb/releases/1.2.0/$COUCHDB_VERSION.tar.gz
 fi
 
-tar zxf $APP_VERSION.tar.gz
-cd $APP_VERSION
+tar zxf $COUCHDB_VERSION.tar.gz
+cd $COUCHDB_VERSION
 ./configure && make && sudo make install
 
 sudo chown -R couchdb:couchdb /usr/local/var/lib/couchdb
@@ -65,7 +65,7 @@ sudo su -l -c "couchdb -b" couchdb
 ###
 
 cd $COUCHDB_PREV_DIR
-unset APP_VERSION
+unset COUCHDB_VERSION
 unset COUCHDB_PREV_DIR
 
 quickness_msg "Server: sudo su -l -c \"couchdb -b\" couchdb (it's already up though)"

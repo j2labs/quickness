@@ -16,7 +16,7 @@ if [ "$(is_formula_installed)" = "yes" ]; then
     return
 fi
 
-APP_VERSION=nginx-1.3.0
+NGINX_VERSION="nginx-1.3.0"
 NGINX_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
@@ -41,12 +41,12 @@ else
     if [ -d nginx ]; then
         rm -rf ./nginx
     fi
-    if [ ! -f $APP_VERSION.tar.gz ]; then
-        wget http://nginx.org/download/$APP_VERSION.tar.gz
+    if [ ! -f $NGINX_VERSION.tar.gz ]; then
+        wget http://nginx.org/download/$NGINX_VERSION.tar.gz
     fi
 
-    tar zxf $APP_VERSION.tar.gz
-    cd $APP_VERSION
+    tar zxf $NGINX_VERSION.tar.gz
+    cd $NGINX_VERSION
     ./configure --with-http_ssl_module
     make && sudo make install
 
@@ -59,7 +59,7 @@ fi
 ###
 
 cd $NGINX_PREV_DIR
-unset APP_VERSION
+unset NGINX_VERSION
 unset NGINX_PREV_DIR
 
 quickness_msg "

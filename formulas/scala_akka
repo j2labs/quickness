@@ -11,7 +11,7 @@ if [ "$(is_formula_installed)" = "yes" ]; then
     return
 fi
 
-APP_VERSION="akka-2.0.1"
+AKKA_VERSION="akka-2.0.1"
 AKKA_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
@@ -26,15 +26,15 @@ cd $QUICKNESS_SRC
 ### Installation
 ###
 
-wget http://download.akka.io/downloads/$APP_VERSION.tgz
-tar zxf $APP_VERSION.tgz
+wget http://download.akka.io/downloads/$AKKA_VERSION.tgz
+tar zxf $AKKA_VERSION.tgz
 
-export PATH=$QUICKNESS_SRC/$APP_VERSION/bin:\$PATH
+export PATH=$QUICKNESS_SRC/$AKKA_VERSION/bin:\$PATH
 ### Update Profile
 if [ "$(grep Akka $HOME/.profile)" = "" ]; then
     echo "" >> $HOME/.profile
     echo "### Akka" >> $HOME/.profile
-    echo "export PATH=$QUICKNESS_SRC/$APP_VERSION/bin:\$PATH" >> ~/.profile
+    echo "export PATH=$QUICKNESS_SRC/$AKKA_VERSION/bin:\$PATH" >> ~/.profile
 fi
 
 
@@ -43,7 +43,7 @@ fi
 ###
 
 cd $AKKA_PREV_DIR
-unset APP_VERSION
+unset AKKA_VERSION
 unset AKKA_PREV_DIR
 
 quickness_teardown
