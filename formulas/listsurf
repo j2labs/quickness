@@ -13,7 +13,6 @@ if [ "$(is_formula_installed)" = "yes" ]; then
     return
 fi
 
-LISTSURF_PREV_DIR=$PWD
 cd $HOME
 
 
@@ -38,9 +37,6 @@ m2sh load
 ###
 ### Teardown
 ###
-
-cd $LISTSURF_PREV_DIR
-unset LISTSURF_PREV_DIR
 
 quickness_msg "
   Start mongrel2 with: m2sh start -every

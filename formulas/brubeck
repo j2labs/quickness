@@ -30,7 +30,6 @@ fi
 ###
 
 . $Q/evented_libs
-. $Q/zeromq
 . $Q/mongrel2
 . $Q/python_dev $APP_NAME
 

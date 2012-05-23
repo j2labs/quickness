@@ -20,8 +20,8 @@ cd $QUICKNESS_SRC
 ### Dependencies
 ###
 
-. $Q/evented_libs
 . $Q/sqlite
+. $Q/zeromq
 
 
 ###
