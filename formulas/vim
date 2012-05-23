@@ -17,8 +17,7 @@ VIM_PREV_DIR=$PWD
 ### Installation
 ###
 
-sudo apt-get -y install \
-    vim-nox
+sudo apt-get -y install vim-nox
 
 # needed for python development using the syntastic plugin
 sudo easy_install pyflakes

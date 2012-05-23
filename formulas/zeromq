@@ -11,17 +11,44 @@ if [ "$(is_formula_installed)" = "yes" ]; then
     return
 fi
 
+APP_VERSION="zeromq-2.2.0"
+ZEROMQ_PREV_DIR=$PWD
+cd $QUICKNESS_SRC
+
 
 ###
 ### Installation
 ###
 
-sudo apt-get -y install \
-    libzmq-dev
+if [ "$1" = "ubuntu" ]; then
+    sudo apt-get -y install libzmq-dev
+else
+    if [ -d $APP_VERSION ]; then
+        rm -rf $APP_VERSION
+    fi
+    if [ ! -f $APP_VERSION.tar.gz ]; then
+        wget http://download.zeromq.org/$ZMQ_VERSION.tar.gz
+    fi
+
+    . $Q/sqlite
+
+    sudo apt-get install \
+        libtool \
+        uuid-dev
+
+    tar zxf $ZMQ_VERSION.tar.gz
+    cd $ZMQ_VERSION
+    ./configure && make && sudo make install
+    sudo ldconfig
+fi
 
 
 ###
 ### Teardown
 ###
+
+cd $ZEROMQ_PREV_DIR
+unset APP_VERSION
+unset ZEROMQ_PREV_DIR
 
 quickness_teardown

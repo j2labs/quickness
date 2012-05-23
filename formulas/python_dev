@@ -22,8 +22,7 @@ cd $QUICKNESS_SRC
 ###
 
 ### optional dependency for Fabric
-sudo apt-get -y install \
-    libgmp3-dev
+sudo apt-get -y install libgmp3-dev
 
 
 ###

@@ -22,8 +22,7 @@ fi
 ###
 
 if [ "$1" = "ubuntu" ]; then
-    sudo apt-get -y install \
-        rabbitmq-server
+    sudo apt-get -y install rabbitmq-server
 else
     sudo sh -c 'echo "deb http://www.rabbitmq.com/debian/ testing main" >> /etc/apt/sources.list'
     wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
