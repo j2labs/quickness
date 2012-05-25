@@ -1,6 +1,7 @@
 ### The usual
 .DS_Store
 *~
+*.pyc
 
 ### Ignore vagrant side-effects
 .vagrant
