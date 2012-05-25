@@ -6,12 +6,8 @@
 ### Initialize
 ###
 
-if [ "$(is_formula_installed)" = "yes" ]; then
-    quickness_teardown
-    return
-fi
+is_formula_installed && return || formula_init
 
-EMACS_PREV_DIR=$PWD
 
 ###
 ### Installation
@@ -34,7 +30,7 @@ cd $HOME
 if [ -f $QUICKNESS_PRIVATE/emacs ]; then
     cp $QUICKNESS_PRIVATE/emacs $HOME/.emacs
 else
-    quickness_msg "using default emacs config, create etc/private/emacs to load in your own emacs config"
+    formula_msg "using default emacs config, create etc/private/emacs to load in your own emacs config"
     cp $QUICKNESS_ETC/emacs $HOME/.emacs
 fi
 
@@ -54,7 +50,4 @@ fi
 ### Teardown
 ###
 
-cd $EMACS_PREV_DIR
-unset EMACS_PREV_DIR
-
-quickness_teardown
+formula_teardown

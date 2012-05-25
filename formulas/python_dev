@@ -1,19 +1,16 @@
 ###
 ### Python Development Libraries
 ###
-### This formula takes an optional name argument that will create a virtualenv
+### This formula takes an optional name argument that will create a
+### virtualenv
 ###
 
 ###
 ### Initialize
 ###
 
-if [ "$(is_formula_installed)" = "yes" ]; then
-    quickness_teardown
-    return
-fi
+is_formula_installed && return || formula_init
 
-PYTHON_DEV_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 
@@ -49,7 +46,7 @@ fi
 
 ### Only create the virtualenv when not already in one
 if [ -z "$VIRTUAL_ENV" ] && [ ! -z "$1" ]; then
-    quickness_msg "a virtualenv has been created named $1"
+    formula_msg "a virtualenv has been created named $1"
     mkvirtualenv $1
 fi
 
@@ -58,7 +55,4 @@ fi
 ### Teardown
 ###
 
-cd $PYTHON_DEV_PREV_DIR
-unset PYTHON_DEV_PREV_DIR
-
-quickness_teardown
+formula_teardown

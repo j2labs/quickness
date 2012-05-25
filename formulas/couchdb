@@ -6,13 +6,8 @@
 ### Initialize
 ###
 
-if [ "$(is_formula_installed)" = "yes" ]; then
-    quickness_teardown
-    return
-fi
+is_formula_installed && return || formula_init
 
-COUCHDB_VERSION="apache-couchdb-1.2.0"
-COUCHDB_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 
@@ -29,6 +24,7 @@ sudo apt-get -y install \
     libmozjs185-dev \
     libtool
 
+
 ###
 ### Installation
 ###
@@ -41,15 +37,15 @@ sudo adduser --system \
   --gecos "CouchDB Administrator" \
   couchdb
 
-if [ -d $COUCHDB_VERSION ]; then
-    rm -rf ./$COUCHDB_VERSION
+if [ -d $COUCHDB_DIRNAME ]; then
+    rm -rf ./$COUCHDB_DIRNAME
 fi
-if [ ! -f $COUCHDB_VERSION.tar.gz ]; then
-    wget http://mirror.cc.columbia.edu/pub/software/apache/couchdb/releases/1.2.0/$COUCHDB_VERSION.tar.gz
+if [ ! -f $COUCHDB_FILENAME ]; then
+    wget $COUCHDB_URL
 fi
 
-tar zxf $COUCHDB_VERSION.tar.gz
-cd $COUCHDB_VERSION
+tar zxf $COUCHDB_FILENAME
+cd $COUCHDB_DIRNAME
 ./configure && make && sudo make install
 
 sudo chown -R couchdb:couchdb /usr/local/var/lib/couchdb
@@ -64,9 +60,6 @@ sudo su -l -c "couchdb -b" couchdb
 ### Teardown
 ###
 
-cd $COUCHDB_PREV_DIR
-unset COUCHDB_VERSION
-unset COUCHDB_PREV_DIR
+formula_msg "Server: sudo su -l -c \"couchdb -b\" couchdb (it's already up though)"
 
-quickness_msg "Server: sudo su -l -c \"couchdb -b\" couchdb (it's already up though)"
-quickness_teardown
+formula_teardown

@@ -1,23 +1,20 @@
 ###
 ### Django
 ###
-### To create an actual django application you should create
-### a <project_name>.private file in the formula directory
-### and source '. django <project_name>' this will create
-### a virtualenv with the name of the project.  Also
-### remember to create a etc/private/django.requirements.
+### To create an actual django application you should create a
+### <project_name>_private file in the formula directory and source
+### '. django <project_name>' this will create a virtualenv with the
+### name of the project.  Also remember to create a
+### etc/private/django.requirements.
 ###
 
 ###
 ### Initialize
 ###
 
-if [ "$(is_formula_installed)" = "yes" ]; then
-    quickness_teardown
-    return
-fi
+is_formula_installed && return || formula_init
 
-sudo cp $QUICKNESS_ETC/django_bash_completion /etc/bash_completion.d
+sudo cp $QUICKNESS_ETC/django_bash_completion /etc/bash_completion.d/
 
 APP_NAME="django"
 if [ ! -z "$1" ]; then
@@ -40,7 +37,7 @@ fi
 if [ -f $QUICKNESS_PRIVATE/django.requirements ]; then
     pip install -r $QUICKNESS_PRIVATE/django.requirements
 else
-    quickness_msg "using default requirements, create etc/private/django.requirements to load in your own requirements"
+    formula_msg "using default requirements, create etc/private/django.requirements to load in your own requirements"
     pip install -r $QUICKNESS_ETC/django.requirements
 fi
 
@@ -51,4 +48,4 @@ fi
 
 unset APP_NAME
 
-quickness_teardown
+formula_teardown

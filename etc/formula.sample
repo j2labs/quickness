@@ -10,15 +10,11 @@
 ### Initialize
 ###
 
-if [ "$(is_formula_installed)" = "yes" ]; then
-    quickness_teardown
-    return
-fi
+# This will likely be the first command in all formulas
+is_formula_installed && return || formula_init
 
-quickness_msg "Include comments as needed"
-<set any variables here, like>
-# Since formulas can be nested swap <formula> with the actual name of the formula
-<formula>_PREV_DIR=$PWD
+formula_msg "Include comments as needed"
+
 cd $QUICKNESS_SRC
 
 
@@ -40,7 +36,7 @@ sudo apt-get -y install \
 ### Installation
 ###
 
-quickness_msg "Include comments as needed"
+formula_msg "Include comments as needed"
 
 git clone ...
 wget http://...
@@ -54,13 +50,9 @@ make && sudo make install
 ### Teardown
 ###
 
-# cleanup
-rm <any dirs or zips that aren't needed anymore>
-cd $<formula>_PREV_DIR
-unset <formula>_PREV_DIR
 
 # Final Message
-quickness_msg "
+formula_msg "
   Put any final messages, notices or doc links here.
   They will be gathered up and printed when the top-level formula
   completes.  You could just use echo statements but if your formula
@@ -68,4 +60,4 @@ quickness_msg "
   Multiline comments should be indented twice and start on a new line"
 
 # This should try to be last statement in any formula
-quickness_teardown
+formula_teardown

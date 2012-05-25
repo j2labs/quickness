@@ -116,13 +116,16 @@ The idea here is to think in terms of servers and say, "I need a Brubeck server"
 
 Eventually, the formulas, and any other relevant scripts, will be sent to one or more servers for executon.
 
-Remember any formulas ending in `.private` will be ignored by git, feel free to create custom formulas that need not be shared to the world.
+Remember any formulas ending in `_private` will be ignored by git, feel free to create custom formulas that need not be shared with the world.
+
 
 ## Tweaks
 
 The `quickness/tweaks` directory is commands you run to flip switches in your operating system, like disabling NUMA or configuring some huge number of open file descriptors.
 
 The tweaks each have comments documenting their purpose. I hope that the tweaks that come with quickness can serve as teaching tools for interesting ways of configuring systems.
+
+Remember any tweaks ending in `_private` will be ignored by git, feel free to create custom tweaks that need not be shared with the world.
 
 
 ## Sudo

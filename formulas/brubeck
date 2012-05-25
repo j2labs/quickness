@@ -3,7 +3,7 @@
 ###
 ### Install consists of installing ZeroMQ and Mongrel2 as well as all
 ### Python dependencies.  To create an actual brubeck application you
-### should create a <project_name>.private file in the formula directory
+### should create a <project_name>_private file in the formula directory
 ### and source this formula in (look at the listsurf formula for ideas).
 ###
 
@@ -11,12 +11,8 @@
 ### Initialize
 ###
 
-if [ "$(is_formula_installed)" = "yes" ]; then
-    quickness_teardown
-    return
-fi
+is_formula_installed && return || formula_init
 
-BRUBECK_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 APP_NAME="brubeck"
@@ -43,7 +39,7 @@ if [ -d "brubeck" ]; then
     git checkout master
     git pull
 else
-    git clone https://github.com/j2labs/brubeck.git
+    git clone $BRUBECK_URL
     cd brubeck
 fi
 
@@ -59,10 +55,8 @@ python setup.py install
 ### Teardown
 ###
 
-cd $BRUBECK_PREV_DIR
-unset BRUBECK_PREV_DIR
 unset APP_NAME
 
-quickness_msg "This formula uses gevent"
+formula_msg "This formula uses gevent"
 
-quickness_teardown
+formula_teardown

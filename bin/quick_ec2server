@@ -114,7 +114,8 @@ if aws_identity:
 
     # time to copy in the private files
     subprocess.call('scp -i $AWS_IDENTITY etc/private/* ubuntu@%s:~/.quickness_repo/etc/private' % instance.public_dns_name, shell=True)
-    subprocess.call('scp -i $AWS_IDENTITY formulas/*.private ubuntu@%s:~/.quickness_repo/formulas' % instance.public_dns_name, shell=True)
+    subprocess.call('scp -i $AWS_IDENTITY formulas/*_private ubuntu@%s:~/.quickness_repo/formulas' % instance.public_dns_name, shell=True)
+    subprocess.call('scp -i $AWS_IDENTITY tweaks/*_private ubuntu@%s:~/.quickness_repo/tweaks' % instance.public_dns_name, shell=True)
 
 else:
     print 'Please set the AWS_IDENTITY environment variable to login to your new machine'

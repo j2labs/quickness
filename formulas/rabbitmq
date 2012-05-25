@@ -1,28 +1,26 @@
 ###
 ### RabbitMQ
 ###
-### As of the release of precise pangolin rabbitmq is
-### fairly up-to-date, if you want to just install the
-### the version in the standard repo pass the ubuntu
-### argument to the formula '. $Q/rabbitmq ubuntu'
+### As of the release of precise pangolin RabbitMQ is fairly old, if you
+### want to just install the the version packaged with ubuntu add a
+### [rabbitmq] section to /etc/private/versions.conf with the option
+### 'package: ubuntu'
 ###
 
 ###
 ### Initialize
 ###
 
-if [ "$(is_formula_installed)" = "yes" ]; then
-    quickness_teardown
-    return
-fi
+is_formula_installed && return || formula_init
 
 
 ###
 ### Installation
 ###
 
-if [ "$1" = "ubuntu" ]; then
+if [ "$RABBITMQ_PACKAGE" = "ubuntu" ]; then
     sudo apt-get -y install rabbitmq-server
+
 else
     sudo sh -c 'echo "deb http://www.rabbitmq.com/debian/ testing main" >> /etc/apt/sources.list'
     wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
@@ -41,8 +39,8 @@ sudo rabbitmqctl set_permissions -p ${USER}_vhost $USER ".*" ".*" ".*"
 ### Teardown
 ###
 
-quickness_msg "
+formula_msg "
     a new rabbit user was created named $USER,
     along with a vhost named ${USER}_vhost"
 
-quickness_teardown
+formula_teardown

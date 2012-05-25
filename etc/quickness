@@ -8,6 +8,7 @@ export Q=$QUICKNESS/formulas
 export QUICKNESS_BIN=$QUICKNESS/bin
 export QUICKNESS_ETC=$QUICKNESS/etc
 export QUICKNESS_PRIVATE=$QUICKNESS_ETC/private
+export QUICKNESS_SCRIPTS=$QUICKNESS/scripts
 export QUICKNESS_TWEAKS=$QUICKNESS/tweaks
 
 export QUICKNESS_HOME=$HOME/.quickness
@@ -41,30 +42,70 @@ if [ ! -f $QUICKNESS_INSTALLED ]; then
     echo "#ONLY REMOVE THINGS FROM HERE YOU WANT TO TRY AND REINSTALL" >> $QUICKNESS_INSTALLED
 fi
 
-is_formula_installed() {
-    if [ ! -z "$(grep ${BASH_SOURCE[1]##*/} $QUICKNESS_INSTALLED)" ]; then
-        quickness_msg "ALERT: ${BASH_SOURCE[1]##*/} already installed, skipping over"
-        echo "yes"
-    else
-        echo "no"
+formula_msg() {
+    if [ ! -f $QUICKNESS_MSG ]; then
+        echo "" >> $QUICKNESS_MSG
     fi
+    echo "[${BASH_SOURCE[1]##*/}] $1" >> $QUICKNESS_MSG
+    echo "" >> $QUICKNESS_MSG
 }
 
-quickness_teardown() {
-    echo "${BASH_SOURCE[1]##*/}" >> $QUICKNESS_INSTALLED
-    if [ "${#BASH_SOURCE[@]}" = "2" ]; then
+message_printer() {
+    # print the messages
+    if [ "${#BASH_SOURCE[@]}" = "3" ]; then
         echo "" >> $QUICKNESS_MSG
         cat $QUICKNESS_MSG
         rm $QUICKNESS_MSG
     fi
 }
 
-quickness_msg() {
-    if [ ! -f $QUICKNESS_MSG ]; then
-        echo "" >> $QUICKNESS_MSG
+is_formula_installed() {
+    if [ ! -z "$(grep ${BASH_SOURCE[1]##*/} $QUICKNESS_INSTALLED)" ]; then
+        formula_msg "ALERT: ${BASH_SOURCE[1]##*/} already installed, skipping over"
+        message_printer
+        return 0
+    else
+        return 1
     fi
-    echo "[${BASH_SOURCE[1]##*/}] $1" >> $QUICKNESS_MSG
-    echo "" >> $QUICKNESS_MSG
+}
+
+formula_init() {
+    declare -A formula_vars=$(python $QUICKNESS_SCRIPTS/formula_info.py ${BASH_SOURCE[1]##*/})
+    declare FORMULA="`echo ${BASH_SOURCE[1]##*/} | tr '[a-z]' '[A-Z]'`"
+    declare KEY
+
+    for key in ${!formula_vars[@]}
+    do
+        KEY="`echo $key | tr '[a-z]' '[A-Z]'`"
+        eval ${FORMULA}_$KEY="${formula_vars["$key"]}"
+    done
+
+    eval ${FORMULA}_PREV_DIR=$PWD
+}
+
+formula_teardown() {
+    # add to installed
+    echo "${BASH_SOURCE[1]##*/}" >> $QUICKNESS_INSTALLED
+
+    # print the messages
+    message_printer
+
+    # unset any formula specific variables
+    declare -A formula_vars=$(python $QUICKNESS_SCRIPTS/formula_info.py ${BASH_SOURCE[1]##*/})
+    declare FORMULA="`echo ${BASH_SOURCE[1]##*/} | tr '[a-z]' '[A-Z]'`"
+    declare KEY
+
+    for key in ${!formula_vars[@]}
+    do
+        KEY="`echo $key | tr '[a-z]' '[A-Z]'`"
+        eval unset ${FORMULA}_$KEY
+    done
+
+    # cd back to original directory
+    if [ ! -z "$(eval echo \$${FORMULA}_PREV_DIR)" ]; then
+        eval cd \$${FORMULA}_PREV_DIR
+        eval unset ${FORMULA}_PREV_DIR
+    fi
 }
 
 

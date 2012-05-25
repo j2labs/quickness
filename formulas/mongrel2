@@ -6,13 +6,8 @@
 ### Initialize
 ###
 
-if [ "$(is_formula_installed)" = "yes" ]; then
-    quickness_teardown
-    return
-fi
+is_formula_installed && return || formula_init
 
-MONGREL2_VERSION="mongrel2-1.7.5"
-MONGREL2_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 
@@ -28,15 +23,15 @@ cd $QUICKNESS_SRC
 ### Installation
 ###
 
-if [ -d $MONGREL2_VERSION ]; then
-    rm -rf ./$MONGREL2_VERSION
+if [ -d $MONGREL2_DIRNAME]; then
+    rm -rf ./$MONGREL2_DIRNAME
 fi
-if [ ! -f $MONGREL2_VERSION.tar.bz2 ]; then
-    wget http://mongrel2.org/static/downloads/$MONGREL2_VERSION.tar.bz2
+if [ ! -f $MONGREL2_FILENAME ]; then
+    wget $MONGREL2_URL
 fi
 
-tar jxf $MONGREL2_VERSION.tar.bz2
-cd $MONGREL2_VERSION
+tar jxf $MONGREL2_FILENAME
+cd $MONGREL2_DIRNAME
 make && sudo make install
 
 
@@ -44,8 +39,4 @@ make && sudo make install
 ### Teardown
 ###
 
-cd $MONGREL2_PREV_DIR
-unset MONGREL2_VERSION
-unset MONGREL2_PREV_DIR
-
-quickness_teardown
+formula_teardown

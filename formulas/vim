@@ -1,17 +1,13 @@
 ###
-### vim
+### Vim
 ###
 
 ###
 ### Initialize
 ###
 
-if [ "$(is_formula_installed)" = "yes" ]; then
-    quickness_teardown
-    return
-fi
+is_formula_installed && return || formula_init
 
-VIM_PREV_DIR=$PWD
 
 ###
 ### Installation
@@ -49,7 +45,7 @@ echo "tmp/*" >> $HOME/.vim/.git/info/exclude
 if [ -f $QUICKNESS_PRIVATE/vimrc ]; then
     cp $QUICKNESS_PRIVATE/vimrc $HOME/.vimrc
 else
-    quickness_msg "using default vimrc, create etc/private/vimrc to load in your own vimrc"
+    formula_msg "using default vimrc, create etc/private/vimrc to load in your own vimrc"
     cp $QUICKNESS_ETC/vimrc $HOME/.vimrc
 fi
 
@@ -58,7 +54,4 @@ fi
 ### Teardown
 ###
 
-cd $VIM_PREV_DIR
-unset VIM_PREV_DIR
-
-quickness_teardown
+formula_teardown

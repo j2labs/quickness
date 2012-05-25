@@ -1,23 +1,18 @@
 ###
-### nginx
+### Nginx
 ###
-### As of the release of precise pangolin nginx is
-### fairly old, if you want to just install the
-### the version in the standard repo pass the ubuntu
-### argument to the formula '. $Q/nginx ubuntu'
+### As of the release of precise pangolin nginx is fairly old, if you
+### want to just install the the version packaged with ubuntu add a
+### [mongodb] section to /etc/private/versions.conf with the option
+### 'package: ubuntu'
 ###
 
 ###
 ### Initialize
 ###
 
-if [ "$(is_formula_installed)" = "yes" ]; then
-    quickness_teardown
-    return
-fi
+is_formula_installed && return || formula_init
 
-NGINX_VERSION="nginx-1.3.0"
-NGINX_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 
@@ -25,7 +20,7 @@ cd $QUICKNESS_SRC
 ### Dependencies
 ###
 
-if [ ! "$1" = "ubuntu" ]; then
+if [ "$NGINX_PACKAGE" != "ubuntu" ]; then
     . $Q/evented_libs
     . $Q/pcre
 fi
@@ -35,18 +30,19 @@ fi
 ### Installation
 ###
 
-if [ "$1" = "ubuntu" ]; then
+if [ "$NGINX_PACKAGE" = "ubuntu" ]; then
     sudo apt-get -y install nginx
+
 else
-    if [ -d nginx ]; then
-        rm -rf ./nginx
+    if [ -d $NGINX_DIRNAME ]; then
+        rm -rf $NGINX_DIRNAME
     fi
-    if [ ! -f $NGINX_VERSION.tar.gz ]; then
-        wget http://nginx.org/download/$NGINX_VERSION.tar.gz
+    if [ ! -f $NGINX_FILENAME ]; then
+        wget $NGINX_URL
     fi
 
-    tar zxf $NGINX_VERSION.tar.gz
-    cd $NGINX_VERSION
+    tar zxf $NGINX_FILENAME
+    cd $NGINX_DIRNAME
     ./configure --with-http_ssl_module
     make && sudo make install
 
@@ -58,12 +54,8 @@ fi
 ### Teardown
 ###
 
-cd $NGINX_PREV_DIR
-unset NGINX_VERSION
-unset NGINX_PREV_DIR
-
-quickness_msg "
+formula_msg "
   Server: sudo nginx
    - Note: if you installed from standard repos run 'sudo service nginx start'"
 
-quickness_teardown
+formula_teardown

@@ -17,6 +17,7 @@ bin/*
 !bin/quick_new
 !bin/quick_tweaks
 
-### Ignore anything in the etc/private or formulas ending in .private
+### Ignore anything in the etc/private or formulas/tweaks ending in _private
 etc/private/*
-formulas/*.private
+formulas/*_private
+tweaks/*_private

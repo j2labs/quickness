@@ -1,19 +1,15 @@
 ###
-### Akka Actor Library
+### Scala Akka Actor Library
 ###
 
 ###
 ### Initialize
 ###
 
-if [ "$(is_formula_installed)" = "yes" ]; then
-    quickness_teardown
-    return
-fi
+is_formula_installed && return || formula_init
 
-AKKA_VERSION="akka-2.0.1"
-AKKA_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
+
 
 ###
 ### Dependencies
@@ -26,15 +22,22 @@ cd $QUICKNESS_SRC
 ### Installation
 ###
 
-wget http://download.akka.io/downloads/$AKKA_VERSION.tgz
-tar zxf $AKKA_VERSION.tgz
+if [ -d $SCALA_AKKA_DIRNAME ]; then
+    rm -rf $SCALA_AKKA_DIRNAME
+fi
+if [ ! -f $SCALA_AKKA_FILENAME ]; then
+    wget $SCALA_AKKA_URL
+fi
 
-export PATH=$QUICKNESS_SRC/$AKKA_VERSION/bin:\$PATH
+tar zxf $SCALA_AKKA_FILENAME
+
+export PATH=$QUICKNESS_SRC/$SCALA_AKKA_DIRNAME/bin:\$PATH
+
 ### Update Profile
 if [ "$(grep Akka $HOME/.profile)" = "" ]; then
     echo "" >> $HOME/.profile
     echo "### Akka" >> $HOME/.profile
-    echo "export PATH=$QUICKNESS_SRC/$AKKA_VERSION/bin:\$PATH" >> ~/.profile
+    echo "export PATH=$QUICKNESS_SRC/$SCALA_AKKA_DIRNAME/bin:\$PATH" >> ~/.profile
 fi
 
 
@@ -42,8 +45,4 @@ fi
 ### Teardown
 ###
 
-cd $AKKA_PREV_DIR
-unset AKKA_VERSION
-unset AKKA_PREV_DIR
-
-quickness_teardown
+formula_teardown

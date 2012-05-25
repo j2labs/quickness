@@ -1,29 +1,24 @@
 ###
 ### Tornado
 ###
-### To create an actual tornado application you should create
-### a <project_name>.private file in the formula directory
-### and source '. tornado <project_name>' this will create
-### a virtualenv with the name of the project.
+### To create an actual tornado application you should create a
+### <project_name>_private file in the formula directory and source
+### '. tornado <project_name>' this will create a virtualenv with the
+### name of the project
 ###
 
 ###
 ### Initialize
 ###
 
-if [ "$(is_formula_installed)" = "yes" ]; then
-    quickness_teardown
-    return
-fi
+is_formula_installed && return || formula_init
 
-TORNADO_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
 
 APP_NAME="tornado"
 if [ ! -z "$1" ]; then
     APP_NAME="$1"
 fi
-
 
 
 ###
@@ -45,7 +40,4 @@ pip install tornado
 ### Teardown
 ###
 
-cd $TORNADO_PREV_DIR
-unset TORNADO_PREV_DIR
-
-quickness_teardown
+formula_teardown

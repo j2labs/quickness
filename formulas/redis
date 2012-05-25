@@ -1,44 +1,48 @@
 ###
 ### Redis
 ###
-### As of the release of precise pangolin redis is
-### a version behind, if you want to just install the
-### the version in the standard repo pass the ubuntu
-### argument to the formula '. $Q/redis ubuntu'
+### As of the release of precise pangolin redis is fairly old, if you
+### want to just install the the version packaged with ubuntu add a
+### [redis] section to /etc/private/versions.conf with the option
+### 'package: ubuntu'
 ###
 
 ###
 ### Initialize
 ###
 
-if [ "$(is_formula_installed)" = "yes" ]; then
-    quickness_teardown
-    return
-fi
+is_formula_installed && return || formula_init
 
-REDIS_VERSION="redis-2.4.14"
-REDIS_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
+
+
+###
+### Dependencies
+###
+
+if [ "$REDIS_PACKAGE" != "ubuntu" ]; then
+    sudo apt-get -y install tcl8.5
+fi
 
 
 ###
 ### Installation
 ###
 
-if [ "$1" = "ubuntu" ]; then
+if [ "$REDIS_PACKAGE" = "ubuntu" ]; then
     sudo apt-get -y install redis-server
+
 else
-    sudo apt-get -y install tcl8.5
-
-    if [ -d $REDIS_VERSION ]; then
-        rm -rf $REDIS_VERSION
+    if [ -d $REDIS_DIRNAME ]; then
+        rm -rf $REDIS_DIRNAME
     fi
-    if [ ! -f $REDIS_VERSION.tar.gz ]; then
-        wget http://redis.googlecode.com/files/$REDIS_VERSION.tar.gz
+    if [ ! -f $REDIS_FILENAME ]; then
+        wget $REDIS_URL
     fi
 
-    tar zxf $REDIS_VERSION.tar.gz
-    cd $REDIS_VERSION
+    formula_msg "installing version $REDIS_VERSION"
+    tar zxf $REDIS_FILENAME
+    cd $REDIS_DIRNAME
     make && sudo make install
 fi
 
@@ -47,11 +51,7 @@ fi
 ### Teardown
 ###
 
-cd $REDIS_PREV_DIR
-unset REDIS_VERSION
-unset REDIS_PREV_DIR
-
-quickness_msg "
+formula_msg "
   Server: redis-server
    - Optionally: redis-server /path/to/redis.conf
    - Note: If you installed from standard repo's redis should already be running
@@ -60,4 +60,4 @@ quickness_msg "
   Worth reading:
    - http://redis.io/commands/auth"
 
-quickness_teardown
+formula_teardown

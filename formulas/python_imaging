@@ -1,18 +1,15 @@
 ###
 ### Python Imaging Libraries
 ###
-### Dependencies needed to compile Pillow (PIL)
-### In your own formulas just 'pip install Pillow'
+### Dependencies needed to compile Pillow (PIL), I recommend your own
+### formulas use Pillow instead, i.e. 'pip install Pillow'
 ###
 
 ###
 ### Initialize
 ###
 
-if [ "$(is_formula_installed)" = "yes" ]; then
-    quickness_teardown
-    return
-fi
+is_formula_installed && return || formula_init
 
 
 ###
@@ -30,4 +27,4 @@ sudo apt-get -y install \
 ### Teardown
 ###
 
-quickness_teardown
+formula_teardown

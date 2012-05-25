@@ -8,10 +8,7 @@
 ### Initialize
 ###
 
-if [ "$(is_formula_installed)" = "yes" ]; then
-    quickness_teardown
-    return
-fi
+is_formula_installed && return || formula_init
 
 cd $HOME
 
@@ -28,8 +25,7 @@ cd $HOME
 ### Installation
 ###
 
-quickness_msg "cloning from j2labs@github"
-git clone https://github.com/j2labs/listsurf.git
+git clone $LISTSURF_URL
 cd listsurf
 m2sh load
 
@@ -38,11 +34,11 @@ m2sh load
 ### Teardown
 ###
 
-quickness_msg "
+formula_msg "
   Start mongrel2 with: m2sh start -every
   With that terminal occupied open a new one and run
     cd $HOME/listsurf
     workon listsurf
     ./listsurf.py"
 
-quickness_teardown
+formula_teardown

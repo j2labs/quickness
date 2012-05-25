@@ -1,46 +1,49 @@
 ###
 ### ZeroMQ
 ###
-### As of the release of precise pangolin zeromq is
-### a version behind, if you want to just install the
-### the version in the standard repo pass the ubuntu
-### argument to the formula '. $Q/zeromq ubuntu'
+### As of the release of precise pangolin ZeroMQ is fairly old, if you
+### want to just install the the version packaged with ubuntu add a
+### [zeromq] section to /etc/private/versions.conf with the option
+### 'package: ubuntu'
 ###
 
 ###
 ### Initialize
 ###
 
-if [ "$(is_formula_installed)" = "yes" ]; then
-    quickness_teardown
-    return
-fi
+is_formula_installed && return || formula_init
 
-ZEROMQ_VERSION="zeromq-2.2.0"
-ZEROMQ_PREV_DIR=$PWD
 cd $QUICKNESS_SRC
+
+
+###
+### Dependencies
+###
+
+if [ "$ZEROMQ_PACKAGE" != "ubuntu" ]; then
+    sudo apt-get -y install \
+        libtool \
+        uuid-dev
+fi
 
 
 ###
 ### Installation
 ###
 
-if [ "$1" = "ubuntu" ]; then
+if [ "$ZEROMQ_PACKAGE" = "ubuntu" ]; then
     sudo apt-get -y install libzmq-dev
+
 else
-    if [ -d $ZEROMQ_VERSION ]; then
-        rm -rf $ZEROMQ_VERSION
+    if [ -d $ZEROMQ_DIRNAME ]; then
+        rm -rf $ZEROMQ_DIRNAME
     fi
-    if [ ! -f $ZEROMQ_VERSION.tar.gz ]; then
-        wget http://download.zeromq.org/$ZEROMQ_VERSION.tar.gz
+    if [ ! -f $ZEROMQ_FILENAME ]; then
+        wget $ZEROMQ_URL
     fi
 
-    sudo apt-get -y install \
-        libtool \
-        uuid-dev
-
-    tar zxf $ZEROMQ_VERSION.tar.gz
-    cd $ZEROMQ_VERSION
+    tar zxf $ZEROMQ_FILENAME
+    cd $ZEROMQ_DIRNAME
     ./configure && make && sudo make install
     sudo ldconfig
 fi
@@ -50,8 +53,4 @@ fi
 ### Teardown
 ###
 
-cd $ZEROMQ_PREV_DIR
-unset ZEROMQ_VERSION
-unset ZEROMQ_PREV_DIR
-
-quickness_teardown
+formula_teardown

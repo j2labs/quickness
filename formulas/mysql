@@ -6,10 +6,7 @@
 ### Initialize
 ###
 
-if [ "$(is_formula_installed)" = "yes" ]; then
-    quickness_teardown
-    return
-fi
+is_formula_installed && return || formula_init
 
 # Since mysql asks for a password lets automate
 sudo apt-get -y install debconf-utils
@@ -31,7 +28,7 @@ sudo apt-get -y install \
 ### Teardown
 ###
 
-quickness_msg "
+formula_msg "
   NOTE: The formula sets a default mysql password of toor
   To change the password for root in your own formulas try the following:
   mysql -u root -ptoor -e \"SET PASSWORD FOR 'root'@'localhost' = PASSWORD('blah');\"
@@ -42,4 +39,4 @@ quickness_msg "
   Worth reading:
    - Adding users: http://dev.mysql.com/doc/en/adding-users.html"
 
-quickness_teardown
+formula_teardown

@@ -1,15 +1,12 @@
 ###
-### pcre
+### PCRE
 ###
 
 ###
 ### Initialize
 ###
 
-if [ "$(is_formula_installed)" = "yes" ]; then
-    quickness_teardown
-    return
-fi
+is_formula_installed && return || formula_init
 
 
 ###
@@ -25,4 +22,4 @@ sudo apt-get -y install \
 ### Teardown
 ###
 
-quickness_teardown
+formula_teardown

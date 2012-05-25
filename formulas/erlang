@@ -6,10 +6,7 @@
 ### Initialize
 ###
 
-if [ "$(is_formula_installed)" = "yes" ]; then
-    quickness_teardown
-    return
-fi
+is_formula_installed && return || formula_init
 
 
 ###
@@ -19,11 +16,11 @@ fi
 sudo apt-get -y install erlang-nox
 
 # Agner
-curl https://raw.github.com/agner/agner/master/scripts/oneliner | sh
+#curl https://raw.github.com/agner/agner/master/scripts/oneliner | sh
 
 
 ###
 ### Teardown
 ###
 
-quickness_teardown
+formula_teardown

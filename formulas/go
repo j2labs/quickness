@@ -6,12 +6,7 @@
 ### Initialize
 ###
 
-if [ "$(is_formula_installed)" = "yes" ]; then
-    quickness_teardown
-    return
-fi
-
-GO_PREV_DIR=$PWD
+is_formula_installed && return || formula_init
 
 
 ###
@@ -65,7 +60,4 @@ export PATH="$HOME/ext/bin:$HOME/mygo/bin:$PATH"
 ### Teardown
 ###
 
-cd $GO_PREV_DIR
-unset GO_PREV_DIR
-
-quickness_teardown
+formula_teardown
