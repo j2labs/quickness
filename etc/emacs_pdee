@@ -1,0 +1,7 @@
+
+;; pdee
+(add-to-list 'load-path "~/.emacs.d/pdee/")
+(defvar pdee-install-dir "~/.emacs.d/pdee/")
+(load-file "~/.emacs.d/pdee/pdee-init.el")
+(pdee-setup-checker "pyflakes %f")
+(pdee-django-snippets)

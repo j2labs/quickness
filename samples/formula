@@ -1,26 +1,21 @@
 ###
 ### Forumula Name
 ###
-### Any information important to future developers.
-### This is a guideline, sometimes formulas don't
-### allow for something quite so simple.
+### Any information important to future developers.  This is a
+### guideline, sometimes formulas don't allow for something quite so
+### straightforward.
 ###
 
 ###
 ### Initialize
-###
 
-# This will likely be the first command in all formulas
+# [NOTE] This will likely be the first command in all formulas
 is_formula_installed && return || formula_init
 
-formula_msg "Include comments as needed"
-
-cd $QUICKNESS_SRC
-
+formula_msg "Include messages you want to show the user"
 
 ###
 ### Dependencies
-###
 
 sudo apt-get -y install \
     <package> \
@@ -31,10 +26,8 @@ sudo apt-get -y install \
 . $Q/formula-b
 . $Q/formula-c
 
-
 ###
 ### Installation
-###
 
 formula_msg "Include comments as needed"
 
@@ -42,16 +35,12 @@ git clone ...
 wget http://...
 tar ...
 blah blah
-### Comments within a section
+# Comments within a section
 make && sudo make install
-
 
 ###
 ### Teardown
-###
 
-
-# Final Message
 formula_msg "
   Put any final messages, notices or doc links here.
   They will be gathered up and printed when the top-level formula
@@ -59,5 +48,5 @@ formula_msg "
   gets used in other formulas the messages might get lost in the terminal.
   Multiline comments should be indented twice and start on a new line"
 
-# This should try to be last statement in any formula
+# [NOTE] This should try to be last statement in any formula
 formula_teardown

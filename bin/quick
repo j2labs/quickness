@@ -1,6 +1,8 @@
+###
 ### Import quickness/etc/quickness
 ###
-### If you change this, change `quickness/etc/profile` too
+
+# If you change this, change `quickness/etc/profile` too
 if [ -z $BASH_SOURCE ]; then
     export QUICKNESS=$(cd $(dirname $(dirname $0)); pwd)
 else
@@ -8,8 +10,7 @@ else
 fi
 . $QUICKNESS_ETC/quickness
 
-
-### Execute any provided commands in created environment
+# Execute any provided commands in created environment
 if [ $# -gt 0 ]; then
     $*
 fi

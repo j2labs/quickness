@@ -1,11 +1,6 @@
+;; org-mode
 (require 'org-install)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
-
-(add-to-list 'load-path "~/.emacs.d/pdee/")
-(defvar pdee-install-dir "~/.emacs.d/pdee/")
-(load-file "~/.emacs.d/pdee/pdee-init.el")
-(pdee-setup-checker "pyflakes %f")
-(pdee-django-snippets)

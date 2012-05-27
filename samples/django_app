@@ -1,0 +1,43 @@
+###
+### A Sample Django Application
+###
+
+###
+### Initialize
+
+is_formula_installed && return || formula_init
+
+###
+### Dependencies
+
+. $Q/memcached
+. $Q/postgres
+. $Q/rabbitmq
+. $Q/python_dev django_app
+
+# *This will install the dependencies necessary to compile PIL
+. $Q/python_imaging --deps-only
+
+# *Installs multiprecision arithmetic library (optional dependency)
+. $Q/fabric --deps-only
+
+###
+### Installation
+
+# *Take a look at samples/django.txt for a handful of good ideas
+pip install -r $QUICKNESS_PRIVATE/django_app.txt
+
+# *If cloning
+cd $HOME
+git clone https://github.com/<yourgitusername>/django_app.git
+
+# *Maybe a new project
+django-admin.py startproject django_app
+
+# *Create a postgres DB
+createdb django_app
+
+###
+### Teardown
+
+formula_teardown $HOME/django_app

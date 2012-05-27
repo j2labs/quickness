@@ -9,47 +9,24 @@
 
 ###
 ### Initialize
-###
 
 is_formula_installed && return || formula_init
 
-cd $QUICKNESS_SRC
-
-
-###
-### Dependencies
-###
-
-if [ "$REDIS_PACKAGE" != "ubuntu" ]; then
-    sudo apt-get -y install tcl8.5
-fi
-
-
 ###
 ### Installation
-###
 
 if [ "$REDIS_PACKAGE" = "ubuntu" ]; then
     sudo apt-get -y install redis-server
-
 else
-    if [ -d $REDIS_DIRNAME ]; then
-        rm -rf $REDIS_DIRNAME
-    fi
-    if [ ! -f $REDIS_FILENAME ]; then
-        wget $REDIS_URL
-    fi
-
-    formula_msg "installing version $REDIS_VERSION"
+    sudo apt-get -y install tcl8.5
+    wget $REDIS_URL
     tar zxf $REDIS_FILENAME
     cd $REDIS_DIRNAME
     make && sudo make install
 fi
 
-
 ###
 ### Teardown
-###
 
 formula_msg "
   Server: redis-server

@@ -1,0 +1,26 @@
+###
+### gocode for Vim
+###
+
+###
+### Initialize
+
+is_formula_installed && return || formula_init
+
+###
+### Dependencies
+
+. $Q/vim
+. $Q/gocode
+
+###
+### Installation
+
+cd $HOME/.vim/bundle
+git clone https://github.com/jnwhiteh/vim-golang.git
+ln -s $HOME/ext/src/github.com/nsf/gocode/vim gocode
+
+###
+### Teardown
+
+formula_teardown

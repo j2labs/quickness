@@ -2,37 +2,32 @@
 ### listsurf
 ###
 ### sample brubeck application
+### Remember to install python_dev (with then name of the app) to create
+### a virtualenv.
 ###
 
 ###
 ### Initialize
-###
 
 is_formula_installed && return || formula_init
 
-cd $HOME
-
-
 ###
 ### Dependencies
-###
 
 . $Q/mongodb
-. $Q/brubeck listsurf
-
+. $Q/python_dev listsurf
+. $Q/brubeck
 
 ###
 ### Installation
-###
 
+cd $HOME
 git clone $LISTSURF_URL
 cd listsurf
 m2sh load
 
-
 ###
 ### Teardown
-###
 
 formula_msg "
   Start mongrel2 with: m2sh start -every
@@ -41,4 +36,4 @@ formula_msg "
     workon listsurf
     ./listsurf.py"
 
-formula_teardown
+formula_teardown $HOME/listsurf

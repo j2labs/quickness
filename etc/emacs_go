@@ -1,0 +1,6 @@
+
+;; gocode
+(add-to-list 'load-path "~/.emacs.d/gocode/")
+(require 'go-autocomplete)
+(require 'auto-complete-config)
+

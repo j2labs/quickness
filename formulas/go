@@ -4,60 +4,29 @@
 
 ###
 ### Initialize
-###
 
 is_formula_installed && return || formula_init
 
-
 ###
 ### Dependencies
-###
 
 sudo apt-get -y install golang
 
-
 ###
 ### Installation
-###
 
-cd $HOME
-mkdir ext
-mkdir -p mygo/{bin,src}
-export GOPATH="$HOME/ext:$HOME/mygo"
-go get github.com/nsf/gocode
-
-# check to see if emacs was installed
-if [ -d "$HOME/.emacs.d" ] ; then
-    sudo apt-get -y install golang-mode
-    mkdir $HOME/.emacs.d/gocode
-    cp $HOME/ext/src/github.com/nsf/gocode/emacs/go-autocomplete.el $HOME/.emacs.d/gocode
-    echo "" >> $HOME/.emacs
-    echo "(add-to-list 'load-path \"~/.emacs.d/gocode/\")" >> $HOME/.emacs
-    echo "(require 'go-autocomplete)" >> $HOME/.emacs
-    echo "(require 'auto-complete-config)" >> $HOME/.emacs
-fi
-
-# check to see if vim was installed
-if [ -d "$HOME/.vim/bundle" ] ; then
-    cd $HOME/.vim/bundle
-    git clone https://github.com/jnwhiteh/vim-golang.git
-    ln -s $HOME/ext/src/github.com/nsf/gocode/vim gocode
-    cd $HOME
-fi
-
-echo '
-### golang
-if [ -d "$HOME/ext/bin" ] ; then
-    GOPATH="$HOME/ext:$HOME/mygo"
-    PATH="$HOME/ext/bin:$HOME/mygo/bin:$PATH"
-fi' >> $HOME/.profile
+mkdir -p $HOME/ext/bin
+mkdir -p $HOME/mygo/bin
 
 export GOPATH="$HOME/ext:$HOME/mygo"
 export PATH="$HOME/ext/bin:$HOME/mygo/bin:$PATH"
 
+echo >> $HOME/.profile
+echo "### golang" >> $HOME/.profile
+echo "GOPATH=\"$HOME/ext:$HOME/mygo\"" >> $HOME/.profile
+echo "PATH=\"$HOME/ext/bin:$HOME/mygo/bin:$PATH\"" >> $HOME/.profile
 
 ###
 ### Teardown
-###
 
 formula_teardown

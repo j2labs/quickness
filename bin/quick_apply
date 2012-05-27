@@ -1,17 +1,8 @@
-### Import quickness/etc/quickness
-export QUICKNESS=$(cd $(dirname $(dirname $0)); pwd)
-. $QUICKNESS_ETC/quickness
-
-
-### Apply
-tweak_name="$1"
-
-if [ "$tweak_name" = "" ]
-then
+# Apply
+if [ -z "$1" ]; then
     echo "Pass <tweak> argument to quick_apply"
 else
-    echo "Tweaking with: $tweak_name"
+    echo "Tweaking with: $1"
     echo
-    sudo $QUICKNESS_BIN/quick $QUICKNESS_TWEAKS/$tweak_name
+    sudo $QUICKNESS_BIN/quick $QUICKNESS_TWEAKS/$1
 fi
-

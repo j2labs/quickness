@@ -4,31 +4,25 @@
 
 ###
 ### Initialize
-###
 
 is_formula_installed && return || formula_init
 
-
 ###
 ### Installation
-###
 
 sudo apt-get -y install \
     postgresql \
     libpq-dev
 
-sudo su -l -c 'createuser -s $USER' postgres
-
+eval sudo su -l -c "createuser -s $USER" postgres
 
 ###
 ### Teardown
-###
 
 formula_msg "
-  Server: sudo service postgresql start - (it's already up though)
-  Create db: createdb <dbname>
-  Client: psql <dbname>
+  This formula creates a superuser named $USER to make development easier
 
-  This formula creates a superuser named $USER to make development easier"
+  Create db: createdb <dbname>
+  Client: psql <dbname>"
 
 formula_teardown

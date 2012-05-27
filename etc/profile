@@ -2,10 +2,7 @@
 ### Environment
 ###
 
-
-### Import quickness/etc/quickness
-###
-### If you change this, change `quickness/bin/quick` too
+# If you change this, change `quickness/bin/quick` too
 if [ -d $HOME/.quickness_repo ]; then
     export QUICKNESS=$HOME/.quickness_repo
 else
@@ -17,24 +14,22 @@ else
 fi
 . $QUICKNESS/etc/quickness
 
-
-### Set-up git options for prompt
+# Set-up git options for prompt
 GIT_PS1_SHOWDIRTYSTATE=yes
 GIT_PS1_SHOWSTASHSTATE=yes
 GIT_PS1_SHOWUNTRACKEDFILES=yes
 GIT_PS1_SHOWUPSTREAM="auto verbose"
 
-### Colorful prompt with special colors for root
+# Colorful prompt with special colors for root
 PS_COLOR="32m"
 if [ $USER = "root" ]; then
     PS_COLOR="31m"
 fi
 export PS1='\[\e[1;$PS_COLOR\]\u@\h\[\e[0m\] : \t : \[\e[1;34m\]\w\[\e[0m\]$(__git_ps1 " (%s)")\nQ: '
 
-
 export EDITOR=vi
 
-### Now load in any custom bash config
+# Now load in any custom bash config
 if [ -f $QUICKNESS_PRIVATE/bash.profile ]; then
     . $QUICKNESS_PRIVATE/bash.profile
 fi

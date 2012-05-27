@@ -1,22 +1,26 @@
 ###
-### Vim
+### Vim (with pathogen)
+###
+### This formula is a bit heavy-handed regarding bundles copy this to
+### vim_private and craft your own custom vim setup
 ###
 
 ###
 ### Initialize
-###
 
 is_formula_installed && return || formula_init
 
+###
+### Dependencies
+
+. $Q/python_dev
 
 ###
 ### Installation
-###
 
 sudo apt-get -y install vim-nox
 
-# needed for python development using the syntastic plugin
-sudo easy_install pyflakes
+sudo su -l -c "sudo pip install pyflakes"
 
 cd $HOME
 git clone https://github.com/tpope/vim-pathogen.git .vim
@@ -31,27 +35,14 @@ git clone https://github.com/jeetsukumaran/vim-buffergator.git
 git clone https://github.com/tpope/vim-fugitive.git
 git clone https://github.com/jmcantrell/vim-virtualenv.git
 
-# check to see if golang was installed
-if [ -d "$HOME/ext" ]; then
-   git clone https://github.com/jnwhiteh/vim-golang.git
-   ln -s $HOME/ext/src/github.com/nsf/gocode/vim gocode
-fi
-
 cd $HOME
 echo "backup/*" >> $HOME/.vim/.git/info/exclude
 echo "bundle/*" >> $HOME/.vim/.git/info/exclude
 echo "tmp/*" >> $HOME/.vim/.git/info/exclude
 
-if [ -f $QUICKNESS_PRIVATE/vimrc ]; then
-    cp $QUICKNESS_PRIVATE/vimrc $HOME/.vimrc
-else
-    formula_msg "using default vimrc, create etc/private/vimrc to load in your own vimrc"
-    cp $QUICKNESS_ETC/vimrc $HOME/.vimrc
-fi
-
+cp $QUICKNESS_ETC/vimrc $HOME/.vimrc
 
 ###
 ### Teardown
-###
 
 formula_teardown

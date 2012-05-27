@@ -3,49 +3,34 @@
 ###
 ### To create an actual django application you should create a
 ### <project_name>_private file in the formula directory and source
-### '. django <project_name>' this will create a virtualenv with the
-### name of the project.  Also remember to create a
-### etc/private/django.requirements.
+### python_dev and this formula.  If you do want to use this formula
+### directly you can place a requirements file in etc/private named
+### django.txt.  Remember to pass the name of your app to python_dev to
+### have a virtualenv created wth that name.  Take a look at
+### samples/django_app for ideas.
 ###
 
 ###
 ### Initialize
-###
 
 is_formula_installed && return || formula_init
 
-sudo cp $QUICKNESS_ETC/django_bash_completion /etc/bash_completion.d/
-
-APP_NAME="django"
-if [ ! -z "$1" ]; then
-    APP_NAME="$1"
-fi
-
-
 ###
 ### Dependencies
-###
 
-. $Q/python_dev $APP_NAME
-. $Q/python_imaging
-
+. $Q/python_dev django
 
 ###
 ### Installation
-###
 
-if [ -f $QUICKNESS_PRIVATE/django.requirements ]; then
-    pip install -r $QUICKNESS_PRIVATE/django.requirements
-else
-    formula_msg "using default requirements, create etc/private/django.requirements to load in your own requirements"
-    pip install -r $QUICKNESS_ETC/django.requirements
+sudo cp $QUICKNESS_ETC/django_bash_completion /etc/bash_completion.d/
+
+# This formula will not by defualt install Django
+if [ -f $QUICKNESS_PRIVATE/django.txt ]; then
+    pip install -r $QUICKNESS_PRIVATE/django.txt
 fi
-
 
 ###
 ### Teardown
-###
-
-unset APP_NAME
 
 formula_teardown

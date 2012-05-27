@@ -3,41 +3,27 @@
 ###
 ### To create an actual tornado application you should create a
 ### <project_name>_private file in the formula directory and source
-### '. tornado <project_name>' this will create a virtualenv with the
-### name of the project
+### python_dev along with this formula.  Remember to source python_dev
+### with the name of your app as an argument.
 ###
 
 ###
 ### Initialize
-###
 
 is_formula_installed && return || formula_init
 
-cd $QUICKNESS_SRC
-
-APP_NAME="tornado"
-if [ ! -z "$1" ]; then
-    APP_NAME="$1"
-fi
-
-
 ###
 ### Dependencies
-###
 
 . $Q/evented_libs
-. $Q/python_dev $APP_NAME
-
+. $Q/python_dev tornado
 
 ###
 ### Installation
-###
 
 pip install tornado
 
-
 ###
 ### Teardown
-###
 
 formula_teardown

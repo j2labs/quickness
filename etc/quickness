@@ -1,6 +1,5 @@
 ###
 ### Quickness Settings
-###
 
 # This should allow for quick sourcing of formulas
 export Q=$QUICKNESS/formulas
@@ -17,56 +16,65 @@ export QUICKNESS_SRC=$HOME/.quickness/src
 export QUICKNESS_INSTALLED=$QUICKNESS_HOME/.installed
 export QUICKNESS_MSG=/tmp/quickness.msg
 
-
 ###
 ### Quickness Workspaces
-###
 
 if [ ! -d $QUICKNESS_HOME ]; then
     mkdir $QUICKNESS_HOME
 fi
+
 if [ ! -d $QUICKNESS_SRC ]; then
     mkdir $QUICKNESS_SRC
+fi
+
+if [ ! -f $QUICKNESS_INSTALLED ]; then
+    echo >> $QUICKNESS_INSTALLED
 fi
 
 
 ###
 ### Various methods to accumalate messages and keep track of what's been installed
-###
 
-if [ -f $QUICKNESS_MSG ]; then
-    rm $QUICKNESS_MSG
-fi
-
-if [ ! -f $QUICKNESS_INSTALLED ]; then
-    echo "#ONLY REMOVE THINGS FROM HERE YOU WANT TO TRY AND REINSTALL" >> $QUICKNESS_INSTALLED
-fi
-
-formula_msg() {
-    if [ ! -f $QUICKNESS_MSG ]; then
-        echo "" >> $QUICKNESS_MSG
-    fi
-    echo "[${BASH_SOURCE[1]##*/}] $1" >> $QUICKNESS_MSG
-    echo "" >> $QUICKNESS_MSG
-}
-
-message_printer() {
-    # print the messages
-    if [ "${#BASH_SOURCE[@]}" = "3" ]; then
-        echo "" >> $QUICKNESS_MSG
+_message_printer() {
+    if [ "${#BASH_SOURCE[@]}" -eq "3" ] && [ -f $QUICKNESS_MSG ]; then
+        echo
         cat $QUICKNESS_MSG
         rm $QUICKNESS_MSG
     fi
 }
 
+_formula_alert() {
+    declare formula
+    if [ -n "${BASH_SOURCE[3]##*/}" ]; then
+        formula=${BASH_SOURCE[3]##*/}
+    else
+        formula=${BASH_SOURCE[2]##*/}
+    fi
+    echo "[ALERT: $formula] $1" >> $QUICKNESS_MSG
+    echo >> $QUICKNESS_MSG
+}
+
+formula_msg() {
+    echo "[${BASH_SOURCE[1]##*/}] $1" >> $QUICKNESS_MSG
+    echo >> $QUICKNESS_MSG
+}
+
 is_formula_installed() {
-    if [ ! -z "$(grep ${BASH_SOURCE[1]##*/} $QUICKNESS_INSTALLED)" ]; then
-        formula_msg "ALERT: ${BASH_SOURCE[1]##*/} already installed, skipping over"
-        message_printer
+    if [ -n "$(grep ${BASH_SOURCE[1]##*/} $QUICKNESS_INSTALLED)" ]; then
+        _formula_alert "${BASH_SOURCE[1]##*/} already installed, skipping over"
+        _message_printer
         return 0
     else
         return 1
     fi
+}
+
+formula_option() {
+    declare -A formula_var=$(python $QUICKNESS_SCRIPTS/formula_info.py --option $2 $1)
+    declare FORMULA="`echo $1 | tr '[a-z]' '[A-Z]'`"
+    declare KEY="`echo $2 | tr '[a-z]' '[A-Z]'`"
+
+    eval ${FORMULA}_$KEY="${formula_var["$2"]}"
 }
 
 formula_init() {
@@ -80,7 +88,7 @@ formula_init() {
         eval ${FORMULA}_$KEY="${formula_vars["$key"]}"
     done
 
-    eval ${FORMULA}_PREV_DIR=$PWD
+    cd $QUICKNESS_SRC
 }
 
 formula_teardown() {
@@ -88,7 +96,7 @@ formula_teardown() {
     echo "${BASH_SOURCE[1]##*/}" >> $QUICKNESS_INSTALLED
 
     # print the messages
-    message_printer
+    _message_printer
 
     # unset any formula specific variables
     declare -A formula_vars=$(python $QUICKNESS_SCRIPTS/formula_info.py ${BASH_SOURCE[1]##*/})
@@ -101,16 +109,15 @@ formula_teardown() {
         eval unset ${FORMULA}_$KEY
     done
 
-    # cd back to original directory
-    if [ ! -z "$(eval echo \$${FORMULA}_PREV_DIR)" ]; then
+    if [ -n "$1" ]; then
+        cd $1
+    else
         eval cd \$${FORMULA}_PREV_DIR
-        eval unset ${FORMULA}_PREV_DIR
     fi
+    eval unset ${FORMULA}_PREV_DIR
 }
-
 
 ###
 ### Path
-###
 
 export PATH=$QUICKNESS_BIN:$PATH

@@ -1,7 +1,6 @@
-### Import quickness/etc/quickness
+# Import quickness/etc/quickness
 export QUICKNESS=$(cd $(dirname $(dirname $0)); pwd)
 . $QUICKNESS_ETC/quickness
 
-
-### Tweaks
+# Tweaks
 ls $QUICKNESS_TWEAKS

@@ -2,57 +2,44 @@
 ### Python Development Libraries
 ###
 ### This formula takes an optional name argument that will create a
-### virtualenv
+### virtualenv.
 ###
 
 ###
 ### Initialize
-###
 
-is_formula_installed && return || formula_init
-
-cd $QUICKNESS_SRC
-
-
-###
-### Dependencies
-###
-
-### optional dependency for Fabric
-sudo apt-get -y install libgmp3-dev
-
+is_formula_installed
+if [ "$?" -eq "0" ]; then
+    if [ -n "$1" ] && [ -z "$VIRTUAL_ENV" ]; then
+        formula_msg "Creating a virtualenv named $1"
+        mkvirtualenv $1
+    fi
+    return
+else
+    formula_init
+fi
 
 ###
 ### Installation
-###
 
 sudo apt-get -y install \
-    python-dev
+    python-dev \
+    python-pip
 
-### Install at system level
-if [ -z "$VIRTUAL_ENV" ]; then
-    sudo easy_install virtualenv virtualenvwrapper
-fi
+sudo pip install virtualenv virtualenvwrapper
 
-### Update Profile
-if [ -z "$(grep VirtualEnv $HOME/.profile)" ]; then
-    echo "" >> $HOME/.profile
-    echo "### VirtualEnv" >> $HOME/.profile
-    echo ". /usr/local/bin/virtualenvwrapper.sh" >> $HOME/.profile
-fi
-
-### Source this so they don't need to logout/login
 . /usr/local/bin/virtualenvwrapper.sh
 
-### Only create the virtualenv when not already in one
-if [ -z "$VIRTUAL_ENV" ] && [ ! -z "$1" ]; then
-    formula_msg "a virtualenv has been created named $1"
+echo >> $HOME/.profile
+echo "### VirtualEnv" >> $HOME/.profile
+echo ". /usr/local/bin/virtualenvwrapper.sh" >> $HOME/.profile
+
+if [ -n "$1" ]; then
+    formula_msg "Creating a virtualenv named $1"
     mkvirtualenv $1
 fi
 
-
 ###
 ### Teardown
-###
 
 formula_teardown

@@ -4,39 +4,23 @@
 
 ###
 ### Initialize
-###
 
 is_formula_installed && return || formula_init
 
-cd $QUICKNESS_SRC
-
-
 ###
 ### Dependencies
-###
 
 . $Q/java
 
-
 ###
 ### Installation
-###
 
-if [ -d $CLOJURE_DIRNAME ]; then
-    rm -rf $CLOJURE_DIRNAME
-fi
-if [ ! -f $CLOJURE_FILENAME ]; then
-    wget $CLOJURE_URL
-    #curl http://repo1.maven.org/maven2/org/clojure/clojure/$CLOJURE_VERSION_NUM/$CLOJURE_VERSION.zip > $CLOJURE_VERSION.zip
-fi
-
+wget $CLOJURE_URL
 unzip $CLOJURE_FILENAME
 echo "java -cp $QUICKNESS_SRC/$CLOJURE_DIRNAME/ clojure.main" > $QUICKNESS_BIN/clj
 chmod 755 $QUICKNESS_BIN/clj
 
-
 ###
 ### Teardown
-###
 
 formula_teardown

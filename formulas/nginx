@@ -9,50 +9,27 @@
 
 ###
 ### Initialize
-###
 
 is_formula_installed && return || formula_init
 
-cd $QUICKNESS_SRC
-
-
-###
-### Dependencies
-###
-
-if [ "$NGINX_PACKAGE" != "ubuntu" ]; then
-    . $Q/evented_libs
-    . $Q/pcre
-fi
-
-
 ###
 ### Installation
-###
 
 if [ "$NGINX_PACKAGE" = "ubuntu" ]; then
     sudo apt-get -y install nginx
-
 else
-    if [ -d $NGINX_DIRNAME ]; then
-        rm -rf $NGINX_DIRNAME
-    fi
-    if [ ! -f $NGINX_FILENAME ]; then
-        wget $NGINX_URL
-    fi
-
+    . $Q/evented_libs
+    . $Q/pcre
+    wget $NGINX_URL
     tar zxf $NGINX_FILENAME
     cd $NGINX_DIRNAME
     ./configure --with-http_ssl_module
     make && sudo make install
-
     sudo ln -s /usr/local/nginx/sbin/nginx /usr/local/bin/
 fi
 
-
 ###
 ### Teardown
-###
 
 formula_msg "
   Server: sudo nginx

@@ -1,29 +1,21 @@
-echo "Quickness Bootstrap"
-
-### Headless install
+# Headless install
 export DEBIAN_FRONTEND=noninteractive
 
-
-### Update package manager and packages
-echo "Updating package list"
+# Update package manager and packages
 sudo apt-get update
 
-
-### Update packages
-echo "Upgrading all packages"
+# Update packages
 sudo apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy upgrade
 
-
-### Install universal needs
-echo "Installing essential system tools"
+# Install universal needs
 sudo apt-get -y install \
     autoconf \
     automake \
     build-essential \
     curl \
     git \
+    libtool \
     ntp \
-    python-setuptools \
     unzip
 
 sudo cp $QUICKNESS_ETC/motd.tail /etc/motd.tail

@@ -7,6 +7,8 @@ from ConfigParser import SafeConfigParser
 
 
 aparser = argparse.ArgumentParser(description='Return filename and download url of a formula.')
+aparser.add_argument('-o', '--option', metavar='option', dest='option', default='__ALL__',
+                           help='Name of the particular option to return')
 aparser.add_argument('formula', metavar='formula', type=str,
                      help='Name of the quickness formula')
 args = aparser.parse_args()
@@ -23,8 +25,11 @@ if not cparser.has_section(args.formula):
     sys.exit()
 
 info = '('
+
 for option in cparser.options(args.formula):
-    info += ' ["%s"]="%s"' % (option, cparser.get(args.formula, option))
+    if args.option == '__ALL__' or args.option == option:
+        info += ' ["%s"]="%s"' % (option, cparser.get(args.formula, option))
 
 info += ' )'
+
 print info

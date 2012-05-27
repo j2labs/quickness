@@ -4,46 +4,28 @@
 
 ###
 ### Initialize
-###
 
 is_formula_installed && return || formula_init
 
-cd $QUICKNESS_SRC
-
-
 ###
 ### Dependencies
-###
 
 . $Q/java
 
-
 ###
 ### Installation
-###
 
-if [ -d $SCALA_DIRNAME ]; then
-    rm -rf $SCALA_DIRNAME
-fi
-if [ ! -f $SCALA_FILENAME ]; then
-    wget $SCALA_URL
-fi
-
+wget $SCALA_URL
 tar zxf $SCALA_FILENAME
 cd $SCALA_DIRNAME
 
 export PATH=$QUICKNESS_SRC/$SCALA_DIRNAME/bin:\$PATH
 
-# Update Profile
-if [ "$(grep Scala $HOME/.profile)" = "" ]; then  # 1 equal sign. wtf bash.
-    echo "" >> $HOME/.profile
-    echo "### Scala" >> $HOME/.profile
-    echo "export PATH=$QUICKNESS_SRC/$SCALA_DIRNAME/bin:\$PATH" >> ~/.profile
-fi
-
+echo >> $HOME/.profile
+echo "### Scala" >> $HOME/.profile
+echo "export PATH=$QUICKNESS_SRC/$SCALA_DIRNAME/bin:\$PATH" >> ~/.profile
 
 ###
 ### Teardown
-###
 
 formula_teardown

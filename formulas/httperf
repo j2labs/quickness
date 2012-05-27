@@ -4,31 +4,18 @@
 
 ###
 ### Initialize
-###
 
 is_formula_installed && return || formula_init
 
-cd $QUICKNESS_SRC
-
-
 ###
 ### Installation
-###
 
-if [ -d $HTTPERF_DIRNAME ]; then
-    rm -rf ./$HTTPERF_DIRNAME
-fi
-if [ ! -f $HTTPERF_FILENAME ]; then
-    wget $HTTPERF_URL
-fi
-
+wget $HTTPERF_URL
 tar xzf $HTTPERF_FILENAME
 cd $HTTPERF_DIRNAME
 ./configure && make && sudo make install
 
-
 ###
 ### Teardown
-###
 
 formula_teardown

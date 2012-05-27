@@ -38,8 +38,8 @@ apt-get -y install \
     automake \
     build-essential \
     git \
-    ntp \
-    python-setuptools
+    libtool \
+    ntp
 
 if [ -d /home/ubuntu ]; then
     su -l -c "git clone git://github.com/jserver/quickness.git .quickness_repo" ubuntu

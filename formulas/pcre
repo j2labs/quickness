@@ -4,22 +4,17 @@
 
 ###
 ### Initialize
-###
 
 is_formula_installed && return || formula_init
 
-
 ###
 ### Installation
-###
 
 sudo apt-get -y install \
     libpcre3 \
     libpcre3-dev
 
-
 ###
 ### Teardown
-###
 
 formula_teardown

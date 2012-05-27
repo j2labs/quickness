@@ -1,5 +1,5 @@
 ###
-### SQLite
+### gocode
 ###
 
 ###
@@ -8,11 +8,14 @@
 is_formula_installed && return || formula_init
 
 ###
+### Dependencies
+
+. $Q/go
+
+###
 ### Installation
 
-sudo apt-get -y install \
-    sqlite3 \
-    libsqlite3-dev
+go get github.com/nsf/gocode
 
 ###
 ### Teardown

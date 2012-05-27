@@ -1,5 +1,5 @@
 ###
-### Python Imaging Libraries
+### Fabric
 ###
 
 ###
@@ -10,18 +10,14 @@ is_formula_installed && return || formula_init
 ###
 ### Dependencies
 
-sudo apt-get -y install \
-    libfreetype6-dev \
-    libjpeg8-dev \
-    liblcms1-dev \
-    zlib1g-dev
+sudo apt-get -y install libgmp3-dev
 
 ###
 ### Installation
 
 if [ "$1" != "--deps-only" ]; then
-    . $Q/python_dev pillow
-    pip install Pillow
+    . $Q/python_dev fabric
+    pip install Fabric
 fi
 
 ###

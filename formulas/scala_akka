@@ -4,45 +4,27 @@
 
 ###
 ### Initialize
-###
 
 is_formula_installed && return || formula_init
 
-cd $QUICKNESS_SRC
-
-
 ###
 ### Dependencies
-###
 
 . $Q/scala
 
-
 ###
 ### Installation
-###
 
-if [ -d $SCALA_AKKA_DIRNAME ]; then
-    rm -rf $SCALA_AKKA_DIRNAME
-fi
-if [ ! -f $SCALA_AKKA_FILENAME ]; then
-    wget $SCALA_AKKA_URL
-fi
-
+wget $SCALA_AKKA_URL
 tar zxf $SCALA_AKKA_FILENAME
 
 export PATH=$QUICKNESS_SRC/$SCALA_AKKA_DIRNAME/bin:\$PATH
 
-### Update Profile
-if [ "$(grep Akka $HOME/.profile)" = "" ]; then
-    echo "" >> $HOME/.profile
-    echo "### Akka" >> $HOME/.profile
-    echo "export PATH=$QUICKNESS_SRC/$SCALA_AKKA_DIRNAME/bin:\$PATH" >> ~/.profile
-fi
-
+echo >> $HOME/.profile
+echo "### Akka" >> $HOME/.profile
+echo "export PATH=$QUICKNESS_SRC/$SCALA_AKKA_DIRNAME/bin:\$PATH" >> ~/.profile
 
 ###
 ### Teardown
-###
 
 formula_teardown

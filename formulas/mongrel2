@@ -4,39 +4,24 @@
 
 ###
 ### Initialize
-###
 
 is_formula_installed && return || formula_init
 
-cd $QUICKNESS_SRC
-
-
 ###
 ### Dependencies
-###
 
 . $Q/sqlite
 . $Q/zeromq
 
-
 ###
 ### Installation
-###
 
-if [ -d $MONGREL2_DIRNAME]; then
-    rm -rf ./$MONGREL2_DIRNAME
-fi
-if [ ! -f $MONGREL2_FILENAME ]; then
-    wget $MONGREL2_URL
-fi
-
+wget $MONGREL2_URL
 tar jxf $MONGREL2_FILENAME
 cd $MONGREL2_DIRNAME
 make && sudo make install
 
-
 ###
 ### Teardown
-###
 
 formula_teardown

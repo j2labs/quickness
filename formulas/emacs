@@ -1,53 +1,24 @@
 ###
-### emacs
+### Emacs
 ###
 
 ###
 ### Initialize
-###
 
 is_formula_installed && return || formula_init
 
-
 ###
 ### Installation
-###
 
 sudo apt-get -y install \
     emacs23-nox \
-    emacs-goodies-el \
-    auto-complete-el
+    emacs-goodies-el
 
-# needed for python development using the pdee plugin
-sudo easy_install pyflakes
+cp $QUICKNESS_ETC/emacs $HOME/.emacs
 
-cd $HOME
-mkdir .emacs.d
-cd .emacs.d
-git clone https://github.com/pdee/pdee.git
-cd $HOME
-
-if [ -f $QUICKNESS_PRIVATE/emacs ]; then
-    cp $QUICKNESS_PRIVATE/emacs $HOME/.emacs
-else
-    formula_msg "using default emacs config, create etc/private/emacs to load in your own emacs config"
-    cp $QUICKNESS_ETC/emacs $HOME/.emacs
-fi
-
-# check to see if golang was installed
-if [ -d "$HOME/ext" ]; then
-    sudo apt-get -y install golang-mode
-    mkdir $HOME/.emacs.d/gocode
-    cp $HOME/ext/src/github.com/nsf/gocode/emacs/go-autocomplete.el $HOME/.emacs.d/gocode
-    echo "" >> $HOME/.emacs
-    echo "(add-to-list 'load-path \"~/.emacs.d/gocode/\")" >> $HOME/.emacs
-    echo "(require 'go-autocomplete)" >> $HOME/.emacs
-    echo "(require 'auto-complete-config)" >> $HOME/.emacs
-fi
-
+mkdir $HOME/.emacs.d
 
 ###
 ### Teardown
-###
 
 formula_teardown

@@ -1,0 +1,28 @@
+###
+### Python Development Emacs Environment
+###
+
+###
+### Initialize
+
+is_formula_installed && return || formula_init
+
+###
+### Dependencies
+
+. $Q/emacs
+. $Q/python_dev
+
+###
+### Installation
+
+sudo su -l -c "sudo pip install pyflakes"
+
+cd $HOME/.emacs.d
+git clone https://github.com/pdee/pdee.git
+cat $QUICKNESS_ETC/emacs_pdee >> $HOME/.emacs
+
+###
+### Teardown
+
+formula_teardown

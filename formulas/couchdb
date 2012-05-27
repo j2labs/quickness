@@ -4,16 +4,11 @@
 
 ###
 ### Initialize
-###
 
 is_formula_installed && return || formula_init
 
-cd $QUICKNESS_SRC
-
-
 ###
 ### Dependencies
-###
 
 . $Q/erlang
 
@@ -21,13 +16,10 @@ sudo apt-get -y install \
     help2man \
     libcurl4-gnutls-dev \
     libicu-dev \
-    libmozjs185-dev \
-    libtool
-
+    libmozjs185-dev
 
 ###
 ### Installation
-###
 
 sudo adduser --system \
   --home /usr/local/var/lib/couchdb \
@@ -37,13 +29,7 @@ sudo adduser --system \
   --gecos "CouchDB Administrator" \
   couchdb
 
-if [ -d $COUCHDB_DIRNAME ]; then
-    rm -rf ./$COUCHDB_DIRNAME
-fi
-if [ ! -f $COUCHDB_FILENAME ]; then
-    wget $COUCHDB_URL
-fi
-
+wget $COUCHDB_URL
 tar zxf $COUCHDB_FILENAME
 cd $COUCHDB_DIRNAME
 ./configure && make && sudo make install
@@ -55,10 +41,8 @@ sudo chown -R couchdb:couchdb /usr/local/etc/couchdb
 
 sudo su -l -c "couchdb -b" couchdb
 
-
 ###
 ### Teardown
-###
 
 formula_msg "Server: sudo su -l -c \"couchdb -b\" couchdb (it's already up though)"
 
