@@ -1,5 +1,5 @@
 ###
-### golang
+### Go Language
 ###
 
 ###
@@ -7,13 +7,15 @@
 
 is_formula_installed && return || formula_init
 
-###
-### Dependencies
-
-sudo apt-get -y install golang
+# Since golang asks a question lets automate
+. $Q/debconf
+echo "golang-go golang-go/dashboard boolean $GOLANG_DASHBOARD" > golang.preseed
+cat golang.preseed | sudo debconf-set-selections
 
 ###
 ### Installation
+
+sudo apt-get -y install golang
 
 mkdir -p $HOME/ext/bin
 mkdir -p $HOME/mygo/bin

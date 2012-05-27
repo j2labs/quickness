@@ -12,7 +12,7 @@ if [ -z "$AWS_IDENTITY" ]; then
 fi
 
 if [ "$1" = "ssh" ]; then
-    local ec2_dns="$(python scripts/ec2search.py $2)"
+    ec2_dns="$(python scripts/ec2search.py $2)"
     if [ -n "$ec2_dns" ]; then
         ssh -i $AWS_IDENTITY ubuntu@$ec2_dns
     else

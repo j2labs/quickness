@@ -3,7 +3,7 @@
 ###
 ### As of the release of precise pangolin ZeroMQ is fairly old, if you
 ### want to just install the the version packaged with ubuntu add a
-### [zeromq] section to /etc/private/versions.conf with the option
+### [zeromq] section to /etc/private/formula.conf with the option
 ### 'package: ubuntu'
 ###
 

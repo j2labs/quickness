@@ -11,6 +11,7 @@ is_formula_installed && return || formula_init
 ### Dependencies
 
 . $Q/vim
+. $Q/golang
 . $Q/gocode
 
 ###

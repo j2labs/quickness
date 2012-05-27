@@ -16,10 +16,10 @@ args = aparser.parse_args()
 
 etc = os.environ['QUICKNESS_ETC']
 private = os.environ['QUICKNESS_PRIVATE']
-version_files = [os.path.join(etc, 'versions.conf'), os.path.join(private, 'versions.conf')]
+formula_conf = [os.path.join(etc, 'formula.conf'), os.path.join(private, 'formula.conf')]
 
 cparser = SafeConfigParser()
-cparser.read(version_files)
+cparser.read(formula_conf)
 
 if not cparser.has_section(args.formula):
     sys.exit()

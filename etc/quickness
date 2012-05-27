@@ -28,7 +28,7 @@ if [ ! -d $QUICKNESS_SRC ]; then
 fi
 
 if [ ! -f $QUICKNESS_INSTALLED ]; then
-    echo >> $QUICKNESS_INSTALLED
+    touch $QUICKNESS_INSTALLED
 fi
 
 

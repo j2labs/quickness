@@ -3,7 +3,7 @@
 ###
 ### As of the release of precise pangolin RabbitMQ is fairly old, if you
 ### want to just install the the version packaged with ubuntu add a
-### [rabbitmq] section to /etc/private/versions.conf with the option
+### [rabbitmq] section to /etc/private/formula.conf with the option
 ### 'package: ubuntu'
 ###
 
@@ -19,10 +19,10 @@ if [ "$RABBITMQ_PACKAGE" = "ubuntu" ]; then
     sudo apt-get -y install rabbitmq-server
 
 else
-    sudo sh -c 'echo "deb http://www.rabbitmq.com/debian/ testing main" >> /etc/apt/sources.list'
+    echo "deb http://www.rabbitmq.com/debian/ testing main" | sudo tee --append /etc/apt/sources.list.d/rabbitmq.list
     wget http://www.rabbitmq.com/rabbitmq-signing-key-public.asc
     sudo apt-key add rabbitmq-signing-key-public.asc
-    sudo apt-get update
+    sudo apt-get -qq update
     sudo apt-get -y install rabbitmq-server
     rm rabbitmq-signing-key-public.asc
 fi

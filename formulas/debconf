@@ -1,5 +1,5 @@
 ###
-### gocode
+### debconf-utils
 ###
 
 ###
@@ -8,14 +8,9 @@
 is_formula_installed && return || formula_init
 
 ###
-### Dependencies
-
-. $Q/golang
-
-###
 ### Installation
 
-go get github.com/nsf/gocode
+sudo apt-get -y install debconf-utils
 
 ###
 ### Teardown

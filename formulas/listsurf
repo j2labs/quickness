@@ -22,7 +22,11 @@ is_formula_installed && return || formula_init
 ### Installation
 
 cd $HOME
-git clone $LISTSURF_URL
+if [ -n "$LISTSURF_BRANCH" ]; then
+    git clone -b $LISTSURF_BRANCH $LISTSURF_GIT_REPO
+else
+    git clone $LISTSURF_GIT_REPO
+fi
 cd listsurf
 m2sh load
 

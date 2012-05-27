@@ -24,31 +24,30 @@ cparser = SafeConfigParser()
 cparser.read(os.path.join('etc/private/', args.filename))
 
 
+branch_option = ""
+if cparser.has_option(args.section, 'git_branch'):
+    branch_option = "-b %s" % cparser.get(args.section, 'git_branch')
+
 profile_text = """
 ### Quickness
 . \$HOME/.quickness_repo/etc/profile"""
 
-custom_user_data = """#!/bin/bash
+user_data = """#!/bin/bash
 su -l -c "mkdir bin && echo 'echo -n loading' > bin/bootstrap_status && chmod 755 bin/bootstrap_status" ubuntu
-export DEBIAN_FRONTEND=noninteractive
-apt-get update
-apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy upgrade
-apt-get -y install \
-    autoconf \
-    automake \
-    build-essential \
-    git \
-    libtool \
-    ntp
+"""
 
+with open('tweaks/bootstrap', 'r') as f:
+    user_data += f.read()
+
+user_data += """
 if [ -d /home/ubuntu ]; then
-    su -l -c "git clone git://github.com/jserver/quickness.git .quickness_repo" ubuntu
+    su -l -c "git clone %s %s .quickness_repo" ubuntu
     su -l -c "echo '%s' > .profile" ubuntu
 fi
 
 cp /home/ubuntu/.quickness_repo/etc/motd.tail /etc/motd.tail
 su -l -c "echo 'echo -n finished' > bin/bootstrap_status" ubuntu
-""" % profile_text
+""" % (branch_option, cparser.get(args.section, 'git_repo'), profile_text)
 
 conn = boto.connect_ec2()
 
@@ -75,8 +74,9 @@ reservation = image.run(key_name=cparser.get(args.section, 'key_name'),
                         instance_type=cparser.get(args.section, 'instance_type'),
                         placement=cparser.get(args.section, 'placement'),
                         security_group_ids=[cparser.get(args.section, 'security_group')],
-                        user_data=custom_user_data)
+                        user_data=user_data)
 instance = reservation.instances[0]
+time.sleep(10)
 conn.create_tags([instance.id], {'Name': 'quickness', 'Quickness': args.name})
 
 while True:
@@ -87,7 +87,7 @@ while True:
     print status
 
 # Now that the server is up and running, check to see when bootstrapping finishes
-print 'Your instance is now running, waiting for bootstrapping to complete...'
+print 'Your instance is now running, waiting for bootstrapping to start...'
 aws_identity = os.environ['AWS_IDENTITY']
 if aws_identity:
     # give it a min to get the bootstrapping started
@@ -122,3 +122,18 @@ else:
 
 print '%s [%s]: %s (%s)' % (args.name, instance.id, instance.state, instance.public_dns_name)
 print 'login in to your new machine using the command - bin/quick_ec2 ssh %s' % args.name
+
+old_text = """
+export DEBIAN_FRONTEND=noninteractive
+apt-get -qq update
+apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy upgrade
+apt-get -y install \
+    autoconf \
+    automake \
+    build-essential \
+    git \
+    libtool \
+    ntp
+"""
+
+

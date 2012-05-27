@@ -14,7 +14,7 @@ sudo apt-get -y install \
     postgresql \
     libpq-dev
 
-eval sudo su -l -c "createuser -s $USER" postgres
+sudo su -l -c "createuser -s -e $USER" postgres
 
 ###
 ### Teardown

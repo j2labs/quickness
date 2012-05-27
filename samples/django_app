@@ -24,8 +24,8 @@ is_formula_installed && return || formula_init
 ###
 ### Installation
 
-# *Take a look at samples/django.txt for a handful of good ideas
-pip install -r $QUICKNESS_PRIVATE/django_app.txt
+# *Take a look at samples/django.reqs for a handful of good ideas
+pip install -r $QUICKNESS_PRIVATE/django_app.reqs
 
 # *If cloning
 cd $HOME

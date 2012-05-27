@@ -10,6 +10,7 @@ is_formula_installed && return || formula_init
 ###
 ### Dependencies
 
+# This is an optional dependency for one of fabric's dependencies
 sudo apt-get -y install libgmp3-dev
 
 ###

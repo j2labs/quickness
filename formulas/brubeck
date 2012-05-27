@@ -22,12 +22,16 @@ is_formula_installed && return || formula_init
 ###
 ### Installation
 
-git clone $BRUBECK_URL
+if [ -n "$BRUBECK_BRANCH" ]; then
+    git clone -b $BRUBECK_BRANCH $BRUBECK_GIT_REPO
+else
+    git clone $BRUBECK_GIT_REPO
+fi
 cd brubeck
 
 # Install Brubeck's dependencies
 pip install -r envs/brubeck.reqs
-pip install -r envs/gevent.reqs
+pip install -r envs/$BRUBECK_EVENT_LIB.reqs
 
 # Install Brubeck itself
 python setup.py install
@@ -35,6 +39,6 @@ python setup.py install
 ###
 ### Teardown
 
-formula_msg "This formula installs brubeck from master using the gevent library."
+formula_msg "This formula was installed using the $BRUBECK_EVENT_LIB library."
 
 formula_teardown

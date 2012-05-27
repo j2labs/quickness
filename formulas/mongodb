@@ -3,7 +3,7 @@
 ###
 ### As of the release of precise pangolin MongoDB is fairly old, if you
 ### want to just install the the version packaged with ubuntu add a
-### [mongodb] section to /etc/private/versions.conf with the option
+### [mongodb] section to /etc/private/formula.conf with the option
 ### 'package: ubuntu'
 ###
 
@@ -19,8 +19,8 @@ if [ "$MONGODB_PACKAGE" = "ubuntu" ]; then
     sudo apt-get -y install mongodb
 else
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
-    sudo sh -c 'echo "deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen" >> /etc/apt/sources.list'
-    sudo apt-get update
+    echo "deb $MONGODB_URL dist 10gen" | sudo tee --append /etc/apt/sources.list.d/mongodb.list
+    sudo apt-get -qq update
     sudo apt-get -y install mongodb-10gen
 fi
 

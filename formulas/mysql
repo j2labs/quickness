@@ -1,6 +1,9 @@
 ###
 ### MySQL
 ###
+### Options (see etc/formula.conf):
+###   password: password for root user
+###
 
 ###
 ### Initialize
@@ -8,9 +11,9 @@
 is_formula_installed && return || formula_init
 
 # Since mysql asks for a password lets automate
-sudo apt-get -y install debconf-utils
-echo "mysql-server-5.5 mysql-server/root_password password toor" > mysql.preseed
-echo "mysql-server-5.5 mysql-server/root_password_again password toor" >> mysql.preseed
+. $Q/debconf
+echo "mysql-server-5.5 mysql-server/root_password password $MYSQL_PASSWORD" > mysql.preseed
+echo "mysql-server-5.5 mysql-server/root_password_again password $MYSQL_PASSWORD" >> mysql.preseed
 cat mysql.preseed | sudo debconf-set-selections
 
 ###
@@ -24,10 +27,6 @@ sudo apt-get -y install \
 ### Teardown
 
 formula_msg "
-  NOTE: The formula sets a default mysql password of toor
-  To change the password for root in your own formulas try the following:
-  mysql -u root -ptoor -e \"SET PASSWORD FOR 'root'@'localhost' = PASSWORD('blah');\"
-
   Server: sudo service mysql start - (it's already up though)
   Client: mysql -u root -p
 
