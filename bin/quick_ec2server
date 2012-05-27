@@ -70,12 +70,18 @@ if args.section not in cparser.sections():
 print 'Attempting to create an instance with Quickness tag %s...' % args.name
 image = conn.get_image(cparser.get(args.section, 'image'))
 
-reservation = image.run(key_name=cparser.get(args.section, 'key_name'),
-                        instance_type=cparser.get(args.section, 'instance_type'),
-                        placement=cparser.get(args.section, 'placement'),
-                        security_group_ids=[cparser.get(args.section, 'security_group')],
-                        user_data=user_data)
+kwargs = {
+    'key_name': cparser.get(args.section, 'key_name'),
+    'instance_type': cparser.get(args.section, 'instance_type'),
+    'security_group_ids': [cparser.get(args.section, 'security_group')],
+    'user_data': user_data,
+}
+if cparser.has_option(args.section, 'placement'):
+    kwargs['placement'] = cparser.get(args.section, 'placement')
+
+reservation = image.run(**kwargs)
 instance = reservation.instances[0]
+
 time.sleep(10)
 conn.create_tags([instance.id], {'Name': 'quickness', 'Quickness': args.name})
 
