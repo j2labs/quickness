@@ -23,6 +23,11 @@ args = aparser.parse_args()
 cparser = SafeConfigParser()
 cparser.read(os.path.join('etc/private/', args.filename))
 
+try:
+    aws_identity = os.environ['AWS_IDENTITY']
+except KeyError:
+    print 'Please set the AWS_IDENTITY environment variable to create a new ec2 machine'
+    sys.exit()
 
 branch_option = ""
 if cparser.has_option(args.section, 'git_branch'):
@@ -92,54 +97,33 @@ while True:
         break
     print status
 
-# Now that the server is up and running, check to see when bootstrapping finishes
 print 'Your instance is now running, waiting for bootstrapping to start...'
-aws_identity = os.environ['AWS_IDENTITY']
-if aws_identity:
-    # give it a min to get the bootstrapping started
-    time.sleep(60)
-    file_exists = False
-    while True:
-        time.sleep(30)
-        if not file_exists:
-            status = subprocess.check_output(
-                    'ssh -o "StrictHostKeyChecking no" -i $AWS_IDENTITY ubuntu@%s "test -e bin/bootstrap_status && echo -n true || echo -n false"' % instance.public_dns_name,
-                    shell=True)
-            if status == 'true':
-                print 'bootstrap started'
-                file_exists = True
-            else:
-                print 'waiting on bootstrap'
-            continue
+# Give it a min to get the bootstrapping started
+time.sleep(60)
+file_exists = False
+while True:
+    time.sleep(30)
+    if not file_exists:
         status = subprocess.check_output(
-                'ssh -o "StrictHostKeyChecking no" -i $AWS_IDENTITY ubuntu@%s bin/bootstrap_status' % instance.public_dns_name,
+                'ssh -o "StrictHostKeyChecking no" -i $AWS_IDENTITY ubuntu@%s "test -e bin/bootstrap_status && echo -n true || echo -n false"' % instance.public_dns_name,
                 shell=True)
-        if status == 'finished':
-            break
-        print status
+        if status == 'true':
+            print 'bootstrap started'
+            file_exists = True
+        else:
+            print 'waiting on bootstrap'
+        continue
+    status = subprocess.check_output(
+            'ssh -o "StrictHostKeyChecking no" -i $AWS_IDENTITY ubuntu@%s bin/bootstrap_status' % instance.public_dns_name,
+            shell=True)
+    if status == 'finished':
+        break
+    print status
 
-    # time to copy in the private files
-    subprocess.call('scp -i $AWS_IDENTITY etc/private/* ubuntu@%s:~/.quickness_repo/etc/private' % instance.public_dns_name, shell=True)
-    subprocess.call('scp -i $AWS_IDENTITY formulas/*_private ubuntu@%s:~/.quickness_repo/formulas' % instance.public_dns_name, shell=True)
-    subprocess.call('scp -i $AWS_IDENTITY tweaks/*_private ubuntu@%s:~/.quickness_repo/tweaks' % instance.public_dns_name, shell=True)
-
-else:
-    print 'Please set the AWS_IDENTITY environment variable to login to your new machine'
+# Time to copy in the private files
+subprocess.call('scp -i $AWS_IDENTITY etc/private/* ubuntu@%s:~/.quickness_repo/etc/private' % instance.public_dns_name, shell=True)
+subprocess.call('scp -i $AWS_IDENTITY formulas/*_private ubuntu@%s:~/.quickness_repo/formulas' % instance.public_dns_name, shell=True)
+subprocess.call('scp -i $AWS_IDENTITY tweaks/*_private ubuntu@%s:~/.quickness_repo/tweaks' % instance.public_dns_name, shell=True)
 
 print '%s [%s]: %s (%s)' % (args.name, instance.id, instance.state, instance.public_dns_name)
 print 'login in to your new machine using the command - bin/quick_ec2 ssh %s' % args.name
-
-old_text = """
-export DEBIAN_FRONTEND=noninteractive
-apt-get -qq update
-apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy upgrade
-apt-get -y install \
-    autoconf \
-    automake \
-    build-essential \
-    git \
-    libtool \
-    ntp
-"""
-
-
