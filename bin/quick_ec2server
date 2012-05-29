@@ -47,7 +47,7 @@ with open('tweaks/bootstrap', 'r') as f:
 user_data += """
 if [ -d /home/ubuntu ]; then
     su -l -c "git clone %s %s .quickness_repo" ubuntu
-    su -l -c "echo '%s' > .profile" ubuntu
+    su -l -c "echo '%s' >> .profile" ubuntu
 fi
 
 cp /home/ubuntu/.quickness_repo/etc/motd.tail /etc/motd.tail
