@@ -1,0 +1,34 @@
+###
+### Gitolite
+###
+### This formula requires you to place your ssh key in etc/private, also
+### in etc/private/formula.conf add a gitolite section and a pub_key
+### option with the name of that key as in 'pub_key: your-name.pub'.
+###
+
+###
+### Initialize
+
+is_formula_installed && return || formula_init
+
+###
+### Installation
+
+sudo adduser --disabled-password --gecos Gitolite git
+sudo cp $QUICKNESS_PRIVATE/$GITOLITE_PUB_KEY /home/git/
+sudo su -l -c "mkdir bin && git clone git://github.com/sitaramc/gitolite" git
+sudo su -l -c "gitolite/install -ln" git
+sudo su -l -c "gitolite setup -pk $GITOLITE_PUB_KEY" git
+
+###
+### Teardown
+
+formula_msg "
+  On your local machine clone the admin:
+    git clone git@<public_dns>:gitolite-admin.git
+
+  Worth reading:
+   - http://sitaramc.github.com/gitolite/users.html
+   - http://sitaramc.github.com/gitolite/repos.html"
+
+formula_teardown
