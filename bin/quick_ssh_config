@@ -1,0 +1,44 @@
+#!/usr/bin/env python
+
+import os
+import sys
+
+import boto
+
+
+try:
+    aws_identity = os.environ['AWS_IDENTITY']
+except KeyError:
+    print 'Please set the AWS_IDENTITY environment variable to update your ssh config'
+    sys.exit()
+
+new_config = ''
+
+with open('%s/.ssh/config' % os.environ['HOME'], 'r') as f:
+    in_zone = False
+    for line in f:
+        if line.startswith('###BEGIN###'):
+            in_zone = True
+        elif line.startswith('###END###'):
+            in_zone = False
+        elif not in_zone:
+            new_config += line
+
+conn = boto.connect_ec2()
+
+with open('%s/.ssh/config' % os.environ['HOME'], 'w+') as f:
+    f.write(new_config)
+
+    f.write('\n###BEGIN### Quickness\n\n')
+    instances = conn.get_all_instances()
+    for res in instances:
+        for instance in res.instances:
+            if instance.tags.has_key('Quickness'):
+                name = instance.tags.get('Quickness')
+                if instance.public_dns_name:
+                    f.write('Host %s\n' % name)
+                    f.write('  HostName %s\n' % instance.public_dns_name)
+                    f.write('  IdentityFile %s\n' % aws_identity)
+                    f.write('  User ubuntu\n')
+                    f.write('\n')
+    f.write('###END###\n')
