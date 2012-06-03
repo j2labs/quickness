@@ -1,4 +1,4 @@
-# Apply
+### Apply
 if [ -z "$1" ]; then
     echo "Pass <tweak> argument to quick_apply"
 else

@@ -1,19 +1,20 @@
 #!/usr/bin/env python
 
+
 import os
 import sys
-
 import boto
 
 
 try:
     aws_identity = os.environ['AWS_IDENTITY']
 except KeyError:
-    print 'Please set the AWS_IDENTITY environment variable to update your ssh config'
+    print 'ERROR: required variable \$AWS_IDENTITY not set'
     sys.exit()
 
-new_config = ''
 
+### Remove previous config, if it exists
+new_config = ''
 with open('%s/.ssh/config' % os.environ['HOME'], 'r') as f:
     in_zone = False
     for line in f:
@@ -24,12 +25,16 @@ with open('%s/.ssh/config' % os.environ['HOME'], 'r') as f:
         elif not in_zone:
             new_config += line
 
+
+### Get EC2 Connection
 conn = boto.connect_ec2()
 
+
+### Copy new instances into SSH config
 with open('%s/.ssh/config' % os.environ['HOME'], 'w+') as f:
     f.write(new_config)
-
     f.write('\n###BEGIN### Quickness\n\n')
+
     instances = conn.get_all_instances()
     for res in instances:
         for instance in res.instances:
@@ -41,4 +46,5 @@ with open('%s/.ssh/config' % os.environ['HOME'], 'w+') as f:
                     f.write('  IdentityFile %s\n' % aws_identity)
                     f.write('  User ubuntu\n')
                     f.write('\n')
+                    
     f.write('###END###\n')

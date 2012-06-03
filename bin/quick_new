@@ -1,6 +1,7 @@
-# Import quickness/etc/quickness
+### Import quickness/etc/quickness
 export QUICKNESS=$(cd $(dirname $(dirname $0)); pwd)
 . $QUICKNESS/etc/quickness
 
-# New
+
+### New
 $QUICKNESS_BIN/quick $QUICKNESS_TWEAKS/bootstrap

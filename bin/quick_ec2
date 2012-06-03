@@ -1,11 +1,13 @@
 #!/bin/bash
 
+### Parse args
 if [ "$#" -ne "2" ]; then
     echo "This scripts takes an action and a machine name"
     echo "Valid actions are reboot, ssh, start, stop and terminate"
     exit
 fi
 
+### Check SSH env
 if [ -z "$AWS_IDENTITY" ]; then
     echo "Set the environment variable AWS_IDENTITY to the location of your amazon key"
     exit
