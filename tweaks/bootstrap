@@ -1,13 +1,13 @@
-# Headless install
+### Headless install
 export DEBIAN_FRONTEND=noninteractive
 
-# Update package manager and packages
+### Update package manager and packages
 sudo apt-get -qq update
 
-# Update packages
+### Update packages
 sudo apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy upgrade
 
-# Install universal needs
+### Install universal needs
 sudo apt-get -y install \
     autoconf \
     automake \
@@ -18,4 +18,5 @@ sudo apt-get -y install \
     ntp \
     unzip
 
+### MOTD
 sudo cp $QUICKNESS_ETC/motd.tail /etc/motd.tail
