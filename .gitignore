@@ -8,15 +8,7 @@
 
 ### Ignore anything added to bin, but track changes on quickness commands
 bin/*
-!bin/quick
-!bin/quick_apply
-!bin/quick_ec2
-!bin/quick_ec2server
-!bin/quick_formulas
-!bin/quick_install
-!bin/quick_instances
-!bin/quick_new
-!bin/quick_tweaks
+!bin/quick*
 
 ### Ignore anything in the etc/private or formulas/tweaks ending in _private
 etc/private/*

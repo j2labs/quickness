@@ -37,6 +37,10 @@ Give it a few extra minutes to bootstrap the environment.
 
 If you login and don't see the quickness ascii art your environment is not ready, exit and wait a minute.
 
+To place your quickness ec2 boxes in your ssh config for easier access run `bin/quick_ssh_config` now logging in to your new box is as easy as
+
+    ssh devbox
+
 
 ## Using Vagrant
 
@@ -82,16 +86,17 @@ For your convenience the `$Q` variable points to the formula directory to make s
 
 After source'ing `quickness/etc/profile` you will have a few commands available to you. Each of them begin with `quick_` and live in `quickness/bin/`, so you can tab them out.
 
-| **Command**       | **Function**                                                                                                         |
-|------------------:|:---------------------------------------------------------------------------------------------------------------------|
-| `quick_new`       | Run this command first. It bootstraps the system with things every developer needs.                                  |
-| `quick_apply`     | This applies a system tweak. The word 'apply' is used to signal that these change a system's config.                 |
-| `quick_tweaks`    | Lists all the available tweaks.                                                                                      |
-| `quick_formulas`  | Lists all the concepts that have been captured as formulas.                                                          |
-| `quick`           | Can be used to prefix commands to create the environment they need to run in. Generally used by other commands only. |
-| `quick_instances` | Lists all ec2 instances that have been created with quickness.                                                       |
-| `quick_ec2server` | Create an ec2 server as defined by etc/private/ec2.conf.                                                             |
-| `quick_ec2`       | Allows you to ssh, reboot, start, stop and terminate a quickness ec2 instances.                                      |
+| **Command**        | **Function**                                                                                                         |
+|-------------------:|:---------------------------------------------------------------------------------------------------------------------|
+| `quick_new`        | Run this command first. It bootstraps the system with things every developer needs.                                  |
+| `quick_apply`      | This applies a system tweak. The word 'apply' is used to signal that these change a system's config.                 |
+| `quick_tweaks`     | Lists all the available tweaks.                                                                                      |
+| `quick_formulas`   | Lists all the concepts that have been captured as formulas.                                                          |
+| `quick`            | Can be used to prefix commands to create the environment they need to run in. Generally used by other commands only. |
+| `quick_instances`  | Lists all ec2 instances that have been created with quickness.                                                       |
+| `quick_ec2server`  | Create an ec2 server as defined by etc/private/ec2.conf.                                                             |
+| `quick_ec2`        | Allows you to ssh, reboot, start, stop and terminate a quickness ec2 instances.                                      |
+| `quick_ssh_config` | Add your quickness boxes to your .ssh/config.                                                                        |
 
 These commands can be any kind of script, they just have to be in `quickness/bin`.  Use your Fabric scripts, or whatever you already have.
 

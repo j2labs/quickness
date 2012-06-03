@@ -5,7 +5,6 @@ import boto
 
 conn = boto.connect_ec2()
 
-# Make sure quickness machine exists and if it does give user 1 last chance to save it
 instances = conn.get_all_instances()
 for res in instances:
     for instance in res.instances:
