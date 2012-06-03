@@ -2,18 +2,19 @@
 ### Quickness Settings
 ###
 
-
 ### This should allow for quick sourcing of formulas
 export Q=$QUICKNESS/formulas
 
 ### Commonly needed settings
 export QUICKNESS_BIN=$QUICKNESS/bin
 export QUICKNESS_ETC=$QUICKNESS/etc
-export QUICKNESS_PRIVATE=$QUICKNESS_ETC/private
 export QUICKNESS_SCRIPTS=$QUICKNESS/scripts
 export QUICKNESS_TWEAKS=$QUICKNESS/tweaks
 
-### Places to put stuff
+### Location of private overrides
+export QUICKNESS_PRIVATE=$QUICKNESS_ETC/private
+
+### Caching
 export QUICKNESS_HOME=$HOME/.quickness
 export QUICKNESS_SRC=$HOME/.quickness/src
 export QUICKNESS_INSTALLED=$QUICKNESS_HOME/.installed
@@ -21,7 +22,7 @@ export QUICKNESS_MSG=/tmp/quickness.msg
 
 
 ###
-### Quickness Workspaces
+### Initialize workspaces if necessary
 ###
 
 if [ ! -d $QUICKNESS_HOME ]; then
