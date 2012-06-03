@@ -2,13 +2,17 @@
 ### Version Control Systems (besides git)
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Installation
+###
 
 sudo apt-get -y install \
     bzr \
@@ -16,7 +20,9 @@ sudo apt-get -y install \
     mercurial \
     subversion
 
+
 ###
 ### Teardown
+###
 
 formula_teardown

@@ -2,26 +2,34 @@
 ### Node.js
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Dependencies
+###
 
 sudo apt-get -y install python-software-properties
 sudo add-apt-repository -y ppa:chris-lea/node.js
 sudo apt-get -qq update
 
+
 ###
 ### Installation
+###
 
 sudo apt-get -y install \
     nodejs \
     npm
 
+
 ###
 ### Teardown
+###
 
 formula_teardown

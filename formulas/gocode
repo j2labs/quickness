@@ -2,22 +2,30 @@
 ### gocode
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Dependencies
+###
 
 . $Q/golang
 
+
 ###
 ### Installation
+###
 
 go get github.com/nsf/gocode
 
+
 ###
 ### Teardown
+###
 
 formula_teardown

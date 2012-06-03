@@ -5,18 +5,24 @@
 ### vim_private and craft your own custom vim setup
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Dependencies
+###
 
 . $Q/python_dev
 
+
 ###
 ### Installation
+###
 
 sudo apt-get -y install vim-nox
 
@@ -42,7 +48,9 @@ echo "tmp/*" >> $HOME/.vim/.git/info/exclude
 
 cp $QUICKNESS_ETC/vimrc $HOME/.vimrc
 
+
 ###
 ### Teardown
+###
 
 formula_teardown

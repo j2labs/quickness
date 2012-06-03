@@ -2,19 +2,25 @@
 ### SQLite
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Installation
+###
 
 sudo apt-get -y install \
     sqlite3 \
     libsqlite3-dev
 
+
 ###
 ### Teardown
+###
 
 formula_teardown

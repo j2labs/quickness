@@ -2,18 +2,24 @@
 ### Scala Akka Actor Library
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Dependencies
+###
 
 . $Q/scala
 
+
 ###
 ### Installation
+###
 
 wget $SCALA_AKKA_URL
 tar zxf $SCALA_AKKA_FILENAME
@@ -24,7 +30,9 @@ echo >> $HOME/.profile
 echo "### Akka" >> $HOME/.profile
 echo "export PATH=$QUICKNESS_SRC/$SCALA_AKKA_DIRNAME/bin:\$PATH" >> ~/.profile
 
+
 ###
 ### Teardown
+###
 
 formula_teardown

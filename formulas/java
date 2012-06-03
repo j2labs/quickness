@@ -2,17 +2,23 @@
 ### Java
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Installation
+###
 
 sudo apt-get -y install default-jdk
 
+
 ###
 ### Teardown
+###
 
 formula_teardown

@@ -7,13 +7,17 @@
 ### 'package: ubuntu'
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Installation
+###
 
 if [ "$RABBITMQ_PACKAGE" = "ubuntu" ]; then
     sudo apt-get -y install rabbitmq-server
@@ -31,8 +35,10 @@ sudo rabbitmqctl add_user $USER $USER
 sudo rabbitmqctl add_vhost ${USER}_vhost
 sudo rabbitmqctl set_permissions -p ${USER}_vhost $USER ".*" ".*" ".*"
 
+
 ###
 ### Teardown
+###
 
 formula_msg "
     a new rabbit user was created named $USER,

@@ -2,26 +2,34 @@
 ### Mongrel2
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Dependencies
+###
 
 . $Q/sqlite
 . $Q/zeromq
 
+
 ###
 ### Installation
+###
 
 wget $MONGREL2_URL
 tar jxf $MONGREL2_FILENAME
 cd $MONGREL2_DIRNAME
 make && sudo make install
 
+
 ###
 ### Teardown
+###
 
 formula_teardown

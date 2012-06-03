@@ -4,11 +4,14 @@
 
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Installation
+###
 
 sudo apt-get -y install \
     emacs23-nox \
@@ -18,7 +21,9 @@ cp $QUICKNESS_ETC/emacs $HOME/.emacs
 
 mkdir $HOME/.emacs.d
 
+
 ###
 ### Teardown
+###
 
 formula_teardown

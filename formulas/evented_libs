@@ -2,19 +2,25 @@
 ### Evented Libraries
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Installation
+###
 
 sudo apt-get -y install \
     libevent-dev \
     libev-dev
 
+
 ###
 ### Teardown
+###
 
 formula_teardown

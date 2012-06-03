@@ -9,18 +9,23 @@
 
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Dependencies
+###
 
 . $Q/evented_libs
 . $Q/mongrel2
 . $Q/python_dev brubeck
 
+
 ###
 ### Installation
+###
 
 if [ -n "$BRUBECK_BRANCH" ]; then
     git clone -b $BRUBECK_BRANCH $BRUBECK_GIT_REPO
@@ -36,8 +41,10 @@ pip install -r envs/$BRUBECK_EVENT_LIB.reqs
 # Install Brubeck itself
 python setup.py install
 
+
 ###
 ### Teardown
+###
 
 formula_msg "This formula was installed using the $BRUBECK_EVENT_LIB library."
 

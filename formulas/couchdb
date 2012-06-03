@@ -2,13 +2,17 @@
 ### CouchDB
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Dependencies
+###
 
 . $Q/erlang
 
@@ -18,9 +22,12 @@ sudo apt-get -y install \
     libicu-dev \
     libmozjs185-dev
 
+
 ###
 ### Installation
+###
 
+### Add couch user
 sudo adduser --system \
   --home /usr/local/var/lib/couchdb \
   --no-create-home \
@@ -29,11 +36,13 @@ sudo adduser --system \
   --gecos "CouchDB Administrator" \
   couchdb
 
+### Install Couch
 wget $COUCHDB_URL
 tar zxf $COUCHDB_FILENAME
 cd $COUCHDB_DIRNAME
 ./configure && make && sudo make install
 
+### Make couch user owner of couch data
 sudo chown -R couchdb:couchdb /usr/local/var/lib/couchdb
 sudo chown -R couchdb:couchdb /usr/local/var/log/couchdb
 sudo chown -R couchdb:couchdb /usr/local/var/run/couchdb
@@ -41,8 +50,10 @@ sudo chown -R couchdb:couchdb /usr/local/etc/couchdb
 
 sudo su -l -c "couchdb -b" couchdb
 
+
 ###
 ### Teardown
+###
 
 formula_msg "Server: sudo su -l -c \"couchdb -b\" couchdb (it's already up though)"
 

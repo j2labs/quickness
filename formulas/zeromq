@@ -7,13 +7,17 @@
 ### 'package: ubuntu'
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Installation
+###
 
 if [ "$ZEROMQ_PACKAGE" = "ubuntu" ]; then
     sudo apt-get -y install libzmq-dev
@@ -26,7 +30,9 @@ else
     sudo ldconfig
 fi
 
+
 ###
 ### Teardown
+###
 
 formula_teardown

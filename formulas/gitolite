@@ -6,13 +6,17 @@
 ### option with the name of that key as in 'pub_key: your-name.pub'.
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Installation
+###
 
 sudo adduser --disabled-password --gecos Gitolite git
 sudo cp $QUICKNESS_PRIVATE/$GITOLITE_PUB_KEY /home/git/
@@ -20,8 +24,10 @@ sudo su -l -c "mkdir bin && git clone git://github.com/sitaramc/gitolite" git
 sudo su -l -c "gitolite/install -ln" git
 sudo su -l -c "gitolite setup -pk $GITOLITE_PUB_KEY" git
 
+
 ###
 ### Teardown
+###
 
 formula_msg "
   On your local machine clone the admin:

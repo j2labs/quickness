@@ -2,18 +2,24 @@
 ### Scala
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Dependencies
+###
 
 . $Q/java
 
+
 ###
 ### Installation
+###
 
 wget $SCALA_URL
 tar zxf $SCALA_FILENAME
@@ -25,7 +31,9 @@ echo >> $HOME/.profile
 echo "### Scala" >> $HOME/.profile
 echo "export PATH=$QUICKNESS_SRC/$SCALA_DIRNAME/bin:\$PATH" >> ~/.profile
 
+
 ###
 ### Teardown
+###
 
 formula_teardown

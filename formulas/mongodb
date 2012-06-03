@@ -7,13 +7,17 @@
 ### 'package: ubuntu'
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Installation
+###
 
 if [ "$MONGODB_PACKAGE" = "ubuntu" ]; then
     sudo apt-get -y install mongodb
@@ -24,7 +28,9 @@ else
     sudo apt-get -y install mongodb-10gen
 fi
 
+
 ###
 ### Teardown
+###
 
 formula_teardown

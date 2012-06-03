@@ -2,24 +2,32 @@
 ### Java Tools
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Dependencies
+###
 
 . $Q/java
 
+
 ###
 ### Installation
+###
 
 sudo apt-get -y install \
     ant \
     maven2  # Ugh. Maven wants to install x11
 
+
 ###
 ### Teardown
+###
 
 formula_teardown

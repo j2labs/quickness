@@ -2,33 +2,41 @@
 ### Go Language
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
-# Since golang asks a question lets automate
+### Since golang asks a question lets automate
 . $Q/debconf
 echo "golang-go golang-go/dashboard boolean $GOLANG_DASHBOARD" > golang.preseed
 cat golang.preseed | sudo debconf-set-selections
 
+
 ###
 ### Installation
+###
 
+### Install language
 sudo apt-get -y install golang
 
+### Prepare workspace
 mkdir -p $HOME/ext/bin
 mkdir -p $HOME/mygo/bin
-
 export GOPATH="$HOME/ext:$HOME/mygo"
 export PATH="$HOME/ext/bin:$HOME/mygo/bin:$PATH"
 
+### Update .profile to include Go environment
 echo >> $HOME/.profile
 echo "### golang" >> $HOME/.profile
 echo "GOPATH=\"$HOME/ext:$HOME/mygo\"" >> $HOME/.profile
 echo "PATH=\"$HOME/ext/bin:$HOME/mygo/bin:$PATH\"" >> $HOME/.profile
 
+
 ###
 ### Teardown
+###
 
 formula_teardown

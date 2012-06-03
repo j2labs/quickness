@@ -7,13 +7,17 @@
 ### 'package: ubuntu'
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Installation
+###
 
 if [ "$REDIS_PACKAGE" = "ubuntu" ]; then
     sudo apt-get -y install redis-server
@@ -25,8 +29,10 @@ else
     make && sudo make install
 fi
 
+
 ###
 ### Teardown
+###
 
 formula_msg "
   Server: redis-server

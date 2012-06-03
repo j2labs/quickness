@@ -2,20 +2,26 @@
 ### httperf
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Installation
+###
 
 wget $HTTPERF_URL
 tar xzf $HTTPERF_FILENAME
 cd $HTTPERF_DIRNAME
 ./configure && make && sudo make install
 
+
 ###
 ### Teardown
+###
 
 formula_teardown

@@ -2,13 +2,17 @@
 ### PostgreSQL
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Installation
+###
 
 sudo apt-get -y install \
     postgresql \
@@ -16,8 +20,10 @@ sudo apt-get -y install \
 
 sudo su -l -c "createuser -s -e $USER" postgres
 
+
 ###
 ### Teardown
+###
 
 formula_msg "
   This formula creates a superuser named $USER to make development easier

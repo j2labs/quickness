@@ -4,18 +4,23 @@
 
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Dependencies
+###
 
 . $Q/emacs
 . $Q/golang
 . $Q/gocode
 
+
 ###
 ### Installation
+###
 
 sudo apt-get -y install auto-complete-el golang-mode
 
@@ -23,7 +28,9 @@ mkdir $HOME/.emacs.d/gocode
 cp $HOME/ext/src/github.com/nsf/gocode/emacs/go-autocomplete.el $HOME/.emacs.d/gocode
 cat $QUICKNESS_ETC/emacs_go >> $HOME/.emacs
 
+
 ###
 ### Teardown
+###
 
 formula_teardown

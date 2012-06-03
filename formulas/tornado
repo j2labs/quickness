@@ -7,23 +7,31 @@
 ### with the name of your app as an argument.
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Dependencies
+###
 
 . $Q/evented_libs
 . $Q/python_dev tornado
 
+
 ###
 ### Installation
+###
 
 pip install tornado
 
+
 ###
 ### Teardown
+###
 
 formula_teardown

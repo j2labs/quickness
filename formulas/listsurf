@@ -6,32 +6,43 @@
 ### a virtualenv.
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Dependencies
+###
 
 . $Q/mongodb
 . $Q/python_dev listsurf
 . $Q/brubeck
 
+
 ###
 ### Installation
+###
 
+### Install project in $HOME
 cd $HOME
 if [ -n "$LISTSURF_BRANCH" ]; then
     git clone -b $LISTSURF_BRANCH $LISTSURF_GIT_REPO
 else
     git clone $LISTSURF_GIT_REPO
 fi
+
+### Compile mongrel2 config
 cd listsurf
 m2sh load
 
+
 ###
 ### Teardown
+###
 
 formula_msg "
   Start mongrel2 with: m2sh start -every

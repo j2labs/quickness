@@ -2,26 +2,34 @@
 ### Fabric
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Dependencies
+###
 
 # This is an optional dependency for one of fabric's dependencies
 sudo apt-get -y install libgmp3-dev
 
+
 ###
 ### Installation
+###
 
 if [ "$1" != "--deps-only" ]; then
     . $Q/python_dev fabric
     pip install Fabric
 fi
 
+
 ###
 ### Teardown
+###
 
 formula_teardown

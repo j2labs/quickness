@@ -5,8 +5,10 @@
 ### virtualenv.
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed
 if [ "$?" -eq "0" ]; then
@@ -19,8 +21,10 @@ else
     formula_init
 fi
 
+
 ###
 ### Installation
+###
 
 sudo apt-get -y install \
     python-dev \
@@ -39,7 +43,9 @@ if [ -n "$1" ]; then
     mkvirtualenv $1
 fi
 
+
 ###
 ### Teardown
+###
 
 formula_teardown

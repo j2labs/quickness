@@ -7,13 +7,17 @@
 ### 'package: ubuntu'
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Installation
+###
 
 if [ "$NGINX_PACKAGE" = "ubuntu" ]; then
     sudo apt-get -y install nginx
@@ -28,8 +32,10 @@ else
     sudo ln -s /usr/local/nginx/sbin/nginx /usr/local/bin/
 fi
 
+
 ###
 ### Teardown
+###
 
 formula_msg "
   Server: sudo nginx

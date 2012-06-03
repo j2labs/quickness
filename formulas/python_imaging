@@ -2,13 +2,17 @@
 ### Python Imaging Libraries
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Dependencies
+###
 
 sudo apt-get -y install \
     libfreetype6-dev \
@@ -16,15 +20,19 @@ sudo apt-get -y install \
     liblcms1-dev \
     zlib1g-dev
 
+
 ###
 ### Installation
+###
 
 if [ "$1" != "--deps-only" ]; then
     . $Q/python_dev pillow
     pip install Pillow
 fi
 
+
 ###
 ### Teardown
+###
 
 formula_teardown

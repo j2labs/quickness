@@ -10,18 +10,24 @@
 ### samples/django_app for ideas.
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Dependencies
+###
 
 . $Q/python_dev django
 
+
 ###
 ### Installation
+###
 
 sudo cp $QUICKNESS_ETC/django_bash_completion /etc/bash_completion.d/
 
@@ -30,7 +36,9 @@ if [ -f $QUICKNESS_PRIVATE/django.reqs ]; then
     pip install -r $QUICKNESS_PRIVATE/django.reqs
 fi
 
+
 ###
 ### Teardown
+###
 
 formula_teardown

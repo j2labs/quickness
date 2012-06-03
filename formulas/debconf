@@ -2,17 +2,23 @@
 ### debconf-utils
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
+
 ###
 ### Installation
+###
 
 sudo apt-get -y install debconf-utils
 
+
 ###
 ### Teardown
+###
 
 formula_teardown

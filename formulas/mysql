@@ -5,26 +5,33 @@
 ###   password: password for root user
 ###
 
+
 ###
 ### Initialize
+###
 
 is_formula_installed && return || formula_init
 
-# Since mysql asks for a password lets automate
+
+### Since mysql asks for a password lets automate
 . $Q/debconf
 echo "mysql-server-5.5 mysql-server/root_password password $MYSQL_PASSWORD" > mysql.preseed
 echo "mysql-server-5.5 mysql-server/root_password_again password $MYSQL_PASSWORD" >> mysql.preseed
 cat mysql.preseed | sudo debconf-set-selections
 
+
 ###
 ### Installation
+###
 
 sudo apt-get -y install \
     mysql-server \
     libmysqlclient-dev
 
+
 ###
 ### Teardown
+###
 
 formula_msg "
   Server: sudo service mysql start - (it's already up though)
