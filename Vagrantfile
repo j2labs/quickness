@@ -7,11 +7,7 @@ Vagrant::Config.run do |config|
 
     ### Network config, based on Vagrant version
     (maj, min, dot) = Vagrant::VERSION.split('.')
-    if Integer(maj) > 0
-        config.vm.network :bridged, "33.33.33.11"
-    else
-        config.vm.network "33.33.33.11"
-    end
+    config.vm.network :bridged, "33.33.33.11"
     config.vm.forward_port 6767, 6767
     config.vm.forward_port 8000, 8000
 
