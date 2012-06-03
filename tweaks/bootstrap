@@ -1,11 +1,10 @@
-### Headless install
-export DEBIAN_FRONTEND=noninteractive
-
 ### Update package manager and packages
 sudo apt-get -qq update
 
-### Upgrade packages
-sudo apt-get -o Dpkg::Options::="--force-confnew" --force-yes -fuy upgrade
+
+### Headless install
+sudo env DEBIAN_FRONTEND=noninteractive apt-get -o DPkg::Options::=--force-confnew upgrade -q -y < /dev/null
+
 
 ### Install universal needs
 sudo apt-get -y install \
@@ -17,6 +16,7 @@ sudo apt-get -y install \
     libtool \
     ntp \
     unzip
+
 
 ### MOTD
 sudo cp $QUICKNESS_ETC/motd.tail /etc/motd.tail
