@@ -25,9 +25,7 @@ PS_COLOR="32m"
 if [ $USER = "root" ]; then
     PS_COLOR="31m"
 fi
-export PS1='\[\e[1;$PS_COLOR\]\u@\h\[\e[0m\] : \t : \[\e[1;34m\]\w\[\e[0m\]$(__git_ps1 " (%s)")\nQ: '
-
-export EDITOR=vi
+export PS1="\n[01;$PS_COLOR\u@\h[0m : \t : [01;34m\w[0m\nQ: "
 
 # Now load in any custom bash config
 if [ -f $QUICKNESS_PRIVATE/bash.profile ]; then
